@@ -1,0 +1,600 @@
+.LogIn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Logo{
+    padding:15px;
+    border-radius:70%;
+    background-color: #9A30AE;
+} 
+.InputMaterial{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.Input{
+    border:1px solid lightgray ;
+    box-shadow: 2px 2px 2px 2px lightgray inset;
+    border-radius: 30px;
+    padding-left: 15px;
+    color:#9A30AE;
+    font-weight: bolder;
+    display: flex;
+}
+.InputMaterial input{
+    border:none;
+    background-color: rgba(255, 255, 255, 0);
+    outline-style: none;
+    appearance: none;
+}
+.InputMaterial button{
+    border-radius: 30px;
+    border:none;
+    color:white;
+    font-weight: bolder;
+    font-size: larger;
+    background-color: #9A30AE;
+}
+.otherBTN_Div1{
+    float: left;
+}
+.otherBTN_Div2{
+    float: right;
+    display: flex;
+}
+.otherBTN_Div2 button{
+    color:#9A30AE;
+    background-color: white;
+    border:none;
+}
+
+@media  only screen and (min-width: 280px) and (max-width: 319px) and (orientation: portrait){/*소형 모바일(세로), 갤럭시 폴드 접은 버전(세로)*/
+    .LogoIMG{
+        width:100px;
+    }
+    .Logo{
+        margin-top:110px;
+        margin-bottom:30px;
+    } 
+    .Input{
+        width:200px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 35px;
+        width:60px;
+        height:35px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    
+    .InputMaterial input{
+        width:130px;
+        height:35px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:150px;
+        height:35px;
+        margin:10px;
+    }
+    .otherBTN{
+        margin-top:20px;
+        width:250px;
+    }
+    .otherLogin{
+        width:30px;
+        height:30px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:25px;
+    }    
+    .otherBTN_Div2 button{
+        height:30px;
+    }
+    .findIDPW{
+        margin-right: 0px;
+        font-weight: bolder;
+        font-size:smaller; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:6px;
+        height: 21px;
+    }
+    .Signup{
+        margin-left: 0px;
+        font-weight: bolder;
+        font-size:smaller; 
+    }
+}
+@media only screen and (min-width : 321px) and (max-width : 424px) and (orientation : portrait){/*모바일(세로)*/
+    .LogoIMG{
+        width:210px;
+    }
+    .Logo{
+        margin-top:130px;
+        margin-bottom:30px;
+    } 
+    .Input{
+        width:300px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 45px;
+        width:70px;
+        height:45px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    
+    .InputMaterial input{
+        width:220px;
+        height:45px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:200px;
+        height:45px;
+        margin:10px;
+    }
+    .otherBTN{
+        margin-top:20px;
+        width:320px;
+    }
+    .otherLogin{
+        width:40px;
+        height:40px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:30px;
+    }    
+    .otherBTN_Div2 button{
+        height:40px;
+    }
+    .findIDPW{
+        margin-right: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:7px;
+        height: 25px;
+    }
+    .Signup{
+        margin-left: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : landscape){/*모바일(가로)*/
+    .LogoIMG{
+        width:80px;
+    }
+    .Logo{
+        margin-top:15px;
+        margin-bottom:10px;
+    } 
+    .Input{
+        width:300px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 30px;
+        width:70px;
+        height:30px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    
+    .InputMaterial input{
+        width:220px;
+        height:30px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:200px;
+        height:35px;
+        margin:10px;
+    }
+    .otherBTN{
+        width:320px;
+    }
+    .otherLogin{
+        width:40px;
+        height:40px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:30px;
+    }    
+    .otherBTN_Div2 button{
+        height:40px;
+    }
+    .findIDPW{
+        margin-right: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:7px;
+        height: 25px;
+    }
+    .Signup{
+        margin-left: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : portrait){/* 갤럭시 폴드 편 버전(가로)*/
+    .LogoIMG{
+        width:120px;
+    }
+    .Logo{
+        margin-top:150px;
+        margin-bottom:10px;
+    } 
+    .Input{
+        width:300px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 30px;
+        width:70px;
+        height:30px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    
+    .InputMaterial input{
+        width:220px;
+        height:30px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:200px;
+        height:35px;
+        margin:10px;
+    }
+    .otherBTN{
+        width:320px;
+    }
+    .otherLogin{
+        width:40px;
+        height:40px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:30px;
+    }    
+    .otherBTN_Div2 button{
+        height:40px;
+    }
+    .findIDPW{
+        margin-right: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:7px;
+        height: 25px;
+    }
+    .Signup{
+        margin-left: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+}
+@media only screen and (min-width: 540px) and (max-width: 767px) and (orientation: portrait) {/*갤럭시Z(세로)*/
+    .LogoIMG{
+        width:200px;
+    }
+    .Logo{
+        margin-top:110px;
+        margin-bottom:30px;
+    } 
+    .Input{
+        width:400px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 50px;
+        width:70px;
+        height:50px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    
+    .InputMaterial input{
+        width:310px;
+        height:50px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:300px;
+        height:50px;
+        margin-top:80px;
+    }
+    .otherBTN{
+        margin-top:20px;
+        width:400px;
+    }
+    .otherLogin{
+        width:50px;
+        height:50px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:40px;
+    }    
+    .otherBTN_Div2 button{
+        height:50px;
+    }
+    .findIDPW{
+        margin-right: 7px;
+        font-weight: bolder;
+        font-size:large; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:12px;
+        height: 25px;
+    }
+    .Signup{
+        margin-left: 7px;
+        font-weight: bolder;
+        font-size:large; 
+    }	
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait){/*태블릿(세로)*/
+    .LogoIMG{
+        width:300px;
+    }
+    .Logo{
+        margin-top:220px;
+        margin-bottom:60px;
+    }  
+    .Input{
+        width:400px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 55px;
+        width:70px;
+        height:55px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    .InputMaterial input{
+        width:320px;
+        height:55px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:300px;
+        height:55px;
+        margin:10px;
+    }
+    .otherBTN{
+        width:400px;
+    }
+    .otherLogin{
+        width:45px;
+        height:45px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:35px;
+    }    
+    .otherBTN_Div2 button{
+        height:45px;
+    }
+    .findIDPW{
+        margin-right: 7px;
+        font-weight: bolder;
+        font-size:medium; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:12px;
+        height: 25px;
+    }
+    .Signup{
+        margin-left: 7px;
+        font-weight: bolder;
+        font-size:medium; 
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape){/*태블릿(가로)*/
+    .LogoIMG{
+        width:120px;
+    }
+    .Logo{
+        margin-top:30px;
+        margin-bottom:20px;
+    } 
+    
+    .Input{
+        width:320px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 30px;
+        width:80px;
+        height:30px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    .InputMaterial input{
+        width:260px;
+        height:30px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:200px;
+        height:30px;
+        margin:10px;
+    }
+    .otherBTN{
+        width:320px;
+    }
+    .otherLogin{
+        width:45px;
+        height:45px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:35px;
+    }    
+    .otherBTN_Div2 button{
+        height:45px;
+    }
+    .findIDPW{
+        margin-right: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:12px;
+        height: 25px;
+    }
+    .Signup{
+        margin-left: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+}
+@media only screen and (min-width : 1025px) {/* 소형 PC */
+    .LogoIMG{
+        width:230px;
+    }
+    .Logo{
+        margin-top:120px;
+        margin-bottom:60px;
+    } 
+    .Input{
+        width:400px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 35px;
+        width:80px;
+        height:35px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    .InputMaterial input{
+        width:280px;
+        height:35px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:18vw;
+        height:35px;
+        margin:10px;
+    }
+    .otherBTN{
+        width:400px;
+    }
+    .otherLogin{
+        width:45px;
+        height:45px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:35px;
+    }    
+    .otherBTN_Div2 button{
+        height:45px;
+    }
+    .findIDPW{
+        margin-right: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:12px;
+        height: 25px;
+    }
+    .Signup{
+        margin-left: 7px;
+        font-weight: bolder;
+        font-size:small; 
+    }
+}
+@media only screen and (min-width : 1201px) {/*대형 PC*/
+    .LogoIMG{
+        width:250px;
+    }    
+    .Logo{
+        margin-top:100px;
+        margin-bottom:70px;
+    } 
+    .Input{
+        width:500px;
+    }
+    .InputLabel{
+        text-align: center;
+        line-height : 50px;
+        width:80px;
+        height:45px;
+        vertical-align: top;
+        font-size: larger;
+    }
+    .InputMaterial input{
+        width:400px;
+        height:45px;
+        margin:2px;
+    }
+    .InputMaterial button{
+        width:300px;
+        height:45px;
+        margin:10px;
+    }
+    .otherBTN{
+        width:500px;
+    }
+    .otherLogin{
+        width:55px;
+        height:55px;
+        border:none;
+        background-color:white;
+    }
+    .IconLogo{
+        width:45px;
+    }  
+    .otherBTN_Div2 button{
+        height:55px;
+    }
+    .findIDPW{
+        margin-right: 15px;
+        font-weight: bolder;
+        font-size:medium; 
+    }
+    .VLine{
+        border-left : 3px solid #9A30AE;
+        margin-top:13px;
+        height: 30px;
+    }
+    .Signup{
+        margin-left: 15px;
+        font-weight: bolder;
+        font-size:medium; 
+    }
+}
