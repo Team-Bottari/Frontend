@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "../../CSS/Login.css";
+import "../../CSS/members/Login.css";
 import axios from "axios";
+
 const LogIn = () => {
   const navigate = useNavigate();
-  const [ID, setID] = useState();
-  const [PW, setPW] = useState();
+  const [ID, setID] = useState("");
+  const [PW, setPW] = useState("");
 
   const LoginClick = async (event) => {
     event.preventDefault();
@@ -16,6 +17,7 @@ const LogIn = () => {
       })
       .then((response) => {
         console.log(response);
+        localStorage.setItem("token", response.data);
         navigate("/");
       })
       .catch((err) => {
@@ -23,15 +25,22 @@ const LogIn = () => {
         alert("로그인에 실패했습니다.");
       });
   };
+
   const kakaoClick = async (event) => {
     event.preventDefault();
+    console.log("Kakao Login");
   };
-  const googleClick = async (event) => {
+
+  const googleClick = (event) => {
     event.preventDefault();
+    console.log("google Login");
   };
+
   const naverClick = async (event) => {
     event.preventDefault();
+    console.log("Naver Login");
   };
+
   return (
     <div className="LogIn">
       <div className="Logo">
@@ -41,27 +50,26 @@ const LogIn = () => {
         <form>
           <div className="Input">
             <div className="InputLabel">
-              <lable for="ID_input">Email</lable>
+              <label htmlFor="ID_input">Email</label>
             </div>
             <input
               id="ID_input"
               type="email"
+              name="ID"
               value={ID}
-              onChange={(event) => setID(event.targt.value)}
+              onChange={(event) => setID(event.target.value)}
             />
           </div>
           <br />
           <div className="Input">
             <div className="InputLabel">
-              <lable for="PW_input" className="InputLabel">
-                PW
-              </lable>
+              <label htmlFor="PW_input">PW</label>
             </div>
             <input
               id="PW_input"
               type="password"
               value={PW}
-              onChange={(event) => setPW(event.targt.value)}
+              onChange={(event) => setPW(event.target.value)}
               autoComplete="on"
             />
           </div>

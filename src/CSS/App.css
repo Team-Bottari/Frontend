@@ -1,0 +1,27 @@
+@media  only screen and (min-width: 280px) and (max-width: 319px) and (orientation: portrait){/*소형 모바일(세로), 갤럭시 폴드 접은 버전(세로)*/
+   
+}
+@media only screen and (min-width : 321px) and (max-width : 424px) and (orientation : portrait){/*모바일(세로)*/
+    
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : landscape){/*모바일(가로)*/
+    
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : portrait){/* 갤럭시 폴드 편 버전(가로)*/
+   
+}
+@media only screen and (min-width: 540px) and (max-width: 767px) and (orientation: portrait) {/*갤럭시Z(세로)*/
+    
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait){/*태블릿(세로)*/
+    
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape){/*태블릿(가로)*/
+   
+}
+@media only screen and (min-width : 1025px) {/* 소형 PC */
+   
+}
+@media only screen and (min-width : 1201px) {/*대형 PC*/
+   
+}

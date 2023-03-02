@@ -1,0 +1,302 @@
+.PWReset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.PWReset_Input{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.PWReset_Div{
+    border:1px solid lightgray ;
+    box-shadow: 2px 2px 2px 2px lightgray inset;
+    border-radius: 30px;
+    padding-left: 15px;
+    color:#9A30AE;
+    font-weight: bolder;
+    display: flex;
+    width:500px;
+    height: 45px;
+    line-height : 45px;
+    font-size: large;
+    margin-bottom: 5px;
+}
+.PWReset_Div input{
+    background-color: rgba(255, 255, 255, 0);
+    outline-style: none;
+    appearance: none;
+    border: none;
+}
+.PWReset_Div select{
+    background-color: #9A30AE;
+    border-radius: 30px;
+    border: none;
+    color:white;
+    outline-style: none;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    width: 152px;
+}
+.Birth_input{
+    font-size: medium;
+    font-weight: bold;
+}
+.PWReset button{
+    border-radius: 30px;
+    border:none;
+    color:white;
+    font-weight: bolder;
+    font-size: larger;
+    background-color: #9A30AE;
+
+    margin-top: 10px;
+    width:300px;
+    height: 45px;
+}
+.PWReset_Div_Birth{
+    border:1px solid lightgray ;
+    box-shadow: 2px 2px 2px 2px lightgray inset;
+    border-radius: 30px;
+    padding-left: 15px;
+    color:#9A30AE;
+    font-weight: bolder;
+
+    width:500px;
+    height: 45px;
+    line-height : 45px;
+    font-size: large;
+    margin-bottom: 5px;
+}
+.Birth_input{      
+    float: right;
+    border:none;
+    background-color:rgba(255, 255, 255, 0);
+    appearance: none;    
+    outline-style: none;
+    width: 380px;
+    height: 45px;
+    padding-right: 20px;
+}
+.PWReset_Div label{
+    width: 100px;
+}
+.IDinput{
+    width: 120px;
+}
+.emailInput{
+    width: 120px;
+}
+.Name_input{
+ width:400px;
+}
+
+@media  only screen and (min-width: 280px) and (max-width: 319px) and (orientation: portrait){/*소형 모바일(세로), 갤럭시 폴드 접은 버전(세로)*/
+    .PWReset_Div{
+        width:260px;
+        height: 45px;
+        line-height : 45px;
+        font-size: small;
+        margin-bottom: 5px;
+     }
+     .PWReset_Div_Birth{
+        width:260px;
+        height: 45px;
+        line-height : 45px;
+        font-size: small;
+        margin-bottom: 5px;
+      }
+     .PWReset_Div label{
+        width: 45px;
+     }
+     .IDinput{
+        width: 70px;
+     }
+     .emailInput{
+        width: 72px;
+        font-size:small;
+     }
+     .PWReset_Div select{
+        width: 90px;
+        font-size: x-small;
+     }
+      .Name_input{
+        width:200px;
+     }
+     .Birth_input{
+        width: 145px;
+        height: 45px;
+        padding-right: 20px;
+     }
+     .PWReset button{
+        margin-top: 10px;
+        width:150px;
+        height: 45px;
+     }
+}
+@media only screen and (min-width : 321px) and (max-width : 424px) and (orientation : portrait){/*모바일(세로)*/
+    .PWReset_Div{
+        width:320px;
+        height: 45px;
+        line-height : 45px;
+        font-size: medium;
+        margin-bottom: 5px;
+     }
+     .PWReset_Div_Birth{
+        width:320px;
+        height: 45px;
+        line-height : 45px;
+        font-size: medium;
+        margin-bottom: 5px;
+      }
+     .PWReset_Div label{
+        width: 50px;
+     }
+     .IDinput{
+        width: 75px;
+     }
+     .emailInput{
+        width: 75px;
+     }
+     .PWReset_Div select{
+        width: 115px;
+        font-size: small;
+     }
+      .Name_input{
+        width:200px;
+     }
+     .Birth_input{
+        width: 180px;
+        height: 45px;
+        padding-right: 20px;
+     }
+     .PWReset button{
+        margin-top: 10px;
+        width:220px;
+        height: 45px;
+     }
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : landscape){/*모바일(가로)*/
+    .PWReset_Div{
+        width:500px;
+        height: 35px;
+        line-height : 35px;
+        font-size: large;
+        margin-bottom: 5px;
+     }
+     .PWReset_Div_Birth{
+        width:500px;
+        height: 35px;
+        line-height : 35px;
+        font-size: large;
+        margin-bottom: 5px;
+      }
+     .PWReset_Div label{
+        width: 100px;
+     }
+     .IDinput{
+        width: 120px;
+     }
+     .emailInput{
+        width: 120px;
+     }
+     .PWReset_Div select{
+        width: 152px;
+     }
+      .Name_input{
+        width:400px;
+     }
+     .Birth_input{
+        width: 380px;
+        height: 35px;
+        padding-right: 20px;
+     }
+     .PWReset button{
+        margin-top: 10px;
+        width:300px;
+        height: 35px;
+     }
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : portrait){/* 갤럭시 폴드 편 버전(가로)*/
+    .PWReset_Div{
+        width:400px;
+        height: 45px;
+        line-height : 45px;
+        font-size: large;
+        margin-bottom: 5px;
+     }
+     .PWReset_Div_Birth{
+        width:400px;
+        height: 45px;
+        line-height : 45px;
+        font-size: large;
+        margin-bottom: 5px;
+      }
+     .PWReset_Div label{
+        width: 90px;
+     }
+     .IDinput{
+        width: 100px;
+     }
+     .emailInput{
+        width: 100px;
+     }
+     .PWReset_Div select{
+        width: 152px;
+     }
+      .Name_input{
+        width:400px;
+     }
+     .Birth_input{
+        width: 215px;
+        height: 45px;
+        padding-right: 20px;
+     }
+     .PWReset button{
+        margin-top: 10px;
+        width:300px;
+        height: 45px;
+     }
+}
+@media only screen and (min-width: 540px) and (max-width: 767px) and (orientation: portrait) {/*갤럭시Z(세로)*/
+    .PWReset_Div{
+        width:500px;
+        height: 55px;
+        line-height : 55px;
+        font-size: large;
+        margin-bottom: 10px;
+     }
+     .PWReset_Div_Birth{
+        width:500px;
+        height: 55px;
+        line-height : 55px;
+        font-size: large;
+        margin-bottom: 5px;
+      }
+     .PWReset_Div label{
+        width: 100px;
+     }
+     .IDinput{
+        width: 120px;
+     }
+     .emailInput{
+        width: 120px;
+     }
+     .PWReset_Div select{
+        width: 152px;
+     }
+      .Name_input{
+        width:400px;
+     }
+     .Birth_input{
+        width: 380px;
+        height: 55px;
+        padding-right: 20px;
+     }
+     .PWReset button{
+        margin-top: 10px;
+        width:300px;
+        height: 55px;
+     }
+}
