@@ -11,14 +11,19 @@ const LogIn = () => {
   const LoginClick = async (event) => {
     event.preventDefault();
     await axios
-      .post("", {
+      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/login", {
         id: ID,
         pw: PW,
       })
       .then((response) => {
-        console.log(response);
-        localStorage.setItem("token", response.data);
-        navigate("/");
+        if (response.data.sign_in === true) {
+          console.log(response);
+          localStorage.setItem("token", response.config.data); // 로그인 유지용, 로그인 보안 강화 후 삭제
+          navigate("/Market");
+        } else {
+          console.log(response);
+          alert("로그인에 실패했습니다.");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -105,7 +110,10 @@ const LogIn = () => {
             ID/PW 찾기
           </button>
           <div className="VLine"></div>
-          <button className="Signup" onClick={(event) => navigate("/SignUp_1")}>
+          <button
+            className="Signup"
+            onClick={(event) => navigate("/SignUpChoice")}
+          >
             회원가입
           </button>
         </div>

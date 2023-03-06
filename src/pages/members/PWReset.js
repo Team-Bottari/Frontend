@@ -17,12 +17,12 @@ const PWReset = () => {
 
   const sendEmail = async (event) => {
     event.preventDefault();
-    console.log(ID, Email, Name, BirthDay);
+    console.log(ID + Email, Name, BirthDay);
     if (!emailRegex.test(ID + Email)) {
       alert("유효하지 않은 이메일 주소입니다. 다시 확인해주세요");
     } else {
       await axios
-        .post("", {
+        .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/pw-find", {
           id: ID + Email,
           name: Name,
           birth: BirthDay,
@@ -86,6 +86,7 @@ const PWReset = () => {
             <option value="self">직접입력</option>
             <option value="@gmail.com">Gmail</option>
             <option value="@naver.com">Naver</option>
+            <option value="@kakao.com">Kakao</option>
             <option value="@daum.net">Daum</option>
             <option value="@nate.net">Nate</option>
           </select>

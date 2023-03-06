@@ -6,6 +6,7 @@ import SignUpStep1 from "./pages/members/SignUpStep1";
 import Market from "./pages/Market";
 import IDSearch from "./pages/members/IDSearch";
 import PWReset from "./pages/members/PWReset";
+import SignUpChoice from "./pages/members/SignUpChoice";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/SignUp_1" element={<SignUpStep1 />} />
           <Route path="/IDSearch" element={<IDSearch />} />
           <Route path="/PWReset" element={<PWReset />} />
+          <Route path="/SignUpChoice" element={<SignUpChoice />} />
         </Routes>
       </div>
     </BrowserRouter>
