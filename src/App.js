@@ -7,7 +7,7 @@ import Market from "./pages/Market";
 import IDSearch from "./pages/members/IDSearch";
 import PWReset from "./pages/members/PWReset";
 import SignUpChoice from "./pages/members/SignUpChoice";
-
+import Mypage from "./pages/members/mypage/Mypage";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +20,7 @@ function App() {
           <Route path="/IDSearch" element={<IDSearch />} />
           <Route path="/PWReset" element={<PWReset />} />
           <Route path="/SignUpChoice" element={<SignUpChoice />} />
+          <Route path="/Mypage" element={<Mypage />} />
         </Routes>
       </div>
     </BrowserRouter>
