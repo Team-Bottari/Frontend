@@ -52,7 +52,7 @@ const Mypage = () => {
         <button
           className="toModify"
           onClick={(e) => {
-            navigate("/ModifyInfo", { state: userData });
+            navigate("/auth/mypage/ModifyInfo", { state: userData });
           }}
         >
           프로필 수정
@@ -61,7 +61,7 @@ const Mypage = () => {
       <div className="rightDiv">
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/InterestList ");
           }}
         >
           <img
@@ -73,7 +73,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/PurchaseList ");
           }}
         >
           <img
@@ -85,7 +85,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/SaleList ");
           }}
         >
           <img
@@ -97,7 +97,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/ChattingList ");
           }}
         >
           <img
@@ -110,7 +110,7 @@ const Mypage = () => {
         <hr />
         <button
           onClick={(e) => {
-            navigate("/");
+            navigate("/Location");
           }}
         >
           <img
@@ -122,7 +122,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/");
+            navigate("/auth/mypage/UserHashTag");
           }}
         >
           <img alt="tag" className="MypageIMG" src="/images/Icon/tagIcon.png" />

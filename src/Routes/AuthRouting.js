@@ -4,11 +4,9 @@ import MemberR from "./MemberRouting";
 
 function AuthRouting() {
   return (
-    <Routes>
-      <Route path="/auth/*">
-        <MyPageR />
-        <MemberR />
-      </Route>
+    <Routes path="/auth/*">
+      <Route path="mypage/*" element={<MyPageR />} />
+      <Route path="member/*" element={<MemberR />} />
     </Routes>
   );
 }

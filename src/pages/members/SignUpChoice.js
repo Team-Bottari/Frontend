@@ -17,7 +17,7 @@ const SignUpChoice = () => {
         <button onClick={google}>구글로 시작하기</button>
         <button
           onClick={(e) => {
-            navigate("/SignUp_1");
+            navigate("/auth/member/SignUp_1");
           }}
         >
           회원가입
