@@ -19,7 +19,7 @@ const LogIn = () => {
         if (response.data.sign_in === true) {
           console.log(response);
           localStorage.setItem("token", response.config.data); // 로그인 유지용, 로그인 보안 강화 후 삭제
-          navigate("/Market");
+          navigate("/Mypage", { state: { ID: ID } });
         } else {
           console.log(response);
           alert("로그인에 실패했습니다.");
@@ -106,13 +106,16 @@ const LogIn = () => {
           </button>
         </div>
         <div className="otherBTN_Div2">
-          <button className="findIDPW" onClick={(event) => navigate("/IDorPW")}>
+          <button
+            className="findIDPW"
+            onClick={(event) => navigate("/auth/member/IDorPW")}
+          >
             ID/PW 찾기
           </button>
           <div className="VLine"></div>
           <button
             className="Signup"
-            onClick={(event) => navigate("/SignUpChoice")}
+            onClick={(event) => navigate("/auth/member/SignUpChoice")}
           >
             회원가입
           </button>

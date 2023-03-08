@@ -1,39 +1,58 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import HeaderV1 from "../../../components/header/HeaderV1";
 import "../../../CSS/mypage/Mypage.css";
 const Mypage = () => {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState();
-  /*
+  //const location = useLocation();
+  //const { ID } = location.ID;
+  const [userData, setUserData] = useState({
+    img: "/images/LogoPurple.png",
+    name: "홍길동",
+    weight: "10",
+  });
+
   useEffect(() => {
+    /*
     async function getUserInfo() {
       try {
-        const dataRecieve = await axios.get(
+        const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
           {
-            headers: {
-              "X-AUTH-TOKEN": localStorage.getItem("token"),
-            },
+            id: "user@example.com", // id: "ID",
           }
         );
-        setUserData(dataRecieve.data);
+        console.log(response);
+        setUserData=response.data;
       } catch (err) {
         console.log(err);
         alert("오류가 발생했습니다");
       }
     }
-    getUserInfo();
+    getUserInfo();*/
   }, []);
-*/
+
   return (
     <div className="Mypage">
       <HeaderV1 />
+      <div className="side"></div>
       <div className="leftDiv">
+        <img alt="user" className="useImg" src={userData.img} />
+        <p className="Name">{userData.name}</p>
+        <div className="WeightDiv">
+          <img
+            alt="weight Logo"
+            className="weightIMG"
+            src="/images/Icon/weightIcon.png"
+          />
+          <p>매너무게</p>
+          <p className="useWeight">{userData.weight}KG</p>
+        </div>
         <button
+          className="toModify"
           onClick={(e) => {
-            navigate("/");
+            navigate("/auth/mypage/ModifyInfo", { state: userData });
           }}
         >
           프로필 수정
@@ -42,7 +61,7 @@ const Mypage = () => {
       <div className="rightDiv">
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/InterestList ");
           }}
         >
           <img
@@ -54,7 +73,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/PurchaseList ");
           }}
         >
           <img
@@ -66,7 +85,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/SaleList ");
           }}
         >
           <img
@@ -75,10 +94,10 @@ const Mypage = () => {
             src="/images/Icon/recieptIcon.png"
           />
           판매 내역
-        </button>{" "}
+        </button>
         <button
           onClick={(e) => {
-            navigate("/ ");
+            navigate("/auth/mypage/ChattingList ");
           }}
         >
           <img
@@ -87,10 +106,11 @@ const Mypage = () => {
             src="/images/Icon/chatIcon.png"
           />
           채팅 내역
-        </button>{" "}
+        </button>
+        <hr />
         <button
           onClick={(e) => {
-            navigate("/");
+            navigate("/Location");
           }}
         >
           <img
@@ -102,7 +122,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/");
+            navigate("/auth/mypage/UserHashTag");
           }}
         >
           <img alt="tag" className="MypageIMG" src="/images/Icon/tagIcon.png" />

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "../../CSS/members/IDorPW.css";
 import "../../CSS/members/Login.css";
 const IDorPW = () => {
+  console.log("sdsd");
   const navigate = useNavigate();
   return (
     <div className="IDorPW">
@@ -11,14 +12,14 @@ const IDorPW = () => {
       <div className="Button">
         <button
           onClick={(e) => {
-            navigate("/IDSearch");
+            navigate("/auth/member/IDSearch");
           }}
         >
           ID 찾기
         </button>
         <button
           onClick={(e) => {
-            navigate("/PWReset");
+            navigate("/auth/member/PWReset");
           }}
         >
           PW 재설정
