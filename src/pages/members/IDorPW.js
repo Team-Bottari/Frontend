@@ -11,14 +11,14 @@ const IDorPW = () => {
       <div className="Button">
         <button
           onClick={(e) => {
-            navigate("/IDSearch");
+            navigate("/auth/IDSearch");
           }}
         >
           ID 찾기
         </button>
         <button
           onClick={(e) => {
-            navigate("/PWReset");
+            navigate("/auth/PWReset");
           }}
         >
           PW 재설정
