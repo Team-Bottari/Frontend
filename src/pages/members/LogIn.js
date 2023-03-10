@@ -10,6 +10,7 @@ const LogIn = () => {
 
   const LoginClick = async (event) => {
     event.preventDefault();
+    console.log(ID, PW);
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/login", {
         id: ID,
@@ -19,7 +20,7 @@ const LogIn = () => {
         if (response.data.sign_in === true) {
           console.log(response);
           localStorage.setItem("token", response.config.data); // 로그인 유지용, 로그인 보안 강화 후 삭제
-          navigate("/Mypage", { state: { ID: ID } });
+          navigate("/Mypage", { state: ID });
         } else {
           console.log(response);
           alert("로그인에 실패했습니다.");
