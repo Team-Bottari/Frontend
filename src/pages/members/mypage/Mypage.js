@@ -5,33 +5,32 @@ import HeaderV1 from "../../../components/header/HeaderV1";
 import "../../../CSS/mypage/Mypage.css";
 const Mypage = () => {
   const navigate = useNavigate();
-  //const location = useLocation();
-  //const { ID } = location.ID;
+  const location = useLocation();
   const [userData, setUserData] = useState({
+    id: "user@example.com",
     img: "/images/LogoPurple.png",
     name: "홍길동",
-    weight: "10",
+    credit_rating: "10",
   });
 
   useEffect(() => {
-    /*
     async function getUserInfo() {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
           {
-            id: "user@example.com", // id: "ID",
+            id: location.state,
           }
         );
         console.log(response);
-        setUserData=response.data;
+        setUserData(response.data);
       } catch (err) {
         console.log(err);
         alert("오류가 발생했습니다");
       }
     }
-    getUserInfo();*/
-  }, []);
+    getUserInfo();
+  }, [location.state]);
 
   return (
     <div className="Mypage">
@@ -47,7 +46,7 @@ const Mypage = () => {
             src="/images/Icon/weightIcon.png"
           />
           <p>매너무게</p>
-          <p className="useWeight">{userData.weight}KG</p>
+          <p className="useWeight">{userData.credit_rating}KG</p>
         </div>
         <button
           className="toModify"

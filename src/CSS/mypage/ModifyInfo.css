@@ -15,8 +15,18 @@
     font-weight: bolder;
     font-size: medium;
 }
-.rightDiv{
+.right{
     width:50vw;
     display: flex;
     flex-direction: column;
+}
+.Logout{
+    border:none;
+    background-color: rgb(187, 22, 22);
+    height: 50px;
+    font-size: large;
+    font-weight: 500;
+    line-height: 40px;
+    padding:10px 0px 50px 0px; 
+    margin-bottom: 30px;
 }
