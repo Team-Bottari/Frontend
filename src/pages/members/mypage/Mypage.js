@@ -8,7 +8,7 @@ const Mypage = () => {
   const location = useLocation();
   const [userData, setUserData] = useState({
     id: "user@example.com",
-    img: "/images/LogoPurple.png",
+    img: "/images/LogoWhite.png",
     name: "홍길동",
     credit_rating: "10",
   });

@@ -1,0 +1,61 @@
+html{
+    font-size: 62.5%;
+}
+.PWConfirm{
+    margin-top:0rem; /**헤더 자리**/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.InputMPWC{
+    width: 45rem;
+    border:0.1rem solid lightgray ;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
+    border-radius: 3rem;
+    padding-left: 1.5rem;
+    color:#9A30AE;
+    font-weight: bolder;
+    display: flex;
+    margin-top:2rem;
+}
+.InputMPWC input{
+    border:none;
+    background-color: rgba(255, 255, 255, 0);
+    outline-style: none;
+    appearance: none;
+    width: 35rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+}
+.InputLabel{
+    width: 12rem;
+    line-height: 4.5rem;
+    font-size: medium;
+}
+.PWConfirm button{
+    position: absolute;
+    top: 68rem;
+    margin-top: 2rem;
+    width: 30rem;
+    height: 4.5rem;
+    border-radius: 3rem;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem 2rem 1rem 2rem;   
+    border:0.1rem solid lightgray ;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray ;
+}
+.disabled {
+    background-color: darkgray;
+    color:gray;
+}
+.active {
+    background-color: #9A30AE;
+    color:white;
+}
+.warning{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color:#9A30AE;
+    text-align: center;
+}

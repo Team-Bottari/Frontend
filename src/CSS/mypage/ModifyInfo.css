@@ -1,13 +1,16 @@
+
+html{
+    font-size: 62.5%;
+}
 .ModifyInfo{
-    margin-top:150px; /**헤더 자리**/
+    margin-top:25rem; /**헤더 자리**/
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.side{
-    width:10vw;
-}
 .leftDiv{
+    margin-left: 15rem;
+    margin-right: 10rem;
     width:35vw;
     display: flex;
     flex-direction: column;
@@ -15,18 +18,113 @@
     font-weight: bolder;
     font-size: medium;
 }
+.InputNickname{
+    margin-top: 3rem;
+    border:0.1rem solid lightgray ;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
+    border-radius: 3rem;
+    padding-left: 1.5rem;
+    color:#9A30AE;
+    font-weight: bolder;
+    display: flex;
+}
+.InputNickname input{
+    margin-left: -1rem;
+    border:none;
+    background-color: rgba(255, 255, 255, 0);
+    outline-style: none;
+    appearance: none;
+    width: 15rem;
+    height: 5rem;
+    text-align: center;
+}
+.InputLabelNickname{
+    line-height: 5rem;
+    font-size: 2rem;
+}
 .right{
-    width:50vw;
+    width:50rem;
     display: flex;
     flex-direction: column;
 }
+.ModifyDiv{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem;
+    border:0.1rem solid lightgray ;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
+    border-radius: 3rem;
+    padding-left: 1.5rem;
+    height: 6rem;
+    font-size: 2.5rem;
+    line-height: 1rem;
+    color:grey;
+    font-weight: bolder;
+}
+.PEmail{
+    text-align: center;
+    width:47rem;
+}
+.PLable{
+    width: 3rem;
+    color: #9A30AE;
+}
+.PWReset{
+    width: 33rem;
+    margin-left: 15rem;    
+    line-height: 4rem;
+    color:white;
+    background-color: #9A30AE;
+}
+.right button{
+    border-radius: 3rem;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem 2rem 1rem 2rem;   
+    border:0.1rem solid lightgray ;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray ;
+}
 .Logout{
+    margin-top: 3rem;
+    width: 50rem;
+    height: 6rem;
+    color: #9A30AE;
+    background-color:white;
+}
+.SaveInfo{
+    margin-top: 2rem;
+    width: 50rem;
+    height: 6rem;
+    color:white;
+    background-color: #9A30AE;
+}
+.withdraw{
+    position: absolute; 
+    right: 0rem; 
+    bottom: 0rem;
+    padding:1rem 2rem 1rem 2rem;   
+    text-decoration: underline;
+    text-underline-position : under;
+    background-color: rgba(255, 255, 255, 0);
     border:none;
-    background-color: rgb(187, 22, 22);
-    height: 50px;
-    font-size: large;
-    font-weight: 500;
-    line-height: 40px;
-    padding:10px 0px 50px 0px; 
-    margin-bottom: 30px;
+    color:#772588;
+    font-size: 2rem;
+}
+.ModifyInfo form{
+    top:42rem;
+    left: 21.5vw;
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    z-index: 10;
+}
+.cameraIcon{
+    width: 6rem;
+}
+.imgInput{
+    visibility: hidden;
+    width: 15rem;
+}
+.useImg{
+    position: relative;
 }
