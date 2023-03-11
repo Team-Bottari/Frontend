@@ -1,0 +1,66 @@
+.sign {
+    position: absolute;
+  
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 700px;
+    background: #ffffff;
+    border: 1px solid #d2c2e6;
+    box-shadow: 3px 3px 5px #b785d5db;
+  
+    margin: 0px;
+    padding: 100px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  
+  h1 {
+    width: 466px;
+    height: 94px;
+    left: 725px;
+    top: 132px;
+  
+    font-family: "Noto Sans CJK KR";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 47px;
+  
+    color: #9a30ae;
+    justify-content: space-evenly;
+  }
+  .dup {
+    font-size: 2px;
+    width: 55px;
+    height: 30px;
+    background-color: #ffffff;
+    color: #9a30ae;
+    margin-left: 200px;
+  }
+  
+  input {
+    margin-right: 20px;
+    padding: 0px;
+    border: none;
+    border-bottom: 1px solid #cfcfcf;
+    width: 250px;
+    height: 30px;
+  }
+  
+  label {
+    font-weight: bolid;
+    color: #736b74bf;
+  }
+  .reg {
+    width: 250px;
+  
+    background-color: #ffffff;
+    color: #9a30ae;
+    border-radius: 20px;
+    border: #9a30ae 1px solid;
+  }
+  
