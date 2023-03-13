@@ -1,0 +1,39 @@
+.html{
+    font-size: 62.5%;
+}
+.header{
+    width: 100vw;
+    height: 5.5rem;
+    position:absolute;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray ;
+}
+.headerCenter{
+    flex: 1;
+    text-align: center;
+}
+.headerLogo{
+    height: 5rem;
+    width: 5rem;
+}
+.headerLogo_center{
+    margin:auto;
+}
+.headerLeft{
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+}
+.headerRight{
+    text-align: right;
+}
+.MenuHeader{
+    width: 5rem;
+}
+.MypageHeader{
+    width: 5rem;
+}

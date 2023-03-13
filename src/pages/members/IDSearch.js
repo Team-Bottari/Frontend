@@ -1,23 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import /* useNavigate */ "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "../../CSS/members/IDSearch.css";
 
- const IDSearch = () => {
+const IDSearch = () => {
   const [Name, setName] = useState("");
   const [Birth, setBirth] = useState("");
   const Sendinform = async (event) => {
     await axios
-      .post(
-        "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/id-find",
-        {
-          name: Name,
-          birth: Birth,
-        }
-      )
+      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/id-find", {
+        name: Name,
+        birth: Birth,
+      })
       .then((response) => {
         console.log(response);
-        if (response.data.id !== false ) {
+        if (response.data.id !== false) {
           console.log(response.data.id);
           alert(response);
         } else {
@@ -29,17 +26,12 @@ import "../../CSS/members/IDSearch.css";
       });
   };
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-  };
-
   const onsetNameHandler = (event) => {
     setName(event.currentTarget.value);
   };
   const onsetBirthHandler = (event) => {
     setBirth(event.currentTarget.value);
   };
- 
 
   return (
     <div>
@@ -51,9 +43,9 @@ import "../../CSS/members/IDSearch.css";
         </header>
       </div>
       <div className="IdReset">
-      <img alt="main Logo" className="LogoIMG" src="/images/purplelogo.png" /> 
+        <img alt="main Logo" className="LogoIMG" src="/images/purplelogo.png" />
         <br></br>
-        <form >
+        <form>
           <div className="Id_Div">
             <label htmlFor="Name_input">이름</label>
             <input
@@ -80,4 +72,4 @@ import "../../CSS/members/IDSearch.css";
     </div>
   );
 };
-export default IDSearch
+export default IDSearch;

@@ -4,6 +4,7 @@ import axios from "axios";
 const Withdraw = () => {
   const navigate = useNavigate();
   const [ID, setID] = useState("");
+  const [PW, setPW] = useState("");
   const withdrawFinal = async (event) => {
     event.preventDefault();
     await axios
@@ -27,8 +28,17 @@ const Withdraw = () => {
   return (
     <div>
       <p>탈퇴하시겠습니까?</p>
-      <p>본인의 ID를 입력해주세요</p>
-      <input value={ID} onChange={(event) => setID(event.target.value)} />
+      <p>본인의 ID와 PW를 입력해주세요</p>
+      <input
+        type="email"
+        value={ID}
+        onChange={(event) => setID(event.target.value)}
+      />
+      <input
+        type="password"
+        value={PW}
+        onChange={(event) => setPW(event.target.value)}
+      />
       <button onClick={withdrawFinal}>탈퇴하기</button>
     </div>
   );
