@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import HeaderV1 from "../../../components/header/HeaderV1";
+import HeaderV3 from "../../../components/header/HeaderV3";
 import "../../../CSS/mypage/Mypage.css";
 const Mypage = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Mypage = () => {
 
   return (
     <div className="Mypage">
-      <HeaderV1 />
+      <HeaderV3 />
       <div className="side"></div>
       <div className="leftDiv">
         <img alt="user" className="useImg" src={userData.img} />

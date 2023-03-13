@@ -1,4 +1,4 @@
 const Identification = () => {
-  return <div></div>;
+  return <div>dd</div>;
 };
-export default Identification; //실명인증 컴포넌트
+export default Identification; //인증 컴포넌트

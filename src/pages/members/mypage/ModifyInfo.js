@@ -59,67 +59,11 @@ const ModifyInfo = () => {
         alert("오류가 발생했습니다. 다시 시도해주세요");
       });*/
   };
-  const InfoPWReset = async (event) => {
-    event.preventDefault();
-    let userR = window.confirm(
-      "본인인증이 필요합니다.\n 이메일로 본인인증을 진행하시겠습니까?."
-    );
-    if (userR === true) {
-      alert(
-        "전송되었습니다.\n 해당 이메일의 확인을 누르시면 비밀번호를 재설정 할 수 있습니다."
-      );
-      navigate("/auth/mypage/PWConfirm");
-      /*await axios
-      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/", {//아직 api 없음
-        
-      })
-      .then((response) => {
-        if (response.data. === true) {
-          alert("전송되었습니다.\n 해당 이메일의 확인을 누르시면 비밀번호를 재설정 할 수 있습니다.")
-          
-        } else {
-          console.log(response);
-          alert("본인인증 이메일 전송 중 오류가 발생했습니다.\n 다시 시도해주세요");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("본인인증 이메일 전송 중 오류가 발생했습니다.\n 다시 시도해주세요");
-      });*/
-    } else if (userR === false) {
-      alert("취소했습니다.");
-    }
+  const InfoPWReset = (event) => {
+    navigate("/auth/mypage/PWConfirm");
   };
-  const withdraw = async (event) => {
-    event.preventDefault();
-    let userR = window.confirm(
-      "본인인증이 필요합니다.\n 이메일로 본인인증을 진행하시겠습니까?."
-    );
-    if (userR === true) {
-      alert(
-        "전송되었습니다.\n 해당 이메일의 확인을 누르시면 탈퇴 할 수 있습니다."
-      );
-      navigate("/auth/mypage/Withdraw");
-      /*await axios
-      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/withdrawal", {
-        
-      })
-      .then((response) => {
-        if (response.data. === true) {
-          alert("전송되었습니다.\n 해당 이메일의 확인을 누르시면 탈퇴 할 수 있습니다.")
-          
-        } else {
-          console.log(response);
-          alert("본인인증 이메일 전송 중 오류가 발생했습니다.\n 다시 시도해주세요");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("본인인증 이메일 전송 중 오류가 발생했습니다.\n 다시 시도해주세요");
-      });*/
-    } else if (userR === false) {
-      alert("취소했습니다.");
-    }
+  const withdraw = (event) => {
+    navigate("/auth/mypage/Withdraw");
   };
   return (
     <div className="ModifyInfo">
