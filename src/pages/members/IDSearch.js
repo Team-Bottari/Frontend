@@ -75,7 +75,7 @@ import "../../CSS/members/IDSearch.css";
           </div>
         </form>
 
-        <button onClick={Sendinform}>확인</button>
+        <button className = "check" onClick={Sendinform}>확인</button>
       </div>
     </div>
   );

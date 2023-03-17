@@ -18,7 +18,7 @@
     flex-wrap: nowrap;
   }
   
-  h1 {
+  .title {
     width: 466px;
     height: 94px;
     left: 725px;
@@ -42,7 +42,7 @@
     margin-left: 200px;
   }
   
-  input {
+  .inputpw {
     margin-right: 20px;
     padding: 0px;
     border: none;
@@ -51,7 +51,7 @@
     height: 30px;
   }
   
-  label {
+  .inputlabel {
     font-weight: bolid;
     color: #736b74bf;
   }

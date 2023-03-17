@@ -92,13 +92,13 @@ const dupcheck = async(event) =>{
    <div className="sign">
  
      <div className="register">
-       <h1>회원가입</h1>
+       <h1 className="title">회원가입</h1>
        <br />
        <form onSubmit={onSubmitHandler}>
-         <label>이메일</label>
+         <label className="inputlabel">이메일</label>
          <br />
 
-         <input
+         <input className ="inputpw"
            type="Email"
            value={Email}
            placeholder="youemail@gmail.com"
@@ -108,10 +108,10 @@ const dupcheck = async(event) =>{
 
          <br />
 
-         <label htmlFor="password"> 비밀번호</label>
+         <label className="inputlabel" htmlFor="password"> 비밀번호</label>
          <br />
 
-         <input
+         <input className="inputpw"
            type="password"
            placeholder="password"
            id="password"
@@ -120,10 +120,10 @@ const dupcheck = async(event) =>{
          />
          <br />
 
-         <label htmlFor="check password"> 비밀번호 확인</label>
+         <label className="inputlabel"htmlFor="check password"> 비밀번호 확인</label>
          <br />
 
-         <input
+         <input className="inputpw"
            type="password"
            placeholder="password"
            id="password"
@@ -131,10 +131,10 @@ const dupcheck = async(event) =>{
            onChange={oncheckpwHandler}
          />
          <br />
-         <label htmlFor="nickname"> 닉네임</label>
+         <label className="inputlabel" htmlFor="nickname"> 닉네임</label>
          <br />
 
-         <input
+         <input className="inputpw"
            type="text"
            placeholder="닉네임"
            id="nickname"
@@ -143,10 +143,10 @@ const dupcheck = async(event) =>{
          />
          <br />
 
-         <label htmlFor="name"> 이름 </label>
+         <label className="inputlabel" htmlFor="name"> 이름 </label>
          <br />
 
-         <input
+         <input className ="inputpw"
            type="text"
            placeholder="이름"
            id="name"
@@ -154,20 +154,20 @@ const dupcheck = async(event) =>{
            onChange={onsetNameHandler}
          />
          <br />
-         <label htmlFor="birth"> 생년월일 </label>
+         <label  className="inputlabel" htmlFor="birth"> 생년월일 </label>
          <br />
 
          <input
-           type="date"
+           type="date"className ="inputpw"
            id="password"
            name="password"
            onChange={onsetBirthHandler}
          />
          <br />
-         <label htmlFor="number"> 핸드폰번호 </label>
+         <label className="inputlabel" htmlFor="number"> 핸드폰번호 </label>
          <br />
 
-         <input
+         <input className ="inputpw"
            type="tel"
            id="password"
            name="phonenumber"

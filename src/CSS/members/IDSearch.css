@@ -76,7 +76,7 @@
     appearance: none;
     border: none;
   }
-  button {
+ .check {
     border-radius: 30px;
     border: none;
     color: white;
