@@ -87,6 +87,13 @@ html{
     font-weight: bold;
     height: 5rem;
 }
+
+.VLine{
+    border-left : 0.3rem solid #9A30AE;
+    margin-top:1.2rem;
+    height: 2.5rem;
+}
+
 @media  only screen and (min-width: 280px) and (max-width: 319px) and (orientation: portrait){/*소형 모바일(세로), 갤럭시 폴드 접은 버전(세로)*/
     html{
         font-size: 36.5%;

@@ -1,14 +1,14 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import HeaderV3 from "../../../components/header/HeaderV3";
+import HeaderV1 from "../../../components/header/HeaderV1";
 import "../../../CSS/mypage/Mypage.css";
 const Mypage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [imgMypage, setImgMypage] = useState("");
   const [userData, setUserData] = useState({
     id: "user@example.com",
-    img: "/images/LogoWhite.png",
     name: "홍길동",
     credit_rating: "10",
   });
@@ -30,15 +30,31 @@ const Mypage = () => {
       }
     }
     getUserInfo();
+    async function getUserIMG() {
+      try {
+        const response = await axios.post(
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
+          {
+            id: location.state,
+          },
+          { responseType: "arraybuffer" }
+        );
+        const blob = new Blob([response.data], { type: "image/jpeg" });
+        setImgMypage(URL.createObjectURL(blob));
+      } catch (err) {
+        console.log(err);
+        alert("오류가 발생했습니다");
+      }
+    }
+    getUserIMG();
   }, [location.state]);
 
   return (
     <div className="Mypage">
-      <HeaderV3 />
-      <div className="side"></div>
+      <HeaderV1 ID={userData.id} />
       <div className="leftDiv">
-        <img alt="user" className="useImg" src={userData.img} />
-        <p className="Name">{userData.name}</p>
+        <img alt="user" className="useImg" src={imgMypage} />
+        <p className="Name">{userData.nick_name}</p>
         <div className="WeightDiv">
           <img
             alt="weight Logo"
@@ -51,7 +67,10 @@ const Mypage = () => {
         <button
           className="toModify"
           onClick={(e) => {
-            navigate("/auth/mypage/ModifyInfo", { state: userData });
+            navigate("/auth/mypage/ModifyInfo", {
+              state: userData,
+              img: imgMypage,
+            });
           }}
         >
           프로필 수정
@@ -126,6 +145,14 @@ const Mypage = () => {
         >
           <img alt="tag" className="MypageIMG" src="/images/Icon/tagIcon.png" />
           해시태그 알림 설정
+        </button>
+        <button
+          onClick={(e) => {
+            navigate("/auth/market/MarketPost", { state: userData.id });
+          }}
+        >
+          <img alt="tag" className="MypageIMG" src="/images/Icon/tagIcon.png" />
+          임시 글 작성 버튼
         </button>
       </div>
     </div>

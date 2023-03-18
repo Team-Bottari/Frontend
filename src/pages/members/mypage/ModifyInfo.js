@@ -1,14 +1,37 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import HeaderV1 from "../../../components/header/HeaderV1";
+import HeaderV2 from "../../../components/header/HeaderV2";
 import "../../../CSS/mypage/ModifyInfo.css";
 const ModifyInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [userData, setUserData] = useState(location.state);
-  const [imgFile, setImgFile] = useState(location.state.img);
+  const IDJSon = { id: userData.id };
+  const [flag, setFlag] = useState(false);
+  const [imgFile, setImgFile] = useState("");
   const imgRef = useRef(null);
+  useEffect(() => {
+    async function getUserIMG() {
+      try {
+        const response = await axios.post(
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
+          {
+            id: location.state.id,
+          },
+          { responseType: "arraybuffer" }
+        );
+        console.log(response);
+        const blob = new Blob([response.data], { type: "image/jpeg" });
+        setImgFile(URL.createObjectURL(blob));
+      } catch (err) {
+        console.log(err);
+        alert("오류가 발생했습니다");
+      }
+    }
+    getUserIMG();
+  }, [location.state]);
+
   const logOut = async (event) => {
     event.preventDefault();
     await axios
@@ -29,35 +52,103 @@ const ModifyInfo = () => {
         alert("오류가 발생하여 로그아웃에 실패했습니다. 다시 시도해주세요");
       });
   };
+  const deleteIMG = async (event) => {
+    if (flag === false) {
+      event.preventDefault();
+      await axios
+        .post(
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/delete",
+          {
+            id: userData.id,
+          },
+          { responseType: "arraybuffer" }
+        )
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            const blob = new Blob([response.data], { type: "image/jpeg" });
+            setImgFile(URL.createObjectURL(blob));
+            setFlag(true);
+            console.log("이미지 삭제");
+          } else {
+            console.log(response);
+            alert(
+              "오류가 발생하여 이미지 삭제에 실패했습니다. 다시 시도해주세요"
+            );
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("오류가 발생하여 삭제에 실패했습니다. 다시 시도해주세요");
+        });
+    }
+  };
   const imgUpload = async (event) => {
-    console.log(1);
+    setFlag(false);
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImgFile(reader.result);
     };
-    console.log(2);
   };
   const SaveInfo = async (event) => {
     event.preventDefault();
-    /*await axios
-      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/", {//아직 api 없음
-        
-      })
+    if (flag === false) {
+      const formData = new FormData();
+      formData.append("upload_file", imgFile);
+      formData.append("member_info", JSON.stringify(IDJSon));
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+      console.log(flag);
+      await axios
+        .post(
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(formData);
+          if (response.data.response === 200) {
+            console.log("이미지 업로드 완료");
+          } else {
+            console.log(response);
+            alert("오류가 발생했습니다. 다시 시도해주세요");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("전송 오류가 발생했습니다. 다시 시도해주세요");
+        });
+    }
+    await axios
+      .post(
+        "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/update-member-info",
+        {
+          id: userData.id,
+          nick_name: userData.nick_name,
+          name: userData.name,
+          phone: userData.phone,
+        }
+      )
       .then((response) => {
-        if (response.data. === true) {
-          
-          navigate("/Mypage");
+        if (response.data.update_member_info === true) {
+          console.log("유저데이터 업로드 완료");
+          navigate("/Mypage", { state: userData.id });
         } else {
           console.log(response);
-          alert("오류가 발생했습니다. 다시 시도해주세요");
+          alert("오류가 발생했습니다! 다시 시도해주세요");
         }
       })
       .catch((err) => {
         console.log(err);
         alert("오류가 발생했습니다. 다시 시도해주세요");
-      });*/
+      });
   };
   const InfoPWReset = (event) => {
     navigate("/auth/mypage/PWConfirm");
@@ -67,7 +158,7 @@ const ModifyInfo = () => {
   };
   return (
     <div className="ModifyInfo">
-      <HeaderV1 />
+      <HeaderV2 ID={userData.id} />
       <div className="leftDiv">
         <img className="useImg" key={imgFile} src={imgFile} alt="userIMG" />
         <form>
@@ -95,15 +186,18 @@ const ModifyInfo = () => {
             id="Nickname_input"
             type="text"
             name="Name"
-            value={userData.name}
+            value={userData.nick_name}
             onChange={(event) =>
               setUserData((prevUserData) => ({
                 ...prevUserData,
-                name: event.target.value,
+                nick_name: event.target.value,
               }))
             }
           />
         </div>
+        <button className="deleteIMGModify" onClick={deleteIMG}>
+          삭제
+        </button>
       </div>
       <div className="right">
         <div className="ModifyDiv">
