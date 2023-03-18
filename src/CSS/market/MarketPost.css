@@ -1,0 +1,100 @@
+.html{
+    font-size: 62.5%;
+}
+.MarketPost{
+    padding-top:10rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.centerDiv{
+    width:80rem;
+    height:60rem;
+}
+.imgUploadMarket{
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    width: 80rem;
+    height: 16rem;
+    overflow-x:auto ;
+    padding-bottom: 3rem;
+}
+.imgUploadMarket form{
+    width: 15rem;
+    height: 15rem;
+    align-items: center;
+    background-color: lightgray;
+}
+.imgUploadMarket input{
+    visibility: hidden;  
+}
+.cameraIcon_Market{
+    width: 7rem;
+    height: 7rem;
+    padding:4rem 4rem;
+}
+.MarketIMG{
+    width: 15rem;
+    height: 15rem;
+}
+.imgDiv{
+    width: 16rem;
+    height: 16rem;
+    margin-left:2rem;
+    display:flex;
+}
+.imgDeleteButton{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 70%;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: black;
+    color:white;
+    border:none;
+    line-height: 3rem;
+    margin-left: -2rem;
+    margin-top:-1rem;
+}
+.PostInfo{
+    width: 80rem;
+    height: 3rem;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+.PostDetails{
+    border-top:0.2rem solid lightgray ;
+}
+.PostInfo label{
+    color:gray;
+    font-weight: bolder;
+    padding-left: 2rem;
+    padding-right: 5rem;
+}   
+.PostInfo input{
+    font-size: 2rem;
+    color:black;
+    font-weight: bolder;
+    height: 2.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border:none;
+}  
+.PostDetails_textInput{
+    display: flex;
+    flex-direction: column;
+    border-top:0.2rem solid lightgray ;
+}
+.PostDetails_textInput textarea{
+    font-size: 2rem;
+    color:black;
+    height: 30rem;
+    font-weight: bolder;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border:none;
+}
+
+

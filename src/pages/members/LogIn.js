@@ -107,17 +107,11 @@ const LogIn = () => {
           </button>
         </div>
         <div className="otherBTN_Div2">
-          <button
-            className="findIDPW"
-            onClick={(event) => navigate("/auth/member/IDorPW")}
-          >
+          <button onClick={(event) => navigate("/auth/member/IDorPW")}>
             ID/PW 찾기
           </button>
           <div className="VLine"></div>
-          <button
-            className="Signup"
-            onClick={(event) => navigate("/auth/member/SignUpChoice")}
-          >
+          <button onClick={(event) => navigate("/auth/member/SignUpChoice")}>
             회원가입
           </button>
         </div>

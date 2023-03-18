@@ -2,98 +2,90 @@ html{
     font-size: 62.5%; 
 }
 .Mypage{    
-    padding-top:5.5rem;
+    padding-top:15rem;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
-.Logo{
-    margin-top: 8rem;
-    padding:2rem;
+.leftDiv{
+    width:35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 3rem;
+}
+.useImg{
+    margin-top: -5rem;
+    width: 25rem;
+    height: 25rem;
     border-radius:70%;
-    background-color: #9A30AE;
-    width: 25rem;
-    height: 25rem;
-} 
-.LogoIMG{
-    width: 25rem;
-    height: 25rem;
+    background-color: rgba(131, 77, 218, 0.468);
 }
-.InputMaterial{
-    margin-top: 3rem;
+.Name{
+    font-size: 5rem;
+    padding:0.5rem 0rem 0.5rem 0rem;
+}
+.WeightDiv{
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    line-height: 0.5rem;
+}
+.weightIMG{
+    width:3rem;
+    height: 3rem;
+    margin-left: -3.5rem;
+    margin-bottom: 3.5rem;
+}
+.useWeight{
+    padding-left: 5rem;
+}
+.toModify{
+    width:15rem;
+    border-radius: 3rem;
+    color:white;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: #9A30AE;
+    padding: 1rem 2rem 1rem 2rem;   
+    border:0.1rem solid lightgray ;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray ;
+
+}
+.rightDiv{
+    margin-left: 5rem;
+    width:60rem;
+    display: flex;
     flex-direction: column;
 }
-.Input{
-    border:0.1rem solid lightgray ;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
-    border-radius: 3rem;
-    padding-left: 1.5rem;
-    font-weight: bolder;
+.rightDiv button{
     display: flex;
-}
-.InputMaterial input{
+    align-items: left;
     border:none;
-    background-color: rgba(255, 255, 255, 0);
-    outline-style: none;
-    appearance: none;
-    width: 35rem;
-    height: 4rem;
-}
-.InputLabel{
-    line-height: 4rem;
-    font-size: medium;
-}
-.Input label{
-    color:#9A30AE;;
-}
-.InputMaterial button{
-    margin-top: 2rem;
-    border-radius: 3rem;
-    border:none;
-    color:white;
-    font-weight: bolder;
-    font-size: larger;
-    background-color: #9A30AE;
-    width: 30rem;
-    height: 4rem;
-}
-.otherBTN{
-    margin-top: 2rem;
-    width: 50rem;
-}
-.otherBTN_Div1{
-    float: left;
-}
-.otherLogin{
-    margin-left: 0.6rem;
-    width: 4.5rem;
-    height: 4.5rem;
-    padding: 0rem;
     background-color: white;
-    border:none;
+    height: 5rem;
+    font-size: large;
+    font-weight: 500;
+    line-height: 4rem;
+    padding:1rem 0rem 5rem 0rem; 
+    margin-bottom: 3rem;
 }
-.IconLogo{
-    width: 4.5rem;
-    height: 4.5rem;
+.rightDiv hr {
+    border: 0;
+    width: 100%;
+    height: 0.1rem;
+    margin-left: -3rem;
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
+    background: lightgray;
+  }
+.MypageIMG{
+    width:4rem;
+    height: 4rem;
+    padding-right: 3rem;;
 }
 
-.otherBTN_Div2{
-    float: right;
-    display: flex;
-}
-.otherBTN_Div2 button{
-    float: inherit;
-    color:#9A30AE;
-    background-color: white;
-    border:none;
-    font-weight: bold;
-    height: 5rem;
-    width: 10rem;
-    font-size: 1.4rem;
-}
 @media  only screen and (min-width: 280px) and (max-width: 319px) and (orientation: portrait){/*소형 모바일(세로), 갤럭시 폴드 접은 버전(세로)*/
     html{
         font-size: 36.5%;

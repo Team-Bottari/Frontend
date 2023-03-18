@@ -1,10 +1,21 @@
 import "../../CSS/components/Header.css";
-const HeaderV1 = () => {
+import { useNavigate } from "react-router-dom";
+const HeaderV1 = (prop) => {
+  const navigate = useNavigate();
   return (
     <div className="header">
-      <div className="headerLeft">
-        <button className="MenuHeader">Menu버튼</button>
-      </div>
+      <button
+        className="MenuHeader"
+        onClick={(event) => {
+          console.log("메뉴");
+        }}
+      >
+        <img
+          alt="Menu Logo"
+          className="HeaderIcon"
+          src="/images/Icon/menuIcon.png"
+        />
+      </button>
       <div className="headerCenter">
         <div className="headerLogo">
           <img
@@ -16,7 +27,19 @@ const HeaderV1 = () => {
       </div>
 
       <div className="headerRight">
-        <button className="MypageHeader">Mypage버튼</button>
+        <button
+          className="MenuHeader"
+          onClick={(event) => {
+            console.log(prop.ID);
+            navigate("/Mypage", { state: prop.ID });
+          }}
+        >
+          <img
+            alt="Menu Logo"
+            className="HeaderIcon_right"
+            src="/images/Icon/userIcon.png"
+          />
+        </button>
       </div>
     </div>
   );
