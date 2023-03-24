@@ -206,7 +206,7 @@ const ModifyInfo = () => {
         </div>
         <div className="ModifyDiv">
           <p className="PLable">PW</p>
-          <button className="PWReset" onClick={InfoPWReset}>
+          <button className="PWResetButton" onClick={InfoPWReset}>
             재설정
           </button>
         </div>

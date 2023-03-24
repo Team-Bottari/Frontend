@@ -5,6 +5,7 @@ html{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white;
 }
 .PWReset_Input{
    margin-top: 2rem;
@@ -17,7 +18,6 @@ html{
     box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
     border-radius: 3rem;
     padding-left: 1.5rem;
-    color:#9A30AE;
     font-weight: bolder;
     display: flex;
     width:50rem;
@@ -52,7 +52,6 @@ html{
     font-weight: bolder;
     font-size: 1.5rem;
     background-color: #9A30AE;
-
     margin-top: 1rem;
     width:30rem;
     height: 4.5rem;
@@ -64,7 +63,6 @@ html{
     padding-left: 1.5rem;
     color:#9A30AE;
     font-weight: bolder;
-
     width:50rem;
     height: 4.5rem;
     line-height :  4.5rem;
