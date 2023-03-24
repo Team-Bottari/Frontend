@@ -58,10 +58,14 @@ html{
 }
 .otherBTN{
     margin-top: 2rem;
-    width: 42rem;
+    width: 50rem;
+    display: flex;
 }
 .otherBTN_Div1{
     float: left;
+    display: flex;
+    flex-direction: row;
+    width: 30rem;
 }
 .otherLogin{
     margin-left: 0.6rem;
@@ -79,6 +83,7 @@ html{
 .otherBTN_Div2{
     float: right;
     display: flex;
+    width: 20rem;
 }
 .otherBTN_Div2 button{
     color:#9A30AE;
@@ -86,11 +91,12 @@ html{
     border:none;
     font-weight: bold;
     height: 5rem;
+    width:10rem;
 }
 
 .VLine{
-    border-left : 0.3rem solid #9A30AE;
-    margin-top:1.2rem;
+    border-left : 0.2rem solid #9A30AE;
+    margin-top:2.2rem;
     height: 2.5rem;
 }
 
