@@ -9,7 +9,7 @@ const Withdraw = () => {
     event.preventDefault();
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/withdrawal", {
-        id: ID,
+        email: ID,
       })
       .then((response) => {
         if (response.data.withdrawal === true) {

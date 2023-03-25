@@ -23,7 +23,7 @@ const MarketInfo = (props) => {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/", 
           {
-            id: location.state,
+            email: location.state,
           }
         );
         console.log(response);
@@ -39,7 +39,7 @@ const MarketInfo = (props) => {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/",
           {
-            id: location.state,
+            email: location.state,
           },
           { responseType: "arraybuffer" }
         );

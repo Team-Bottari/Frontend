@@ -19,7 +19,7 @@ const Mypage = () => {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
           {
-            id: location.state,
+            email: location.state,
           }
         );
         console.log(response);
@@ -35,7 +35,7 @@ const Mypage = () => {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
           {
-            id: location.state,
+            email: location.state,
           },
           { responseType: "arraybuffer" }
         );

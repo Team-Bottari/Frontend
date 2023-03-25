@@ -14,8 +14,8 @@ const IDSearch = () => {
       })
       .then((response) => {
         console.log(response);
-        if (response.data.id !== false) {
-          console.log(response.data.id);
+        if (response.data.email !== false) {
+          console.log(response.data.email);
           alert(response);
         } else {
           console.log("error");

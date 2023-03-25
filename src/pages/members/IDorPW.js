@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import "../../CSS/members/IDorPW.css";
 import "../../CSS/members/Login.css";
 const IDorPW = () => {
-  console.log("sdsd");
   const navigate = useNavigate();
   return (
     <div className="IDorPW">

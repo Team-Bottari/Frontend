@@ -33,7 +33,7 @@ const PWConfirm = () => {
         .post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/pw-change",
           {
-            id: ID,
+            email: ID,
             before_pw: currentPW,
             new_pw: newPWConfirm,
           }
@@ -42,7 +42,7 @@ const PWConfirm = () => {
           if (response.data.pw_change === true) {
             console.log(response);
             alert("변경되었습니다.");
-            navigate("/Mypage");
+            navigate("/");
           } else {
             console.log(response);
             alert("변경에 실패했습니다.");
