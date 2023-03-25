@@ -35,13 +35,17 @@
   }
   .dup {
     font-size: 2px;
-    width: 55px;
+    width: 58px;
     height: 30px;
     background-color: #ffffff;
     color: #9a30ae;
     margin-left: 200px;
+      }
+ 
+ 
+  .dupmessage{
+    font-size: 2px;
   }
-  
   .inputpw {
     margin-right: 20px;
     padding: 0px;
