@@ -7,7 +7,7 @@ const ModifyInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [userData, setUserData] = useState(location.state);
-  const IDJSon = { id: userData.id };
+  const IDJSon = { email: userData.id };
   const [flag, setFlag] = useState(false);
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef(null);
@@ -17,7 +17,7 @@ const ModifyInfo = () => {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
           {
-            id: location.state.id,
+            email: location.state.id,
           },
           { responseType: "arraybuffer" }
         );
@@ -36,7 +36,7 @@ const ModifyInfo = () => {
     event.preventDefault();
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/logout", {
-        id: userData.id,
+        email: userData.id,
       })
       .then((response) => {
         if (response.data.logout === true) {
@@ -59,7 +59,7 @@ const ModifyInfo = () => {
         .post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/delete",
           {
-            id: userData.id,
+            email: userData.id,
           },
           { responseType: "arraybuffer" }
         )
@@ -130,7 +130,7 @@ const ModifyInfo = () => {
       .post(
         "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/update-member-info",
         {
-          id: userData.id,
+          email: userData.id,
           nick_name: userData.nick_name,
           name: userData.name,
           phone: userData.phone,

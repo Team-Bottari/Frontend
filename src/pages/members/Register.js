@@ -14,7 +14,7 @@ const Register = () => {
   const dupcheck = async (event) => {
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/override", {
-        id: Email,
+        email: Email,
       })
       .then((response) => {
         if (response.data.override === true) {
@@ -31,7 +31,7 @@ const Register = () => {
   const Registeraxios = async (event) => {
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/sign_up", {
-        id: Email,
+        email: Email,
         pw: PW,
         nick_name: Nickname,
         name: Name,

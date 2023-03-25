@@ -23,7 +23,7 @@ const PWReset = () => {
     } else {
       await axios
         .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/pw-find", {
-          id: ID + Email,
+          email: ID + Email,
           name: Name,
           birth: BirthDay,
         })

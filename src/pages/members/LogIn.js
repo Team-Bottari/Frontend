@@ -13,7 +13,7 @@ const LogIn = () => {
     console.log(ID, PW);
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/login", {
-        id: ID,
+        email: ID,
         pw: PW,
       })
       .then((response) => {

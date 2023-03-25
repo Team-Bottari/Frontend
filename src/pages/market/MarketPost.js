@@ -1,19 +1,19 @@
-import { /*useNavigate,*/ useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
-//import axios from "axios";
+import axios from "axios";
 import HeaderV2 from "../../components/header/HeaderV2";
 import "../../CSS/market/MarketPost.css";
 const MarketPost = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const [MarketImgFile, setMarketImgFile] = useState([]);
   const imgRef = useRef(null);
-  //let tagArr = [];
   const [postInfo, setPostInfo] = useState({
     title: "",
     price: "",
     text: "",
-    //tag: [],
+    discountCheck: false,
+    category: "",
   });
   const MarketImgUpload = async (event) => {
     const file = imgRef.current.files[0];
@@ -27,11 +27,19 @@ const MarketPost = () => {
       }
     };
   };
-  /*
-  const arrChange = (event) => {
-    tagArr.push({ key: event.target.value });
-    setPostInfo((prevPostInfo) => ({ ...prevPostInfo, tag: tagArr }));
-  };*/
+  const discountCheckEvent = (event) => {
+    if (event.target.checked === true) {
+      setPostInfo((prevPostInfo) => ({
+        ...prevPostInfo,
+        discountCheck: true,
+      }));
+    } else {
+      setPostInfo((prevPostInfo) => ({
+        ...prevPostInfo,
+        discountCheck: false,
+      }));
+    }
+  };
   const SavePost = async (event) => {
     event.preventDefault();
     console.log(postInfo);
@@ -54,13 +62,19 @@ const MarketPost = () => {
         console.log(err);
         alert("오류가 발생했습니다. 다시 시도해주세요");
       });
+      */
     await axios
-      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/", {
+      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/posting", {
         //게시글 올리기
-        postInfo: postInfo,
+        title: postInfo.title,
+        content: postInfo.text,
+        price: postInfo.price,
+        member_id: location.state,
+        category: "카테고리 추후 추가",
+        can_discount: true,
       })
       .then((response) => {
-        if (response.data === true) {
+        if (response.data.response === 200) {
           alert("작성완료되었습니다.");
           navigate("/"); //메인페이지로 이동
         } else {
@@ -70,8 +84,8 @@ const MarketPost = () => {
       })
       .catch((err) => {
         console.log(err);
-        alert("오류가 발생했습니다. 다시 시도해주세요");
-      });*/
+        alert("전송 중 오류가 발생했습니다. 다시 시도해주세요");
+      });
   };
   return (
     <div className="MarketPost">
@@ -158,17 +172,16 @@ const MarketPost = () => {
               }
             />
           </div>
-          {/*
-          <div className="PostDetails">
-          <label htmlFor="tag">태그</label>
-          <input
-            id="tag"
-            type="text"
-            name="tag"
-            value={postInfo.tag}
-            onChange={arrChange}
-          />
-          </div>*/}
+          <div className="PostDetails" style={{ margin: "500px" }}>
+            <label htmlFor="tag">네고 가능</label>
+            <input
+              id="discount"
+              type="checkbox"
+              name="discount"
+              value={postInfo.discountCheck}
+              onChange={discountCheckEvent}
+            />
+          </div>
         </div>
       </div>
       <button onClick={SavePost}>완료</button>
