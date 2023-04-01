@@ -9,7 +9,7 @@ const MarketInfo = (props) => {
     text: "",
   });
   const [userData, setUserData] = useState({
-    id: props.id,
+    id: props.id, //console 확인 후 email인지 id인지 판별
     name: props.name,
     credit_rating: props.weight,
   });
@@ -21,7 +21,7 @@ const MarketInfo = (props) => {
     async function getPostInfo() {
       try {
         const response = await axios.post(
-          "http://wisixicidi.iptime.org:30000/", 
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/{posting_id}", 
           {
             email: location.state,
           }

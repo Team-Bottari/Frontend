@@ -51,7 +51,7 @@ const Mypage = () => {
 
   return (
     <div className="Mypage">
-      <HeaderV1 ID={userData.id} />
+      <HeaderV1 ID={userData.email} />
       <div className="leftDiv">
         <img alt="user" className="useImg" src={imgMypage} />
         <p className="Name">{userData.nick_name}</p>
@@ -148,7 +148,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/auth/market/MarketPost", { state: userData.id });
+            navigate("/auth/market/MarketPost", { state: userData.email });
           }}
         >
           <img alt="tag" className="MypageIMG" src="/images/Icon/tagIcon.png" />

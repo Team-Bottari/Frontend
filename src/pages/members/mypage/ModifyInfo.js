@@ -7,17 +7,18 @@ const ModifyInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [userData, setUserData] = useState(location.state);
-  const IDJSon = { email: userData.id };
+  const IDJSon = { email: userData.email };
   const [flag, setFlag] = useState(false);
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef(null);
   useEffect(() => {
+    /*console.log(location.state.email)*/
     async function getUserIMG() {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
           {
-            email: location.state.id,
+            email: location.state.email,
           },
           { responseType: "arraybuffer" }
         );
@@ -36,7 +37,7 @@ const ModifyInfo = () => {
     event.preventDefault();
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/logout", {
-        email: userData.id,
+        email: userData.email,
       })
       .then((response) => {
         if (response.data.logout === true) {
@@ -59,7 +60,7 @@ const ModifyInfo = () => {
         .post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/delete",
           {
-            email: userData.id,
+            email: userData.email,
           },
           { responseType: "arraybuffer" }
         )
@@ -130,7 +131,7 @@ const ModifyInfo = () => {
       .post(
         "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/update-member-info",
         {
-          email: userData.id,
+          email: userData.email,
           nick_name: userData.nick_name,
           name: userData.name,
           phone: userData.phone,
@@ -139,7 +140,7 @@ const ModifyInfo = () => {
       .then((response) => {
         if (response.data.update_member_info === true) {
           console.log("유저데이터 업로드 완료");
-          navigate("/Mypage", { state: userData.id });
+          navigate("/Mypage", { state: userData.email });
         } else {
           console.log(response);
           alert("오류가 발생했습니다! 다시 시도해주세요");
@@ -158,7 +159,7 @@ const ModifyInfo = () => {
   };
   return (
     <div className="ModifyInfo">
-      <HeaderV2 ID={userData.id} />
+      <HeaderV2 ID={userData.email} />
       <div className="leftDiv">
         <img className="useImg" key={imgFile} src={imgFile} alt="userIMG" />
         <form>
@@ -202,7 +203,7 @@ const ModifyInfo = () => {
       <div className="right">
         <div className="ModifyDiv">
           <p className="PLable">Email</p>
-          <p className="PEmail">{userData.id}</p>
+          <p className="PEmail">{userData.email}</p>
         </div>
         <div className="ModifyDiv">
           <p className="PLable">PW</p>
