@@ -63,7 +63,7 @@ const IDSearch = () => {
               id="Name_input"
               type="date"
               onChange={onsetBirthHandler}
-            />{" "}
+            />
           </div>
         </form>
 

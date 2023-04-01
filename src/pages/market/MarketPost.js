@@ -42,8 +42,17 @@ const MarketPost = () => {
   };
   const SavePost = async (event) => {
     event.preventDefault();
-    console.log(postInfo);
-    console.log(MarketImgFile);
+    console.log(
+      postInfo.title,
+      " / ",
+      postInfo.text,
+      " / ",
+      postInfo.price,
+      " / ",
+      location.state,
+      " / ",
+      postInfo.discountCheck
+    );
     /*
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/", {
@@ -69,22 +78,74 @@ const MarketPost = () => {
         title: postInfo.title,
         content: postInfo.text,
         price: postInfo.price,
-        member_id: location.state,
-        category: "카테고리 추후 추가",
-        can_discount: true,
+        category: postInfo.category,
+        email: location.state,
+        can_discount: postInfo.discountCheck,
       })
       .then((response) => {
         if (response.data.response === 200) {
-          alert("작성완료되었습니다.");
-          navigate("/"); //메인페이지로 이동
+          for (let imageID = 0; imageID < MarketImgFile.length; imageID++) {
+            const fileName = MarketImgFile[imageID];
+            const fileExtension = fileName.substr(
+              fileName.indexOf(":") + 1,
+              fileName.indexOf(";") - fileName.indexOf(":") - 1
+            ); //파일 확장자명 가져오기
+            console.log(fileExtension);
+            const file = new File(
+              [MarketImgFile[imageID]],
+              `PostID:${response.data.posting_id}image${imageID + 1}.jpg`, //파일명
+              { type: `${fileExtension}` } //파일 타입 -image/jpeg또는 image/png
+            );
+            const IMGformData = new FormData();
+            IMGformData.append("files", file, file.name);
+            /*console.log(IMGformData);
+            for (const [key, value] of IMGformData.entries()) {
+              console.log(`${key}: ${value}`);
+            }*/
+            axios
+              .post(
+                `http://wisixicidi.iptime.org:30000/api/v1.0.0/images/${
+                  response.data.posting_id
+                }/${imageID + 1}/upload`,
+                IMGformData,
+                {
+                  headers: {
+                    "Content-Type": "multipart/form-data", //오류 해결 후에도 안되면 Accept : "application:json" 헤더 추가.
+                  } /*
+                  data:{
+                    files : IMGformData,  //IMGformData data files 키값과 매칭해서 보내기.
+                  },*/,
+                }
+              )
+              .then((response) => {
+                console.log(response);
+                if (response.data.response === 200) {
+                  if (imageID === MarketImgFile.length - 1) {
+                    alert("작성 완료되었습니다.");
+                    navigate("/Mypage"); //메인페이지로 이동
+                  }
+                } else {
+                  console.log(response);
+                  alert(
+                    "사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요"
+                  );
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+                alert(
+                  "사진 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요."
+                );
+              });
+          }
         } else {
           console.log(response);
-          alert("오류가 발생했습니다. 다시 시도해주세요");
+          alert("게시물 업로드 중 오류가 발생했습니다. 다시 시도해주세요");
         }
       })
       .catch((err) => {
         console.log(err);
-        alert("전송 중 오류가 발생했습니다. 다시 시도해주세요");
+        alert("게시물 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요.");
       });
   };
   return (
@@ -168,6 +229,23 @@ const MarketPost = () => {
                 setPostInfo((prevPostInfo) => ({
                   ...prevPostInfo,
                   text: event.target.value,
+                }))
+              }
+            />
+          </div>
+          <div className="Category_textInput">
+            {/*카테고리 현재는 string값. 추후 카테고리 고정되면 select 박스 생성, 여러번 선택 가능하게 하고 선택할때마다 
+            카테고리 str 값을 추가, concat해서 합쳐서 서버로 보내기*/}
+            <label htmlFor="text">카테고리</label>
+            <textarea
+              className="textInput"
+              id="text"
+              name="text"
+              value={postInfo.category}
+              onChange={(event) =>
+                setPostInfo((prevPostInfo) => ({
+                  ...prevPostInfo,
+                  category: event.target.value,
                 }))
               }
             />
