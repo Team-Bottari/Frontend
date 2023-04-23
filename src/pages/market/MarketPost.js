@@ -51,27 +51,11 @@ const MarketPost = () => {
       " / ",
       location.state,
       " / ",
+      postInfo.category,
+      " / ",
       postInfo.discountCheck
     );
-    /*
-    await axios
-      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/", {
-        //이미지
-        
-      })
-      .then((response) => {
-        if (response.data === true) {
-          
-        } else {
-          console.log(response);
-          alert("오류가 발생했습니다. 다시 시도해주세요");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("오류가 발생했습니다. 다시 시도해주세요");
-      });
-      */
+
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/posting", {
         //게시글 올리기
@@ -90,27 +74,47 @@ const MarketPost = () => {
               fileName.indexOf(":") + 1,
               fileName.indexOf(";") - fileName.indexOf(":") - 1
             ); //파일 확장자명 가져오기
-            console.log(fileExtension);
+            let fileExtensionName = fileExtension.substr(
+              fileExtension.indexOf("/") + 1,
+              fileExtension.length + 1
+            );
             const file = new File(
               [MarketImgFile[imageID]],
-              `PostID:${response.data.posting_id}image${imageID + 1}.jpg`, //파일명
-              { type: `${fileExtension}` } //파일 타입 -image/jpeg또는 image/png
+              `PostID:${response.data.posting_id}image${
+                imageID + 1
+              }.${fileExtensionName}`, //파일명
+              { type: `${fileExtension}` } //파일 타입 - image/jpeg또는 image/png
             );
+            const base64String = MarketImgFile[imageID].replace(
+              /^data:\w+\/\w+;base64,/,
+              ""
+            );
+            const blob = new Blob(
+              [
+                new Uint8Array(
+                  atob(base64String)
+                    .split("")
+                    .map((char) => char.charCodeAt(0))
+                ),
+              ],
+              { type: fileExtension }
+            );
+            console.log(blob);
             const IMGformData = new FormData();
-            IMGformData.append("files", file, file.name);
-            /*console.log(IMGformData);
-            for (const [key, value] of IMGformData.entries()) {
+            IMGformData.append("files", blob, file.name);
+            /*for (const [key, value] of IMGformData.entries()) {
               console.log(`${key}: ${value}`);
             }*/
             axios
               .post(
-                `http://wisixicidi.iptime.org:30000/api/v1.0.0/images/${
+                `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
                   response.data.posting_id
                 }/${imageID + 1}/upload`,
                 IMGformData,
                 {
                   headers: {
                     "Content-Type": "multipart/form-data", //오류 해결 후에도 안되면 Accept : "application:json" 헤더 추가.
+                    Accept: "application/json",
                   } /*
                   data:{
                     files : IMGformData,  //IMGformData data files 키값과 매칭해서 보내기.
@@ -127,7 +131,7 @@ const MarketPost = () => {
                 } else {
                   console.log(response);
                   alert(
-                    "사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요"
+                    `${imageID}번째 사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요`
                   );
                 }
               })
@@ -145,7 +149,7 @@ const MarketPost = () => {
       })
       .catch((err) => {
         console.log(err);
-        alert("게시물 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요.");
+        alert(`게시물 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요.`);
       });
   };
   return (
@@ -233,11 +237,11 @@ const MarketPost = () => {
               }
             />
           </div>
-          <div className="Category_textInput">
+          <div className="PostDetails">
             {/*카테고리 현재는 string값. 추후 카테고리 고정되면 select 박스 생성, 여러번 선택 가능하게 하고 선택할때마다 
             카테고리 str 값을 추가, concat해서 합쳐서 서버로 보내기*/}
             <label htmlFor="text">카테고리</label>
-            <textarea
+            <input
               className="textInput"
               id="text"
               name="text"
@@ -250,7 +254,7 @@ const MarketPost = () => {
               }
             />
           </div>
-          <div className="PostDetails" style={{ margin: "500px" }}>
+          <div className="PostDetailsCheckBox">
             <label htmlFor="tag">네고 가능</label>
             <input
               id="discount"
@@ -260,9 +264,11 @@ const MarketPost = () => {
               onChange={discountCheckEvent}
             />
           </div>
+          <button className="completeButton" onClick={SavePost}>
+            완료
+          </button>
         </div>
       </div>
-      <button onClick={SavePost}>완료</button>
     </div>
   );
 };
