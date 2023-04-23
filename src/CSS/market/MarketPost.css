@@ -10,7 +10,6 @@
 }
 .centerDiv{
     width:80rem;
-    height:60rem;
 }
 .imgUploadMarket{
     padding-top: 2rem;
@@ -96,5 +95,18 @@
     padding-right: 2rem;
     border:none;
 }
-
-
+.PostDetailsCheckBox input{
+    font-size: 2rem; 
+    width: 2.5rem;
+    padding-left: 0rem;
+}
+.completeButton{
+    background-color:#9A30AE;
+    color: white;
+    border:none;
+    font-size: medium;
+    height: 5rem;
+    width:30rem;
+    margin-left: 25rem;
+    margin-right: 25rem;
+}

@@ -21,6 +21,8 @@ const MarketInfo = (props) => {
   const imgRef = useRef(null);
 
   useEffect(() => {
+    let posting_id = 0;
+    let imageNum = 0;
     /*
     async function getPostInfo() {
       try {
@@ -32,6 +34,8 @@ const MarketInfo = (props) => {
         );
         console.log(response);
         setMarketPostInfo(response.data);
+        posting_id = response.data.posting_id;
+        imageNum = response.data.imageNum;
       } catch (err) {
         console.log(err);
         alert("오류가 발생했습니다");
@@ -40,15 +44,18 @@ const MarketInfo = (props) => {
     getPostInfo();
     async function getPostIMG() {
       try {
-        const response = await axios.post(
-          "http://wisixicidi.iptime.org:30000/",
+        for(let index =1; index < imageNum ; index++){
+          const response = await axios.post(
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/{posting_id}/{index}/standard",
           {
             email: location.state,
           },
           { responseType: "arraybuffer" }
         );
         const blob = new Blob([response.data], { type: "image/jpeg" });
-        setMarketPostImg(URL.createObjectURL(blob));
+        setMarketInfoImgFile((prevFiles) => [...prevFiles, URL.createObjectURL(blob)])
+        }
+        
       } catch (err) {
         console.log(err);
         alert("오류가 발생했습니다");
@@ -56,15 +63,19 @@ const MarketInfo = (props) => {
     }
     getPostIMG();*/
   }, [location.state]);
-
   return (
     <div className="MarketInfo">
       {
         //<HeaderV1 ID={location.state} />
       }
-      {
-        //       <img alt="postImg" className="postImg" src={marketPostImg} /> //이미지 한개씩인지 여러개 한번에인지 따라서 달라짐.
-      }
+      {/*{MarketImgFile.map((file, index) => (
+            <div className="imgDiv" key={index}>
+              <img className="MarketIMG" src={file} alt="MarketIMG" />
+              
+            </div>
+          ))}
+        //<img alt="postImg" className="postImg" src={marketPostImg} /> //이미지 한개씩인지 여러개 한번에인지 따라서 달라짐.
+      */}
       <p>{userData.name}</p>
       <p>{userData.credit_rating}</p>
       <div className="InfoBody_right">
