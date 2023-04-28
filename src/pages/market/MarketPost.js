@@ -102,9 +102,6 @@ const MarketPost = () => {
             console.log(blob);
             const IMGformData = new FormData();
             IMGformData.append("files", blob, file.name);
-            /*for (const [key, value] of IMGformData.entries()) {
-              console.log(`${key}: ${value}`);
-            }*/
             axios
               .post(
                 `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
@@ -113,12 +110,9 @@ const MarketPost = () => {
                 IMGformData,
                 {
                   headers: {
-                    "Content-Type": "multipart/form-data", //오류 해결 후에도 안되면 Accept : "application:json" 헤더 추가.
+                    "Content-Type": "multipart/form-data",
                     Accept: "application/json",
-                  } /*
-                  data:{
-                    files : IMGformData,  //IMGformData data files 키값과 매칭해서 보내기.
-                  },*/,
+                  },
                 }
               )
               .then((response) => {
@@ -126,7 +120,7 @@ const MarketPost = () => {
                 if (response.data.response === 200) {
                   if (imageID === MarketImgFile.length - 1) {
                     alert("작성 완료되었습니다.");
-                    navigate("/Mypage"); //메인페이지로 이동
+                    navigate("/Mypage", { state: location.state }); //메인페이지로 이동
                   }
                 } else {
                   console.log(response);
