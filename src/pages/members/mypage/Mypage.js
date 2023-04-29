@@ -8,7 +8,7 @@ const Mypage = () => {
   const location = useLocation();
   const [imgMypage, setImgMypage] = useState("");
   const [userData, setUserData] = useState({
-    id: "user@example.com",
+    email: "user@example.com",
     name: "홍길동",
     credit_rating: "10",
   });
@@ -91,7 +91,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/auth/mypage/PurchaseList ");
+            navigate("/auth/mypage/PurchaseList", { state: userData.email });
           }}
         >
           <img
@@ -103,7 +103,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/auth/mypage/SaleList ");
+            navigate("/auth/mypage/SaleList", { state: userData.email });
           }}
         >
           <img
@@ -115,7 +115,7 @@ const Mypage = () => {
         </button>
         <button
           onClick={(e) => {
-            navigate("/auth/mypage/ChattingList ");
+            navigate("/auth/mypage/ChattingList", { state: userData.email });
           }}
         >
           <img
