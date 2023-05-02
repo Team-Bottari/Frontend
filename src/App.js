@@ -5,6 +5,7 @@ import Market from "./pages/Market";
 import Location from "./pages/Location";
 import Mypage from "./pages/members/mypage/Mypage";
 import AuthRouting from "./Routes/AuthRouting";
+import Market from "./pages/market/Market";
 
 function App() {
   return (
