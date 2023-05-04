@@ -1,6 +1,7 @@
 import "./CSS/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LogIn from "./pages/members/LogIn";
+import Chat from "./pages/chatting/Chat";
 import Location from "./pages/Location";
 import Mypage from "./pages/members/mypage/Mypage";
 import AuthRouting from "./Routes/AuthRouting";
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<LogIn />} />
           <Route path="/Mypage" element={<Mypage />} />
           <Route path="/location" element={<Location />} />
+          <Route path="/Chat" element={<Chat />} />
           <Route path="/auth/*" element={<AuthRouting />} />
         </Routes>
       </div>

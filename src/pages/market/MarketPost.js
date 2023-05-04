@@ -3,6 +3,9 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import HeaderV2 from "../../components/header/HeaderV2";
 import "../../CSS/market/MarketPost.css";
+
+/** 컴포넌트 쪼개기**/
+
 const MarketPost = (propsFromM) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -150,79 +153,66 @@ const MarketPost = (propsFromM) => {
           console.log(response);
           if (response.data.response === "수정 완료") {
             for (let imageID = 0; imageID < MarketImgFile.length; imageID++) {
-              const fileName = MarketImgFile[imageID];
-              const fileExtension = fileName.substr(
-                fileName.indexOf(":") + 1,
-                fileName.indexOf(";") - fileName.indexOf(":") - 1
-              ); //파일 확장자명 가져오기
-              let fileExtensionName = fileExtension.substr(
-                fileExtension.indexOf("/") + 1,
-                fileExtension.length + 1
-              );
-              const file = new File(
-                [MarketImgFile[imageID]],
-                `PostID:${response.data.posting_id}image${
-                  imageID + 1
-                }.${fileExtensionName}`, //파일명
-                { type: `${fileExtension}` } //파일 타입 - image/jpeg또는 image/png
-              );
-              console.log("이미지 파일", MarketImgFile[imageID]);
-              const base64String = MarketImgFile[imageID].replace(
-                /^data:\w+\/\w+;base64,/,
-                ""
-              );
-
-              console.log("콘솔", base64String);
-              const blobIMG = new Blob(
-                [
-                  new Uint8Array(
-                    atob(base64String)
-                      .split("")
-                      .map((char) => char.charCodeAt(0))
-                  ),
-                ],
-                { type: fileExtension }
-              );
-
-              console.log(blobIMG);
-              const IMGformData = new FormData();
-              IMGformData.append("files", blobIMG, file.name);
-              axios
-                .post(
-                  `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
-                    response.data.posting_id
-                  }/${imageID + 1}/update`,
-                  IMGformData,
-                  {
-                    headers: {
-                      "Content-Type": "multipart/form-data",
-                      Accept: "application/json",
-                    },
-                  }
-                )
-                .then((response) => {
-                  console.log(response);
-                  if (response.data.response === 200) {
-                    if (imageID === MarketImgFile.length - 1) {
-                      alert("작성 완료되었습니다.");
-                      navigate("/auth/market/MarketPost", {
-                        state: location.state,
-                      }); //메인페이지로 이동
-                    }
-                  } else {
-                    console.log(imageID);
-                    console.log(response);
-                    alert(
-                      `${imageID}번째 사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요`
+              fetch(MarketImgFile[imageID])
+                .then((response) => response.blob())
+                .then((blob) => {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(blob);
+                  reader.onloadend = () => {
+                    const base64String = reader.result.split(",")[1];
+                    const fileExtension = reader.result
+                      .split(":")[1]
+                      .split(";")[0];
+                    const blobIMG = new Blob(
+                      [
+                        new Uint8Array(
+                          atob(base64String)
+                            .split("")
+                            .map((char) => char.charCodeAt(0))
+                        ),
+                      ],
+                      { type: fileExtension }
                     );
-                  }
+
+                    const IMGformData = new FormData();
+                    IMGformData.append("files", blobIMG, imageID + 1);
+                    axios
+                      .post(
+                        `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
+                          response.data.posting_id
+                        }/${imageID + 1}/update`,
+                        IMGformData,
+                        {
+                          headers: {
+                            "Content-Type": "multipart/form-data",
+                            Accept: "application/json",
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        console.log(response);
+                        if (response.data.response === 200) {
+                          if (imageID === MarketImgFile.length - 1) {
+                            alert("작성 완료되었습니다.");
+                            navigate("/auth/market/MarketPost", {
+                              state: location.state,
+                            }); //메인페이지로 이동
+                          }
+                        } else {
+                          alert(
+                            `${imageID}번째 사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요`
+                          );
+                        }
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                        alert(
+                          "사진 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요."
+                        );
+                      });
+                  };
                 })
-                .catch((err) => {
-                  console.log(err);
-                  alert(
-                    "사진 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요."
-                  );
-                });
+                .catch((error) => console.log(error));
             }
           } else {
             console.log(response);
