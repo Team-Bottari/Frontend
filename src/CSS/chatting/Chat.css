@@ -1,0 +1,30 @@
+html{
+    font-size: 62.5%;
+}
+.Chat{
+    display: flex;
+    flex-direction: row;
+    padding-top: 8rem;
+}
+.ListOfChatting{
+    height: 82vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.Chat hr{
+    margin:0rem 0rem 0rem 5rem;
+    height: 83vh;
+    border: 0.1rem solid rgba(158, 158, 158, 0.26);
+}
+.buttonDiv{
+    padding:0rem;
+}
+.ChattingListButton{
+    border:1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: -20rem;
+    margin-left: 5rem;
+    width:45rem;
+    height: 15rem;
+    overflow: auto;
+}
