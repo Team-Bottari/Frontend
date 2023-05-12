@@ -7,6 +7,9 @@ const MarketModify = () => {
   const [marketImgFile, setMarketImgFile] = useState(location.state.image);
   return (
     <div>
+      {
+        //console.log(URL.createObjectURL(marketImgFile[0]))
+      }
       <MarketPost
         marketInfo={marketInfo}
         marketImgFile={marketImgFile}
