@@ -53,6 +53,7 @@ const MarketPost = (propsFromM) => {
         })
         .then((response) => {
           if (response.data.response === 200) {
+            console.log("포스팅 번호:", response.data.posting_id);
             for (let imageID = 0; imageID < MarketImgFile.length; imageID++) {
               const fileName = MarketImgFile[imageID];
               const fileExtension = fileName.substr(
@@ -74,6 +75,7 @@ const MarketPost = (propsFromM) => {
                 /^data:\w+\/\w+;base64,/,
                 ""
               );
+              console.log("이미지BLOB:", base64String);
               const blob = new Blob(
                 [
                   new Uint8Array(
@@ -84,7 +86,7 @@ const MarketPost = (propsFromM) => {
                 ],
                 { type: fileExtension }
               );
-              console.log(blob);
+              console.log("이미지BLOB:", blob);
               const IMGformData = new FormData();
               IMGformData.append("files", blob, file.name);
               axios
@@ -101,7 +103,7 @@ const MarketPost = (propsFromM) => {
                   }
                 )
                 .then((response) => {
-                  console.log(response);
+                  //console.log(response);
                   if (response.data.response === 200) {
                     if (imageID === MarketImgFile.length - 1) {
                       alert("작성 완료되었습니다.");
@@ -133,14 +135,15 @@ const MarketPost = (propsFromM) => {
           );
         });
     } else if (status === "수정") {
+      console.log(postInfo);
       await axios
         .put(
           `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/${postInfo.posting_id}`,
           {
             member_id_check: {
-              member_id: postInfo.member_id,
+              member_id: postInfo.member_id.toString(),
             },
-            posting: {
+            new_posting: {
               title: postInfo.title,
               content: postInfo.text,
               price: parseInt(postInfo.price),
@@ -153,8 +156,80 @@ const MarketPost = (propsFromM) => {
           console.log(response);
           if (response.data.response === "수정 완료") {
             for (let imageID = 0; imageID < MarketImgFile.length; imageID++) {
-              fetch(MarketImgFile[imageID])
+              console.log(
+                "수정 시 이미지 경로 ",
+                typeof MarketImgFile[imageID]
+              );
+              const blobUrl = MarketImgFile[imageID];
+              fetch(blobUrl)
                 .then((response) => response.blob())
+                .then((blob) => {
+                  // blob 객체를 이용한 코드 작성
+                  const fileReader = new FileReader();
+                  fileReader.readAsDataURL(blob);
+                  fileReader.onloadend = () => {
+                    const base64String = fileReader.result;
+                    console.log(base64String);
+
+                    const blob = new Blob(
+                      [
+                        new Uint8Array(
+                          atob(base64String)
+                            .split("")
+                            .map((char) => char.charCodeAt(0))
+                        ),
+                      ],
+                      { type: "image/jpeg" }
+                    );
+                    console.log("이미지BLOB:", blob);
+                    const IMGformData = new FormData();
+                    IMGformData.append(
+                      "files",
+                      blob,
+                      `${response.data.posting_id}${imageID}`
+                    );
+                    axios
+                      .post(
+                        `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
+                          response.data.posting_id
+                        }/${imageID + 1}/upload`,
+                        IMGformData,
+                        {
+                          headers: {
+                            "Content-Type": "multipart/form-data",
+                            Accept: "application/json",
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        //console.log(response);
+                        if (response.data.response === 200) {
+                          if (imageID === MarketImgFile.length - 1) {
+                            alert("작성 완료되었습니다.");
+                            navigate("/Mypage", { state: location.state }); //메인페이지로 이동
+                          }
+                        } else {
+                          console.log(response);
+                          alert(
+                            `${imageID}번째 사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요`
+                          );
+                        }
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                        alert(
+                          "사진 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요."
+                        );
+                      });
+                  };
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+              // FileReader API를 사용하여 Blob 객체를 base64로 변환합니다.
+
+              /*fetch(MarketImgFile[imageID])
+                .then((response) => MarketImgFile[imageID].blob())
                 .then((blob) => {
                   const reader = new FileReader();
                   reader.readAsDataURL(blob);
@@ -213,6 +288,7 @@ const MarketPost = (propsFromM) => {
                   };
                 })
                 .catch((error) => console.log(error));
+              */
             }
           } else {
             console.log(response);
@@ -356,6 +432,9 @@ MarketPost.defaultProps = {
     category: "",
     member_id: "",
     posting_id: 0,
+    email: "",
+    status: true,
+    like: 0,
   },
   marketImgFile: [],
   status: "작성",
