@@ -78,6 +78,7 @@
 .userImgMini{
     width:5rem;
     height:5rem;
+    border-radius: 100%;
 }
 .userIconWeight{
    padding-top: 1rem;

@@ -4,13 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../../CSS/market/MarketInfo.css";
 
-/* 포스팅 아이디 / 유저 정보 props로 넘겨 받은 후 url 수정하기!!!!!!
-if 내 제작페이지면 props에 status로 mine 넘겨 받아 버튼 보이게 해주기, 그리고 수정버튼 누르면 state로 postInfo 보내주기 */
-const MarketInfo = (props) => {
+/*if 내 제작페이지면 수정 버튼 보이게 해주기, 그리고 수정버튼 누르면 state로 postInfo 보내주기 */
+const MarketInfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [marketPostInfo, setMarketPostInfo] = useState({
     member_id: "",
+    email: "",
     posting_id: 0,
     title: "기본제목",
     price: 100,
@@ -18,14 +18,12 @@ const MarketInfo = (props) => {
     discountCheck: false,
     category: "기본카테고리",
     status: true, //팔린 상품이면 false
+    like: 0,
   });
   const [marketInfoImgFile, setMarketInfoImgFile] = useState([]);
   const [imgIndex, setImgIndex] = useState(0);
   const [starIMG, setstarIMG] = useState(false);
   const [userData, setUserData] = useState({
-    /*id: props.id, //console 확인 후 email인지 id인지 판별
-    name: props.name,
-    credit_rating: props.weight,*/
     id: "skarod0401@gmail.com", //console 확인 후 email인지 id인지 판별
     name: "홍길동",
     credit_rating: 10,
@@ -50,15 +48,42 @@ const MarketInfo = (props) => {
       return copy;
     });
   };
-  const starClick = (event) => {
+  const starClick = async (event) => {
     if (marketPostInfo.status === true) {
+      event.preventDefault();
       setstarIMG(!starIMG);
-      //!starIMG 상태에 따라서 관심목록에 추가 및 삭제하는 메소드 만들기
+      console.log("관심 클릭", starIMG);
+      if (starIMG == true) {
+        await axios
+          .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/like", {
+            posting_id: marketPostInfo.posting_id,
+            member_id: marketPostInfo.member_id,
+          })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("오류가 발생했습니다.");
+          });
+      } else if (starIMG == false) {
+        await axios
+          .put("http://wisixicidi.iptime.org:30000/api/v1.0.0/like", {
+            posting_id: marketPostInfo.posting_id,
+            member_id: marketPostInfo.member_id,
+          })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("오류가 발생했습니다.");
+          });
+      }
     } else {
       alert("판매완료된 상품은 관심목록에 추가할 수 없습니다.");
     }
   };
-
   const ClickChat = (event) => {
     if (marketPostInfo.status === true) {
       navigate("Chat");
@@ -66,41 +91,24 @@ const MarketInfo = (props) => {
       alert("판매완료된 상품은 채팅 할 수 없습니다.");
     }
   };
-
   useEffect(() => {
     let posting_id = 0;
     let imageNum = 0;
-    async function getUserIMG() {
-      try {
-        const response = await axios.post(
-          "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/mini",
-          {
-            email: userData.id,
-          },
-          { responseType: "arraybuffer" }
-        );
-        const blob = new Blob([response.data], { type: "image/jpeg" });
-        const imgURL = URL.createObjectURL(blob);
-        setUserData({ ...userData, img: imgURL });
-      } catch (err) {
-        console.log(err);
-        alert("오류가 발생했습니다");
-      }
-    }
-    getUserIMG();
+    let userEmail = "";
     async function getPostInfo() {
       try {
         const response = await axios.post(
-          "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/136",
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/8plA8IcBHesMA68iaexH",
           {
-            member_id: "2",
+            member_id: "7",
           }
         );
         posting_id = response.data.posting.posting_id;
         imageNum = response.data.posting.posting_images.length;
-        //setImageNum(response.data.posting.posting_images.length);
+        userEmail = response.data.posting.email;
         setMarketPostInfo((prevUserData) => ({
           ...prevUserData,
+          email: response.data.posting.email,
           member_id: response.data.posting.member_id,
           posting_id: response.data.posting.posting_id,
           title: response.data.posting.title,
@@ -109,13 +117,49 @@ const MarketInfo = (props) => {
           discountCheck: response.data.posting.can_discount,
           category: response.data.posting.category,
           status: !response.data.posting.sold_out,
+          like: response.data.posting.like,
         }));
         if (response.status === 200) {
+          try {
+            const response = axios.post(
+              "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/mini",
+              {
+                email: userEmail,
+              },
+              { responseType: "arraybuffer" }
+            );
+            response.then((result) => {
+              const blob = new Blob([result.data], { type: "image/jpeg" });
+              const imgURL = URL.createObjectURL(blob);
+              setUserData({ ...userData, img: imgURL });
+            });
+          } catch (err) {
+            console.log(err);
+            alert("오류가 발생했습니다");
+          }
+          try {
+            const response = axios.post(
+              "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
+              {
+                email: userEmail,
+              }
+            );
+            response.then((result) => {
+              setUserData({
+                ...userData,
+                name: result.data.nick_name,
+                credit_rating: result.data.credit_rating,
+              });
+            });
+          } catch (err) {
+            console.log(err);
+            alert("오류가 발생했습니다");
+          }
           try {
             const imageFiles = [];
             for (let index = 1; index <= imageNum; index++) {
               const response = await axios.post(
-                `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/136/${index}/standard`,
+                `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/8plA8IcBHesMA68iaexH/${index}/standard`,
                 {},
                 { responseType: "arraybuffer" }
               );
@@ -143,11 +187,6 @@ const MarketInfo = (props) => {
     <div className="MarketInfo">
       <HeaderV1 ID={location.state} />
       <div className="InfoBody_left">
-        {/*marketInfoImgFile.map((file, index) => (
-          <div className="imgDiv" key={index}>
-            <img className="MarketInfoIMG" src={file} alt="MarketIMG" />
-          </div>
-        ))*/}
         {marketPostInfo.status === false && (
           <div className="StatusFalse">
             <p>판매완료</p>
