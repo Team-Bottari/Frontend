@@ -21,6 +21,7 @@ const MarketInfo = () => {
     like: 0,
   });
   const [marketInfoImgFile, setMarketInfoImgFile] = useState([]);
+  const [imgBlob, setImgBlob] = useState([]);
   const [imgIndex, setImgIndex] = useState(0);
   const [starIMG, setstarIMG] = useState(false);
   const [userData, setUserData] = useState({
@@ -53,7 +54,7 @@ const MarketInfo = () => {
       event.preventDefault();
       setstarIMG(!starIMG);
       console.log("관심 클릭", starIMG);
-      if (starIMG == true) {
+      if (starIMG === true) {
         await axios
           .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/like", {
             posting_id: marketPostInfo.posting_id,
@@ -66,7 +67,7 @@ const MarketInfo = () => {
             console.log(err);
             alert("오류가 발생했습니다.");
           });
-      } else if (starIMG == false) {
+      } else if (starIMG === false) {
         await axios
           .put("http://wisixicidi.iptime.org:30000/api/v1.0.0/like", {
             posting_id: marketPostInfo.posting_id,
@@ -98,7 +99,7 @@ const MarketInfo = () => {
     async function getPostInfo() {
       try {
         const response = await axios.post(
-          "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/8plA8IcBHesMA68iaexH",
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/-JkIDogBHesMA68i1exk",
           {
             member_id: "7",
           }
@@ -106,6 +107,7 @@ const MarketInfo = () => {
         posting_id = response.data.posting.posting_id;
         imageNum = response.data.posting.posting_images.length;
         userEmail = response.data.posting.email;
+        console.log(response.data.posting.posting_images.length);
         setMarketPostInfo((prevUserData) => ({
           ...prevUserData,
           email: response.data.posting.email,
@@ -157,19 +159,18 @@ const MarketInfo = () => {
           }
           try {
             const imageFiles = [];
+            const blobFiles = [];
             for (let index = 1; index <= imageNum; index++) {
               const response = await axios.post(
-                `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/8plA8IcBHesMA68iaexH/${index}/standard`,
+                `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/-JkIDogBHesMA68i1exk/${index}/standard`,
                 {},
                 { responseType: "arraybuffer" }
               );
-              //const arrayBuffer = new ArrayBuffer(response.data); // 예시로 작성한 ArrayBuffer
-              /*const blob = new Blob([arrayBuffer], {
-                type: "application/octet-stream",
-              });*/
               const blob = new Blob([response.data], { type: "image/jpeg" });
+              blobFiles.push(blob);
               imageFiles.push(URL.createObjectURL(blob));
             }
+            setImgBlob(blobFiles);
             setMarketInfoImgFile(imageFiles);
           } catch (err) {
             console.log(err);
@@ -187,6 +188,10 @@ const MarketInfo = () => {
     <div className="MarketInfo">
       <HeaderV1 ID={location.state} />
       <div className="InfoBody_left">
+        {
+          //console.log(marketPostInfo)
+          //console.log(marketInfoImgFile.length)
+        }
         {marketPostInfo.status === false && (
           <div className="StatusFalse">
             <p>판매완료</p>
@@ -255,7 +260,7 @@ const MarketInfo = () => {
         <button
           onClick={(e) => {
             navigate("/auth/market/MarketModify", {
-              state: { data: marketPostInfo, image: marketInfoImgFile },
+              state: { data: marketPostInfo, image: imgBlob },
             });
           }}
         >

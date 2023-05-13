@@ -75,7 +75,6 @@ const MarketPost = (propsFromM) => {
                 /^data:\w+\/\w+;base64,/,
                 ""
               );
-              console.log("이미지BLOB:", base64String);
               const blob = new Blob(
                 [
                   new Uint8Array(
@@ -104,6 +103,9 @@ const MarketPost = (propsFromM) => {
                 )
                 .then((response) => {
                   //console.log(response);
+                  for (let [key, value] of IMGformData.entries()) {
+                    console.log("전송 부분 콘솔 ", key, value);
+                  }
                   if (response.data.response === 200) {
                     if (imageID === MarketImgFile.length - 1) {
                       alert("작성 완료되었습니다.");
@@ -153,142 +155,101 @@ const MarketPost = (propsFromM) => {
           }
         )
         .then((response) => {
-          console.log(response);
+          //console.log("포스팅 수정 결과:", response);
           if (response.data.response === "수정 완료") {
             for (let imageID = 0; imageID < MarketImgFile.length; imageID++) {
-              console.log(
-                "수정 시 이미지 경로 ",
-                typeof MarketImgFile[imageID]
-              );
-              const blobUrl = MarketImgFile[imageID];
-              fetch(blobUrl)
-                .then((response) => response.blob())
-                .then((blob) => {
-                  // blob 객체를 이용한 코드 작성
-                  const fileReader = new FileReader();
-                  fileReader.readAsDataURL(blob);
-                  fileReader.onloadend = () => {
-                    const base64String = fileReader.result;
-                    console.log(base64String);
-
-                    const blob = new Blob(
-                      [
-                        new Uint8Array(
-                          atob(base64String)
-                            .split("")
-                            .map((char) => char.charCodeAt(0))
-                        ),
-                      ],
-                      { type: "image/jpeg" }
+              const IMGformData = new FormData();
+              if (MarketImgFile[imageID].slice(0, 4) === "data") {
+                //새로 추가한 사진이었을때.
+                const fileName = MarketImgFile[imageID];
+                const fileExtension = fileName.substr(
+                  fileName.indexOf(":") + 1,
+                  fileName.indexOf(";") - fileName.indexOf(":") - 1
+                ); //파일 확장자명 가져오기
+                let fileExtensionName = fileExtension.substr(
+                  fileExtension.indexOf("/") + 1,
+                  fileExtension.length + 1
+                );
+                const file = new File(
+                  [MarketImgFile[imageID]],
+                  `PostID:${postInfo.posting_id}image${
+                    imageID + 1
+                  }.${fileExtensionName}`, //파일명
+                  { type: `${fileExtension}` } //파일 타입 - image/jpeg또는 image/png
+                );
+                const base64String = MarketImgFile[imageID].replace(
+                  /^data:\w+\/\w+;base64,/,
+                  ""
+                );
+                const blob = new Blob(
+                  [
+                    new Uint8Array(
+                      atob(base64String)
+                        .split("")
+                        .map((char) => char.charCodeAt(0))
+                    ),
+                  ],
+                  { type: fileExtension }
+                );
+                console.log(imageID, blob);
+                IMGformData.append("files", blob, file.name);
+              } else {
+                //기존 존재하던 사진이었을 때
+                const fileName = MarketImgFile[imageID];
+                const fileExtension = fileName.type; //파일 확장자명 가져오기
+                let fileExtensionName = fileExtension.substr(
+                  fileExtension.indexOf("/") + 1,
+                  fileExtension.length + 1
+                );
+                const file = new File(
+                  [MarketImgFile[imageID]],
+                  `PostID:${postInfo.posting_id}image${
+                    imageID + 1
+                  }.${fileExtensionName}`, //파일명
+                  { type: `${fileExtension}` } //파일 타입 - image/jpeg또는 image/png
+                );
+                const blob = MarketImgFile[imageID];
+                console.log(imageID, MarketImgFile[imageID]);
+                IMGformData.append("files", blob, file.name);
+              }
+              for (let [key, value] of IMGformData.entries()) {
+                console.log(key, value);
+              }
+              axios
+                .post(
+                  `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
+                    postInfo.posting_id
+                  }/${imageID + 1}/upload`,
+                  IMGformData,
+                  {
+                    headers: {
+                      "Content-Type": "multipart/form-data",
+                      Accept: "application/json",
+                    },
+                  }
+                )
+                .then((response) => {
+                  if (response.data.response === 200) {
+                    for (let [key, value] of IMGformData.entries()) {
+                      console.log("전송 부분 콘솔 ", key, value);
+                    }
+                    if (imageID === MarketImgFile.length - 1) {
+                      alert("작성 완료되었습니다.");
+                      navigate("/Mypage", { state: "user@example.com" }); //메인페이지로 이동
+                    }
+                  } else {
+                    console.log(response);
+                    alert(
+                      `${imageID}번째 사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요`
                     );
-                    console.log("이미지BLOB:", blob);
-                    const IMGformData = new FormData();
-                    IMGformData.append(
-                      "files",
-                      blob,
-                      `${response.data.posting_id}${imageID}`
-                    );
-                    axios
-                      .post(
-                        `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
-                          response.data.posting_id
-                        }/${imageID + 1}/upload`,
-                        IMGformData,
-                        {
-                          headers: {
-                            "Content-Type": "multipart/form-data",
-                            Accept: "application/json",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        //console.log(response);
-                        if (response.data.response === 200) {
-                          if (imageID === MarketImgFile.length - 1) {
-                            alert("작성 완료되었습니다.");
-                            navigate("/Mypage", { state: location.state }); //메인페이지로 이동
-                          }
-                        } else {
-                          console.log(response);
-                          alert(
-                            `${imageID}번째 사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요`
-                          );
-                        }
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                        alert(
-                          "사진 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요."
-                        );
-                      });
-                  };
+                  }
                 })
-                .catch((error) => {
-                  console.error("Error:", error);
+                .catch((err) => {
+                  console.log(err);
+                  alert(
+                    "사진 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요."
+                  );
                 });
-              // FileReader API를 사용하여 Blob 객체를 base64로 변환합니다.
-
-              /*fetch(MarketImgFile[imageID])
-                .then((response) => MarketImgFile[imageID].blob())
-                .then((blob) => {
-                  const reader = new FileReader();
-                  reader.readAsDataURL(blob);
-                  reader.onloadend = () => {
-                    const base64String = reader.result.split(",")[1];
-                    const fileExtension = reader.result
-                      .split(":")[1]
-                      .split(";")[0];
-                    const blobIMG = new Blob(
-                      [
-                        new Uint8Array(
-                          atob(base64String)
-                            .split("")
-                            .map((char) => char.charCodeAt(0))
-                        ),
-                      ],
-                      { type: fileExtension }
-                    );
-
-                    const IMGformData = new FormData();
-                    IMGformData.append("files", blobIMG, imageID + 1);
-                    axios
-                      .post(
-                        `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${
-                          response.data.posting_id
-                        }/${imageID + 1}/update`,
-                        IMGformData,
-                        {
-                          headers: {
-                            "Content-Type": "multipart/form-data",
-                            Accept: "application/json",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        console.log(response);
-                        if (response.data.response === 200) {
-                          if (imageID === MarketImgFile.length - 1) {
-                            alert("작성 완료되었습니다.");
-                            navigate("/auth/market/MarketPost", {
-                              state: location.state,
-                            }); //메인페이지로 이동
-                          }
-                        } else {
-                          alert(
-                            `${imageID}번째 사진 업로드 중 오류가 발생했습니다. 다시 시도해주세요`
-                          );
-                        }
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                        alert(
-                          "사진 업로드 중 서버 오류가 발생했습니다. 다시 시도해주세요."
-                        );
-                      });
-                  };
-                })
-                .catch((error) => console.log(error));
-              */
             }
           } else {
             console.log(response);
@@ -327,7 +288,17 @@ const MarketPost = (propsFromM) => {
           </form>
           {MarketImgFile.map((file, index) => (
             <div className="imgDiv" key={index}>
-              <img className="MarketIMG" src={file} alt="MarketIMG" />
+              {console.log(file.type)}
+              {file.type === "image/jpeg" && (
+                <img
+                  className="MarketIMG"
+                  src={URL.createObjectURL(file)}
+                  alt="MarketIMG"
+                />
+              )}
+              {file.type !== "사진 XboX 방지용" && (
+                <img className="MarketIMG" src={file} alt="MarketIMG" />
+              )}
               <button
                 className="imgDeleteButton"
                 onClick={() =>
