@@ -1,0 +1,93 @@
+html{
+    font-size: 62.5%;
+}
+.ListOfChatting{
+}
+.pastChat{
+    display: flex;
+    flex-direction: column;
+    border:0.2rem solid rgba(128, 128, 128, 0.466);
+    margin:0rem 0rem 0rem 5rem;
+    font-size: 2rem;
+    width:62rem;
+    height: 60rem;
+    overflow: auto;
+}
+.leftChat{
+    display: flex;
+    float:left;
+    margin:1rem 0rem 1rem 0.5rem;
+    width: 70%;
+}
+.ChatUser{
+    border-radius: 100%;
+    margin-right: 1rem;
+    padding:0;
+    height: 5rem;
+    width: 5rem;
+    color:white;
+    background-color: black;
+    
+}
+.ChatTextL{
+    background-color: white;
+    border:0.1rem solid #9a30ae;
+    color:#9a30ae;
+    word-break: break-all;
+    padding: 1rem 1rem 1rem 1rem;
+}
+.ChatTime{
+    font-size: 1.5rem;
+    word-break:keep-all;
+    margin:0.5rem;
+    display: flex;
+    align-items: flex-end;
+    line-height:1; 
+}
+.rightChat{
+    display: flex;
+    margin:1rem 0rem 1rem 0rem;
+    float:right;
+    max-width: 70%;
+}
+.ChatTextR{   
+    word-break: break-all;
+    background-color: #9a30ae;
+    border:0.1rem solid #9a30ae;
+    color:white;
+    padding: 1rem 1rem 1rem 1rem;
+}
+.chatEnter{
+    display: flex;
+    position: absolute;
+    bottom:5rem;   
+    margin:0rem 0rem 0rem 5rem;
+}
+.chatInput{
+    border:1px solid gray;
+    width:56.5rem;
+    height: 5rem;
+}
+.chatEnter input{
+    border:none;
+    height:5rem;
+    line-height: 5rem;
+    width:50rem;
+    margin:0rem 0rem 0rem 1rem;
+}
+.chatPlus{
+    width:4rem;
+    margin:0rem 0rem 0rem 1rem;
+    height: 4rem;
+    border:0.1rem solid rgba(128, 128, 128, 0.557);
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 100%;    
+    color:black;
+    font-size: 1rem;
+}
+.chatButton{
+    border-radius: 3%;
+    margin:0rem 0rem 0rem 0rem;
+    width: 6rem;
+    height:5.2rem;
+}

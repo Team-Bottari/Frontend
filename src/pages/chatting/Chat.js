@@ -1,10 +1,9 @@
 import ChattingList from "./ChattingList";
 import Chatting from "./Chatting";
 import { useState, useEffect } from "react";
-import "../../CSS/chatting/Chat.css";
-import HeaderV2 from "../../components/header/HeaderV2";
+import "CSS/chatting/Chat.css";
+import HeaderV2 from "components/header/HeaderV2";
 const Chat = () => {
-  const [numOfChat, setNumOfChat] = useState(3);
   const [chattingUser, setChattingUser] = useState([
     {
       email: "더미이메일1",

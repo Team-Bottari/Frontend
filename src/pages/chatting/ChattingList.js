@@ -1,4 +1,4 @@
-import "../../CSS/chatting/ChattingList.css";
+import "CSS/chatting/ChattingList.css";
 import { useState } from "react";
 const ChattingList = (propsChatting) => {
   const [userData, setUserData] = useState(propsChatting.userData);
