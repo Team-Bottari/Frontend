@@ -288,15 +288,14 @@ const MarketPost = (propsFromM) => {
           </form>
           {MarketImgFile.map((file, index) => (
             <div className="imgDiv" key={index}>
-              {console.log(file.type)}
-              {file.type === "image/jpeg" && (
+              {file.type === "image/jpeg" && ( //Blob 타입 URL 변환 후 이미지 보여주기
                 <img
                   className="MarketIMG"
                   src={URL.createObjectURL(file)}
                   alt="MarketIMG"
                 />
               )}
-              {file.type !== "사진 XboX 방지용" && (
+              {file.type !== "사진 XboX 방지용" && ( //일반 이미지 타입
                 <img className="MarketIMG" src={file} alt="MarketIMG" />
               )}
               <button

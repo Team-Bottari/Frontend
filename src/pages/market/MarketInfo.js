@@ -5,9 +5,10 @@ import axios from "axios";
 import "../../CSS/market/MarketInfo.css";
 
 /*if 내 제작페이지면 수정 버튼 보이게 해주기, 그리고 수정버튼 누르면 state로 postInfo 보내주기 */
-const MarketInfo = () => {
+const MarketInfo = (postingID_Props) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const postID = postingID_Props.postingID;
   const [marketPostInfo, setMarketPostInfo] = useState({
     member_id: "",
     email: "",
@@ -99,7 +100,7 @@ const MarketInfo = () => {
     async function getPostInfo() {
       try {
         const response = await axios.post(
-          "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/-JkIDogBHesMA68i1exk",
+          `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/${postID}`,
           {
             member_id: "7",
           }
@@ -162,7 +163,7 @@ const MarketInfo = () => {
             const blobFiles = [];
             for (let index = 1; index <= imageNum; index++) {
               const response = await axios.post(
-                `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/-JkIDogBHesMA68i1exk/${index}/standard`,
+                `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/${postID}/${index}/standard`,
                 {},
                 { responseType: "arraybuffer" }
               );
@@ -270,4 +271,7 @@ const MarketInfo = () => {
     </div>
   );
 }; //마켓게시글
+MarketInfo.defaultProps = {
+  postingID: "",
+};
 export default MarketInfo;
