@@ -1,8 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import HeaderV1 from "../../components/header/HeaderV1";
+import HeaderV1 from "components/header/HeaderV1";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import "../../CSS/market/MarketInfo.css";
+import "CSS/market/MarketInfo.css";
 
 /*if 내 제작페이지면 수정 버튼 보이게 해주기, 그리고 수정버튼 누르면 state로 postInfo 보내주기 */
 const MarketInfo = (postingID_Props) => {
