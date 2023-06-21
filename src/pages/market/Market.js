@@ -1,4 +1,4 @@
-import { Product } from "../../components/market/Preview";
+import { Product } from "components/market/Preview";
 import { useEffect } from "react";
 import { useState } from "react";
 import React from "react";

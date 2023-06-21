@@ -1,8 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
 import axios from "axios";
-import HeaderV2 from "../../components/header/HeaderV2";
-import "../../CSS/market/MarketPost.css";
+import HeaderV2 from "components/header/HeaderV2";
+import "CSS/market/MarketPost.css";
 
 /** 컴포넌트 쪼개기**/
 
@@ -288,14 +288,14 @@ const MarketPost = (propsFromM) => {
           </form>
           {MarketImgFile.map((file, index) => (
             <div className="imgDiv" key={index}>
-              {file.type === "image/jpeg" && ( //Blob 타입 URL 변환 후 이미지 보여주기
+              {file.type === "image/jpeg" && (
                 <img
                   className="MarketIMG"
                   src={URL.createObjectURL(file)}
                   alt="MarketIMG"
                 />
               )}
-              {file.type !== "사진 XboX 방지용" && ( //일반 이미지 타입
+              {file.type !== "사진 XboX 방지용" && (
                 <img className="MarketIMG" src={file} alt="MarketIMG" />
               )}
               <button
