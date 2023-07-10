@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import "../../CSS/members/Register.css";
+import "CSS/members/Register.css";
 const Register = () => {
   const navigate = useNavigate();
   const [Email, setEmail] = useState("");

@@ -6,6 +6,7 @@ const Withdraw = () => {
   const [ID, setID] = useState("");
   const [PW, setPW] = useState("");
   const withdrawFinal = async (event) => {
+    /**탈퇴할때 왜 pw가 맞는지 확인을 안하지? 다시 확인하기 */
     event.preventDefault();
     await axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/withdrawal", {

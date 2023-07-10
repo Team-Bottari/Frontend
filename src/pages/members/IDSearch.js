@@ -1,7 +1,7 @@
 import /* useNavigate */ "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import "../../CSS/members/IDSearch.css";
+import "CSS/members/IDSearch.css";
 
 const IDSearch = () => {
   const [Name, setName] = useState("");

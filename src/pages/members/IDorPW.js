@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import "../../CSS/members/IDorPW.css";
-import "../../CSS/members/Login.css";
+import "CSS/members/IDorPW.css";
+import "CSS/members/Login.css";
 const IDorPW = () => {
   const navigate = useNavigate();
   return (

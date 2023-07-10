@@ -1,7 +1,8 @@
-import HeaderV1 from "../../../components/header/HeaderV1";
-import MemberInfoSide from "../../members/MemberInfoSide";
+import HeaderV1 from "components/header/HeaderV1";
+import MemberInfoSide from "pages/members/MemberInfoSide";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 const PurchaseList = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -11,7 +12,14 @@ const PurchaseList = () => {
     credit_rating: "10",
   });
   const [componentList, setComponentList] = useState([]);
-  useEffect(() => {}, [location.state]);
+  const [cookies] = useCookies(["sessionID"]);
+  useEffect(() => {
+    if (!cookies.sessionID) {
+      alert("로그인 정보가 유효하지 않습니다!");
+      navigate("/login");
+      return;
+    }
+  }, [location.state, cookies.sessionID]);
   return (
     <div>
       <HeaderV1 ID={location.state} />
