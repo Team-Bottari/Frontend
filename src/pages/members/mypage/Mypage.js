@@ -1,8 +1,10 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import HeaderV1 from "../../../components/header/HeaderV1";
-import "../../../CSS/mypage/Mypage.css";
+import HeaderV1 from "components/header/HeaderV1";
+import "CSS/mypage/Mypage.css";
+import { useCookies } from "react-cookie";
+
 const Mypage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,12 +15,29 @@ const Mypage = () => {
     credit_rating: "10",
   });
 
+  const [cookies] = useCookies(["sessionID"]);
+
   useEffect(() => {
+    // 쿠키를 검사하고 유효하지 않으면 로그인 페이지로 이동
+    /*const token = cookies.sessionID; // 쿠키에서 id 를 꺼내기
+    axios
+      .post("로그인체크API", { token: token }) // 토큰으로 서버에 인증 요청
+      .then((res) => {
+        // 유저 이메일을 response로 응답
+      })
+      .catch(() => {
+        alert("로그인 정보가 유효하지 않습니다!");
+        navigate("/");
+        return;
+      });
+*/
     async function getUserInfo() {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
           {
+            //sessionID: cookies.sessionID,
+            //세션 아이디로 사용자 정보 받아오기 -> 이메일을 location으로 넘기는 방법은 컴포넌트간 결합성이 높아져서 권장 XX
             email: location.state,
           }
         );
@@ -35,6 +54,8 @@ const Mypage = () => {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
           {
+            //sessionID: cookies.sessionID,
+            //세션 아이디로 사용자 정보 받아오기 -> 이메일을 location으로 넘기는 방법은 컴포넌트간 결합성이 높아져서 권장 XX
             email: location.state,
           },
           { responseType: "arraybuffer" }
@@ -47,7 +68,7 @@ const Mypage = () => {
       }
     }
     getUserIMG();
-  }, [location.state]);
+  }, [location.state, cookies.sessionID]);
 
   return (
     <div className="Mypage">

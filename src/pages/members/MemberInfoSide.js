@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../../CSS/members/SideMember.css";
+import "CSS/members/SideMember.css";
+
+import { useCookies } from "react-cookie";
+
 const MemberInfoSide = (props) => {
   const navigate = useNavigate();
   const [imgSide, setImgSide] = useState("");
@@ -12,13 +15,24 @@ const MemberInfoSide = (props) => {
     nick_name: "홍길동",
     credit_rating: "10",
   });
+
+  const [cookies] = useCookies(["sessionID"]);
+
   useEffect(() => {
+    if (!cookies.sessionID) {
+      alert("로그인 정보가 유효하지 않습니다!");
+      navigate("/login");
+      return;
+    }
     /*
     async function getUserInfo() {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
           {
+            //sessionID: cookies.sessionID,
+            //세션 아이디로 사용자 정보 받아오기 -> 이메일을 location으로 넘기는 방법은 컴포넌트간 결합성이 높아져서 권장 XX
+ 
             email: userID,
           }
         );
@@ -34,6 +48,8 @@ const MemberInfoSide = (props) => {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
           {
+            //sessionID: cookies.sessionID,
+            //세션 아이디로 사용자 정보 받아오기 -> 이메일을 location으로 넘기는 방법은 컴포넌트간 결합성이 높아져서 권장 XX
             email: userID,
           },
           { responseType: "arraybuffer" }
@@ -46,7 +62,7 @@ const MemberInfoSide = (props) => {
       }
     }
     getUserIMG();*/
-  }, []);
+  }, [cookies.sessionID]);
   return (
     <div className="MemberInfoSide">
       <img alt="user" className="useImg" src={imgSide} />

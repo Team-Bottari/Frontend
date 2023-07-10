@@ -1,8 +1,8 @@
 import { useNavigate /*useLocation*/ } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import "../../CSS/members/PWReset.css";
-import "../../CSS/members/Login.css";
+import "CSS/members/PWReset.css";
+import "CSS/members/Login.css";
 const PWReset = () => {
   const navigate = useNavigate();
   //const location = useLocation(); 새로고침에 필요

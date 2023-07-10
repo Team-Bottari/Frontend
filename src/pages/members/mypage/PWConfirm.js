@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import "../../../CSS/mypage/PWConfirm.css";
+import "CSS/mypage/PWConfirm.css";
+import { useCookies } from "react-cookie";
 const PWConfirm = () => {
   const navigate = useNavigate();
   const [ID, setID] = useState("");
@@ -10,6 +11,15 @@ const PWConfirm = () => {
   const [newPWConfirm, setNewPWConfirm] = useState("");
   const [newPWConfirmTF, setNewPWConfirmTF] = useState(true);
   const [newPWConfirmTFButton, setNewPWConfirmTFButton] = useState(true);
+
+  const [cookies] = useCookies(["sessionID"]);
+  useEffect(() => {
+    if (!cookies.sessionID) {
+      alert("로그인 정보가 유효하지 않습니다!");
+      navigate("/login");
+      return;
+    }
+  }, [cookies.sessionID]);
   const confirmPW = async (event) => {
     setNewPWConfirm(event.target.value);
     if (event.target.value === newPW) {

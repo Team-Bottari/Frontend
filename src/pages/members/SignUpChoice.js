@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import "../../CSS/members/IDorPW.css";
-import "../../CSS/members/Login.css";
+import "CSS/members/IDorPW.css";
+import "CSS/members/Login.css";
 const SignUpChoice = () => {
   const navigate = useNavigate();
   const kakao = (event) => {};

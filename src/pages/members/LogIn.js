@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "../../CSS/members/Login.css";
+import "CSS/members/Login.css";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const LogIn = () => {
   const navigate = useNavigate();
   const [ID, setID] = useState("");
   const [PW, setPW] = useState("");
+  const [cookies, setCookie] = useCookies(["sessionID"]);
 
   const LoginClick = async (event) => {
     event.preventDefault();
@@ -19,7 +22,7 @@ const LogIn = () => {
       .then((response) => {
         if (response.data.sign_in === true) {
           console.log(response);
-          localStorage.setItem("token", response.config.data); // 로그인 유지용, 로그인 보안 강화 후 삭제
+          //setCookie("sessionID", response.data.sessionID, { path: "/" }); // 세션 ID를 쿠키로 저장
           navigate("/Mypage", { state: ID });
         } else {
           console.log(response);
