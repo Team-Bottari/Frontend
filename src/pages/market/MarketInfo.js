@@ -189,10 +189,6 @@ const MarketInfo = (postingID_Props) => {
     <div className="MarketInfo">
       <HeaderV1 ID={location.state} />
       <div className="InfoBody_left">
-        {
-          //console.log(marketPostInfo)
-          //console.log(marketInfoImgFile.length)
-        }
         {marketPostInfo.status === false && (
           <div className="StatusFalse">
             <p>판매완료</p>
