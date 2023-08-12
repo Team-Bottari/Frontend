@@ -1,45 +1,38 @@
 import "CSS/chatting/Chatting.css";
 import { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
-import axios from "axios";
+//import axios from "axios";
 const Chatting = (props) => {
   const user = props.chatData;
   const scrollContainerRef = useRef(null); //스크롤 고정용
-  //const socket = io("웹소켓 서버 URL");
+  /*const socket = io(
+    "ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/7/11",
+    { transports: ["websocket"] }
+  );*/
+  var socket = new WebSocket(
+    "ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/7/11"
+  );
+  socket.onmessage = function (event) {
+    console.log(event);
+  };
   const [pastChat, setPastChat] = useState([
     {
       time: "오전10:11",
       text: "더미 텍스트 내역입니다.",
-      chatUser: "user1",
+      chatUser: "11",
     },
-    {
-      time: "오전10:12",
-      text: "더미 텍스트 내역입니다222222222222.",
-      chatUser: "user1",
-    },
-    {
-      time: "오전10:15",
-      text: "더미 텍스트 내역입니다32323223.",
-      chatUser: "홍길동",
-    },
-    {
-      time: "오전10:40",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "user1",
-    },
-  ]); /*
+  ]);
   useEffect(() => {
-    axios.get("url").then(() => {
-      setPastChat(); //과거 채팅내역 가져오기
-    });
-    socket.on("newMessage", handleNewMessage); //컴포넌트 마운트 시 이벤트 리스너 등록
-    return () => {
-      socket.off("newMessage", handleNewMessage); //컴포넌트 언마운트 시 이벤트 리스너 제거
+    socket.onopen = (event) => {
+      console.log("WebSocket connection opened:", event);
     };
-  }, []);*/
-  useEffect(() => {
-    console.log(user);
+    return () => {
+      socket.onclose = function (event) {
+        console.log("WebSocket connection closed:", event);
+      };
+    };
   }, []);
+
   useEffect(() => {
     scrollToBottom();
   }, [pastChat]);
@@ -72,14 +65,17 @@ const Chatting = (props) => {
     }
 
     const chatUser = user.nickName; // 사용자 이름을 저장
+    console.log(user.nickName, chatUser);
     const message = {
       text,
       time,
-      chatUser,
+      chatUser: "테스트",
     };
     if (text !== "") {
-      //socket.emit("sendMessage", message);
-      setPastChat((prevChat) => [...prevChat, message]); //소켓 열리면 해당 줄 삭제 필요!
+      //socket.send("sendMessage", message);
+      socket.send(JSON.stringify(message));
+      console.log(message);
+      //setPastChat((prevChat) => [...prevChat, message]); //소켓 열리면 해당 줄 삭제 필요!
     }
     input.value = ""; // 채팅 입력란을 초기화
   };

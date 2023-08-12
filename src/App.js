@@ -2,7 +2,7 @@ import "./CSS/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LogIn from "./pages/members/LogIn";
 import Chat from "./pages/chatting/Chat";
-import Location from "./pages/Location";
+import Location from "./pages/members/Location";
 import Mypage from "./pages/members/mypage/Mypage";
 import AuthRouting from "./Routes/AuthRouting";
 
