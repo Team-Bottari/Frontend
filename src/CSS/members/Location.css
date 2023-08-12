@@ -1,0 +1,17 @@
+html{
+    font-size: 62.5%; 
+}
+.Location{
+    display: flex;
+    flex-direction: row;
+}
+.Locatoin_Top{
+    height: 6rem;
+    visibility: hidden;
+}
+.Map{
+    margin: 3rem;
+    width:80vh;
+    height: 80vh;
+    border: 1px solid black;
+}

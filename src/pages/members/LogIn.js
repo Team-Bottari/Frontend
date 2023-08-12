@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "CSS/members/Login.css";
 import axios from "axios";
