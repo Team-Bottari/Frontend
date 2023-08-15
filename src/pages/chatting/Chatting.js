@@ -13,7 +13,7 @@ const Chatting = (props) => {
     "ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/7/11"
   );
   socket.onmessage = function (event) {
-    console.log(event);
+    console.log("메시지 수신_data:", event.data);
   };
   const [pastChat, setPastChat] = useState([
     {
@@ -52,20 +52,14 @@ const Chatting = (props) => {
     const input = document.getElementById("Chat");
     const text = input.value;
     const date = new Date();
+    let year = date.getFullYear();
+    let day = date.getDate();
     let hours = date.getHours();
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    let time = "";
-
-    if (hours < 13) {
-      hours = hours.toString().padStart(2, "0");
-      time = `오전${hours}:${minutes}`; // 채팅 보낸 시간
-    } else if (hours >= 13) {
-      hours -= 12;
-      time = `오후${hours}:${minutes}`; // 채팅 보낸 시간
-    }
-
+    let month = date.getMonth() + 1;
+    let minutes = date.getMinutes().toString().padStart(2, "0");
+    const time = `${year}-${month}-${day}-${hours}-${minutes}`;
     const chatUser = user.nickName; // 사용자 이름을 저장
-    console.log(user.nickName, chatUser);
+    //console.log(user.nickName, chatUser);
     const message = {
       text,
       time,

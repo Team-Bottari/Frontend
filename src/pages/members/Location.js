@@ -84,7 +84,7 @@ const Location = () => {
     };
     const placesService = new kakao.maps.services.Places();
     placesService.keywordSearch(
-      "우체국",
+      "지방행정기관",
       (result, status) => {
         console.log("결과:", result);
         if (status === kakao.maps.services.Status.OK) {
@@ -106,7 +106,7 @@ const Location = () => {
             // 해당 주소가 원의 반지름 내에 있는지 확인합니다.
             return distance <= radius;
           });
-
+          //const temp = nearbyAddresses.address_name.split[""];
           console.log("필터링결과:", nearbyAddresses);
           setNearLocation(nearbyAddresses);
         } else {
