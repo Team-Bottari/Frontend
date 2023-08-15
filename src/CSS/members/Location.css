@@ -15,3 +15,28 @@ html{
     height: 80vh;
     border: 1px solid black;
 }
+.currentL{
+    margin-top:5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color:rgb(86, 27, 141);
+}
+.warn{
+    color:rgba(86, 27, 141, 0.61);
+}
+.addressBTN{
+    display: flex;
+    font-size: 1.5rem;
+    margin-top: 0;
+    color:rgb(86, 27, 141);
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0%;
+    height: 5rem;
+    line-height: 4.5rem;
+}
+.Location hr{
+    border: 0.2px solid rgb(86, 27, 141);
+}
+.LocationConfirm{
+    background-color:rgb(86, 27, 141);
+}
