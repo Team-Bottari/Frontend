@@ -9,27 +9,23 @@ const Chatting = (props) => {
     "ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/7/11",
     { transports: ["websocket"] }
   );*/
-  /*
-  메시지 수신_data: {'text': '123123', 'time': '2023-8-19-11-10', 'chatUser': 'TEST'}
-  */
   var socket = new WebSocket(
-    "ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/7/11"
-    //"ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/8/12"
+    //"ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/7/11"
+    "ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/13/14"
   );
   socket.onmessage = function (event) {
     console.log("메시지 수신_data:", event.data);
   };
   const [pastChat, setPastChat] = useState([
-    //시간 순서대로 배열 필요
     {
-      time: "10:11",
+      time: "오전10:11",
       text: "더미 텍스트 내역입니다.",
       chatUser: "11",
     },
     {
-      time: "14:11",
+      time: "오전10:11",
       text: "더미 텍스트 내역입니다.더미 텍스트 내역입니다.더미 텍스트 내역입니다.더미 텍스트 내역입니다.",
-      chatUser: "TEST",
+      chatUser: "TEST2",
     },
   ]);
   useEffect(() => {
@@ -73,7 +69,7 @@ const Chatting = (props) => {
     const message = {
       text,
       time,
-      chatUser: "TEST",
+      chatUser: "TEST2",
     };
     if (text !== "") {
       //socket.send("sendMessage", message);
@@ -95,7 +91,7 @@ const Chatting = (props) => {
                 <span className="ChatTime">{chat.time}</span>
               </div>
             )}
-            {chat.chatUser === "TEST" && (
+            {chat.chatUser === user.nickName && (
               <div className="rightChat">
                 <span className="ChatTime">{chat.time}</span>
                 <div className="ChatTextR">{chat.text}</div>
