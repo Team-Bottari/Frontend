@@ -10,7 +10,7 @@ html{
     margin-top: 8rem;
     padding:2rem;
     border-radius:70%;
-    background-color: #9A30AE;
+    background-color: #d1bbec;
     width: 25rem;
     height: 25rem;
 } 
@@ -29,7 +29,7 @@ html{
     box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
     border-radius: 3rem;
     padding-left: 1.5rem;
-    color:#9A30AE;
+    color:#d1bbec;
     font-weight: bolder;
     display: flex;
 }
@@ -52,7 +52,7 @@ html{
     color:white;
     font-weight: bolder;
     font-size: larger;
-    background-color: #9A30AE;
+    background-color: #d1bbec;
     width: 30rem;
     height: 4rem;
 }
@@ -86,7 +86,7 @@ html{
     width: 20rem;
 }
 .otherBTN_Div2 button{
-    color:#9A30AE;
+    color:#d1bbec;
     background-color: white;
     border:none;
     font-weight: bold;
@@ -95,7 +95,7 @@ html{
 }
 
 .VLine{
-    border-left : 0.2rem solid #9A30AE;
+    border-left : 0.2rem solid #d1bbec;
     margin-top:2.2rem;
     height: 2.5rem;
 }
