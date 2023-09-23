@@ -10,8 +10,10 @@ const Chatting = (props) => {
     { transports: ["websocket"] }
   );*/
   var socket = new WebSocket(
+    "ws://wisixicidi.iptime.org:30010/chatting-socket/string/14/15"
+    //"ws://wisixicidi.iptime.org:30008/chatting-socket/string/13/14"
     //"ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/7/11"
-    "ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/13/14"
+    //"ws://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/string/13/14"
   );
   socket.onmessage = function (event) {
     console.log("메시지 수신_data:", event.data);
