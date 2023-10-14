@@ -10,12 +10,16 @@ const Chatting = (props) => {
   var chatIndex_start = 0;
   var chatIndex_end = 0; // useState훅으로 바꿔주기
   var socket = new WebSocket(
-    "ws://wisixicidi.iptime.org:30009/chatting-socket/string/13/15"
+    `ws://wisixicidi.iptime.org:3000${
+      (user.host_id % 10) + (user.client_id % 10) + 1
+    }/chatting-socket/${user.posting_id}/${user.host_id}/${user.client_id}`
   );
   useEffect(() => {
     socket.onmessage = function (event) {
       console.log("메시지 수신_data:", event.data);
       const jsonObject = JSON.parse(event.data);
+      //초기 pastChat 저장 필요.
+
       chatIndex_start = jsonObject.index - 20;
       chatIndex_end = jsonObject.index - 10;
       //setChatIndex(jsonObject.index);
@@ -27,48 +31,8 @@ const Chatting = (props) => {
     //시간 순서대로 배열 필요
     {
       time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "10:11",
-      text: "더미 텍스트 내역입니다.",
-      chatUser: "11",
-    },
-    {
-      time: "14:11",
-      text: "더미 텍스트 내역입니다.더미 텍스트 내역입니다.더미 텍스트 내역입니다.더미 텍스트 내역입니다.",
-      chatUser: "TEST",
+      text: user.client_id,
+      chatUser: ".",
     },
   ]);
   useEffect(() => {
@@ -126,6 +90,8 @@ const Chatting = (props) => {
     if (text !== "") {
       socket.send(JSON.stringify(message));
       console.log(message);
+      setPastChat((prevChat) => [...prevChat, message]);
+      //index도 받아야함!
     }
     input.value = ""; // 채팅 입력란을 초기화
   };
@@ -133,17 +99,26 @@ const Chatting = (props) => {
     //console.log(chatIndex);
     await axios
       .get(
-        `http://wisixicidi.iptime.org:30009/chatting-record/string/13/15/${chatIndex_start}/${chatIndex_end}`,
+        `http://wisixicidi.iptime.org:3000${
+          (user.host_id % 10) + (user.client_id % 10) + 1
+        }/chatting-record/${user.posting_id}/${user.host_id}/${
+          user.client_id
+        }/${chatIndex_start}/${chatIndex_end}`,
         {
-          posting_id: "string",
-          host_id: 13,
-          client_id: 15,
+          posting_id: user.posting_id,
+          host_id: user.host_id,
+          client_id: user.client_id,
           start_index: chatIndex_start,
           last_index: chatIndex_end,
         }
       )
       .then((response) => {
         console.log(response); //리스폰스 pastchat에 저장하기
+        setPastChat((prev) => {
+          const newChat = [...prev, response];
+          newChat.sort((a, b) => a.index - b.index);
+          return newChat;
+        });
         chatIndex_end = chatIndex_start - 1;
         if (chatIndex_start >= 10) chatIndex_start -= 10;
         else chatIndex_start = 0;
@@ -191,6 +166,9 @@ Chatting.defaultProps = {
   user: {
     email: "",
     nickName: "",
+    posting_id: "string",
+    host_id: 13,
+    client_id: 15,
   },
 };
 export default Chatting;
