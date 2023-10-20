@@ -3,8 +3,15 @@ import MemberInfoSide from "pages/members/MemberInfoSide";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import dummy from "../../market/data.json";
+import React from "react";
+
+import axios from "axios";
+import History from "components/members/History";
+import { GiWeightLiftingUp } from "react-icons/gi";
+import HeaderV2 from "components/header/HeaderV2";
 const PurchaseList = () => {
-  const navigate = useNavigate();
+  /**   const navigate = useNavigate();
   const location = useLocation();
   const [userData, setUserData] = useState({
     id: "user@example.com",
@@ -25,6 +32,7 @@ const PurchaseList = () => {
       <HeaderV1 ID={location.state} />
       <MemberInfoSide ID={location.state} page={"구매목록"} />
     </div>
-  );
+  );*/
+  return <History pagename={"구매내역"} dummy={dummy}></History>;
 };
 export default PurchaseList;

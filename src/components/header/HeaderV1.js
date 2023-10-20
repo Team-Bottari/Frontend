@@ -1,5 +1,9 @@
 import { useState } from "react";
+import { MdLocationSearching } from "react-icons/md";
+import { BsFillPersonFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
+import { BiSearch } from "react-icons/bi";
 import "../../CSS/components/Header.css";
 const HeaderV1 = (prop) => {
   const navigate = useNavigate();
@@ -7,24 +11,14 @@ const HeaderV1 = (prop) => {
   return (
     <div className="header">
       <div className="headerLeft">
-        <button
-          className="MenuHeader"
-          onClick={(event) => {
-            console.log("메뉴");
-          }}
-        >
-          <img
-            alt="Menu Logo"
-            className="HeaderIcon"
-            src="/images/Icon/menuIcon.png"
-          />
-        </button>
         <img
           alt="headerLogo"
           className="headerLogo"
-          src="/images/LogoPurple.png"
-        />
+          src="/images/blacklogo.png"
+        />{" "}
+        <div className="br"></div>
       </div>
+
       <div className="headerCenter">
         <div className="SearchLabel">
           <label htmlFor="Search_input">
@@ -38,32 +32,30 @@ const HeaderV1 = (prop) => {
             />
           </label>{" "}
           <button
-            className="MenuHeader"
+            className="searchbtn"
             onClick={(event) => {
               console.log(searchWord, "검색");
             }}
           >
-            <img
-              alt="Menu Logo"
-              className="HeaderIconSearch"
-              src="/images/Icon/searchIcon.png"
-            />
+            <BiSearch className="HeaderIconSearch" color="black" size="20" />
           </button>
         </div>
       </div>
 
       <div className="headerRight">
+        <div className="br"></div>
         <button
           className="MenuHeader"
           onClick={(event) => {
             console.log("위치");
           }}
         >
-          <img
-            alt="Menu Logo"
+          <MdLocationSearching
             className="HeaderIcon_right"
-            src="/images/Icon/locationIcon.png"
+            color="black"
+            size="30"
           />
+          <div className="text">위치</div>
         </button>
         <button
           className="MenuHeader"
@@ -72,11 +64,21 @@ const HeaderV1 = (prop) => {
             navigate("/Mypage", { state: prop.ID });
           }}
         >
-          <img
-            alt="Menu Logo"
+          <BsFillPersonFill
             className="HeaderIcon_right"
-            src="/images/Icon/userIcon.png"
+            color="black"
+            size="30"
           />
+          <div className="text">내 정보</div>
+        </button>{" "}
+        <button
+          className="MenuHeader"
+          onClick={(event) => {
+            console.log("메뉴");
+          }}
+        >
+          <AiOutlineMenuUnfold className="HeaderIcon" color="black" size="30" />
+          <div className="text">메뉴</div>{" "}
         </button>
       </div>
     </div>
