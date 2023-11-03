@@ -11,11 +11,9 @@ const HeaderV1 = (prop) => {
   return (
     <div className="header">
       <div className="headerLeft">
-        <img
-          alt="headerLogo"
-          className="headerLogo"
-          src="/images/blacklogo.png"
-        />{" "}
+        {" "}
+        <div>GYM</div>
+        <div className="headerLogo">Bottari</div>
         <div className="br"></div>
       </div>
 
@@ -37,7 +35,7 @@ const HeaderV1 = (prop) => {
               console.log(searchWord, "검색");
             }}
           >
-            <BiSearch className="HeaderIconSearch" color="black" size="20" />
+            <BiSearch className="HeaderIconSearch" color=" #4053FF" size="20" />
           </button>
         </div>
       </div>
@@ -52,7 +50,7 @@ const HeaderV1 = (prop) => {
         >
           <MdLocationSearching
             className="HeaderIcon_right"
-            color="black"
+            color=" #4053FF"
             size="30"
           />
           <div className="text">위치</div>
@@ -66,7 +64,7 @@ const HeaderV1 = (prop) => {
         >
           <BsFillPersonFill
             className="HeaderIcon_right"
-            color="black"
+            color="#3342c3"
             size="30"
           />
           <div className="text">내 정보</div>
@@ -77,7 +75,11 @@ const HeaderV1 = (prop) => {
             console.log("메뉴");
           }}
         >
-          <AiOutlineMenuUnfold className="HeaderIcon" color="black" size="30" />
+          <AiOutlineMenuUnfold
+            className="HeaderIcon"
+            color=" #3342c3"
+            size="30"
+          />
           <div className="text">메뉴</div>{" "}
         </button>
       </div>

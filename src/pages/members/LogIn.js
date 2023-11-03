@@ -8,30 +8,45 @@ const LogIn = () => {
   const navigate = useNavigate();
   const [ID, setID] = useState("");
   const [PW, setPW] = useState("");
-  const [cookies, setCookie] = useCookies(["sessionID"]);
+  const [accesstoken, setaccesstoken] = useState("");
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const LoginClick = async (event) => {
     event.preventDefault();
     console.log(ID, PW);
-    await axios
-      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/login", {
-        email: ID,
-        pw: PW,
-      })
-      .then((response) => {
-        if (response.data.sign_in === true) {
-          console.log(response);
-          //setCookie("sessionID", response.data.sessionID, { path: "/" }); // 세션 ID를 쿠키로 저장
-          navigate("/Mypage", { state: ID });
-        } else {
-          console.log(response);
-          alert("로그인에 실패했습니다.");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("로그인에 실패했습니다.");
-      });
+    const config = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    };
+
+    const formData = new URLSearchParams();
+    formData.append("username", ID);
+    formData.append("password", PW);
+
+    try {
+      const response = await axios.post(
+        "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/login-token",
+        formData,
+        config
+      );
+
+      if (response) {
+        setaccesstoken(response.data);
+        console.log(response.data);
+        setCookie("token", response.data.access_token, {
+          path: "/",
+        });
+        console.log(cookies);
+        navigate("/Mypage", { state: ID });
+      } else {
+        console.log(response);
+        alert("로그인에 실패했습니다!!!.");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("로그인에 실패했습니다.");
+    }
   };
 
   const kakaoClick = async (event) => {
