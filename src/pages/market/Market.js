@@ -1,36 +1,109 @@
-import { Product } from "components/market/Preview";
+import { Product } from "../../components/market/Product";
 import { useEffect } from "react";
 import { useState } from "react";
+
+import { PiWaveSine } from "react-icons/pi";
+import dummy from "./data.json";
+import { AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
+import HeaderV1 from "../../components/header/HeaderV1";
 import React from "react";
+import "CSS/market/Marketmain.css";
+
 import axios from "axios";
-
-const Main = () => {
+export const Market = () => {
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    axios
-      .get("http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/list")
-      .then((data) => {
-        setProducts(data.data.items);
-      });
-  }, [setProducts]);
+  const [itemimg, setItemimg] = useState([]);
+  const [blobImg, setBlobImg] = useState([]);
+  const [posting_id, setPosting_id] = useState([]);
+  const [searchWord, setSeartchword] = useState("");
+  // setSeartchword("노트북");
+  // useEffect(() => {
+  //   const FetchData = async () => {
+  //     try {
+  //       const params = searchWord ? { keyword: searchWord } : {};
+  //       const response = await axios.get(
+  //         "http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/list/",
+  //         { params } /////
+  //       );
+  //       const items = response.data.items;
+  //       console.log("products", response.data);
+  //       setProducts(items);
 
+  //       const imgList = [];
+  //       const blobFiles = [];
+
+  //       for (let i = 0; i < items.length; i++) {
+  //         const posting_id = items[i].posting_id;
+  //         setPosting_id(items[i].posting_id);
+  //         const posting_images = items[i].posting_images[0];
+  //         const imageResponse = await axios.post(
+  //           `http://wisixicidi.iptime.org:30000/api/v1.0.0/posting/images/FGlFD4kBg4HIUcUDRVtR/01/standard`,
+  //           {},
+  //           { responseType: "arraybuffer" }
+  //         );
+  //         const blob = new Blob([imageResponse.data], { type: "image/jpeg" });
+  //         const urlImg = URL.createObjectURL(blob);
+  //         console.log("url", urlImg);
+
+  //         imgList.push(urlImg);
+  //       }
+
+  //       setItemimg(imgList);
+  //       setBlobImg(blobFiles);
+  //       console.log("이미지", imgList[0]);
+  //       //console.log(imgList, blobFiles);
+  //     } catch (error) {
+  //       console.error("Failed to fetch data:", error);
+  //     }
+  //   };
+
+  //   FetchData();
+  // }, []);
+
+  // const updatedArray = products.map((item, index) => {
+  //   const url = itemimg[index]; // 현재 인덱스에 해당하는 url 값 가져오기
+  //   return { ...item, url: url };
+  // });
+  //console.log("업데이트어레이", updatedArray);
+  // function valuetext(value) {
+  //   return `${value}원`;
+  // }
+  // const [value, setValue] = React.useState([20, 37]);
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
+  console.log(typeof dummy.item);
   return (
-    <>
-      <div>
-        <button>작성하기</button>
-        <button>가격</button>
-        <select name="option">
-          <option value="1">최신순 </option>
-          <option value="2">저가순 </option>
-          <option value="3">고가순 </option>
-        </select>
+    <div className="Main">
+      <HeaderV1 />
+      <div className="layoutcontainer">
+        {" "}
+        <br />
+        <div className="mainlayout">
+          <div className="select">
+            <select className="selectoption" name="option">
+              <option value="new">최신순</option>
+              <option value="low">낮은가격</option>
+              <option value="high">높은가격</option>
+            </select>
+          </div>
+          <br />
+
+          <div className="itembox">
+            {
+              //updatedArray//
+              dummy.item.map((item, index) => (
+                <div className="itemlay" key={`product-${index}`}>
+                  <Product item={item} />
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </div>
-      <main>
-        {products.map((product, index) => {
-          return <Product key={`key-${index}`} product={products[index]} />;
-        })}
-      </main>
-    </>
+    </div>
   );
 };
-export default Main;
+
+export default Market;

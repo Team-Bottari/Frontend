@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "NanumSquareNeo-Variable";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.bigcontainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
+body {
+  font-family: "Noto Sans KR", sans-serif;
+}
+.top {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: center;
+}
+.myinform {
+  background: gray;
+  border-radius: 50%;
+  width: 25rem;
+  height: 25rem;
+}
+.weight {
+  font-size: 20px;
+}
+.userinform {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+.item-grid {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  margin-top: 7rem;
+}
+.inform {
+  height: auto;
+  display: flex;
+  margin-right: 55rem;
+  justify-content: left;
+  align-items: center;
+  width: auto;
+  gap: 20px;
+}
+.itemlist {
+  width: 350px;
+  height: 370px;
+}
+.itemlist1 {
+  position: relative;
+  width: 22rem;
+  height: 28rem;
+  border: solid 1px rgb(211, 208, 208);
+}
+.itemsize {
+  position: relative;
+  width: 100%;
+  height: 22rem;
+  z-index: 0;
+}
+.purchased {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 22rem;
+  background-color: rgba(159, 155, 150, 0.495);
+}
+html,
+body {
+  height: 100vw;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+.cont {
+  height: 100vw;
+}
+.name {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+}
+.iteminform {
+  display: flex;
+  gap: 10rem;
+  margin-left: 0.7rem;
+}
+.inform1 {
+  margin-left: 10px;
+}
+.inform2 {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 1.5rem;
+}
+.price {
+  font-weight: bolder;
+  font-size: 2rem;
+}
+.itemname {
+  font-size: 2rem;
+}
+.pagename {
+  margin-top: 5rem;
+  text-align: center;
+  width: inherit;
+  font-size: 3rem;
+}
