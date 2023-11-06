@@ -10,7 +10,7 @@ const ModifyInfo = () => {
   const location = useLocation();
   const [userData, setUserData] = useState(location.state);
   const IDJSon = { email: userData.email };
-  const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState(true);
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef(null);
   const [Cookie] = useCookies(["token"]);
@@ -94,11 +94,11 @@ const ModifyInfo = () => {
     }
   };
   const imgUpload = async (event) => {
-    setFlag(false);
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
+      setFlag(false);
       setImgFile(reader.result);
     };
   };
@@ -144,7 +144,14 @@ const ModifyInfo = () => {
           nick_name: userData.nick_name,
           name: userData.name,
           phone: userData.phone,
-        }
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookie.token}`,
+          },
+        },
+        { responseType: "arraybuffer" }
       )
       .then((response) => {
         if (response.data.update_member_info === true) {
@@ -168,7 +175,9 @@ const ModifyInfo = () => {
   };
   return (
     <div className="ModifyInfo">
-      <HeaderV2 ID={userData.email} />
+      {
+        //<HeaderV2 ID={userData.email} />
+      }
       <div className="leftDiv">
         <img className="useImg" key={imgFile} src={imgFile} alt="userIMG" />
         <form>

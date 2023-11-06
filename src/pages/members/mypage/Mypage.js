@@ -1,7 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import { useCookies } from "react-cookie";
 import HeaderV1 from "../../../components/header/HeaderV1";
 import "../../../CSS/mypage/Mypage.css";
@@ -10,7 +9,6 @@ const Mypage = () => {
   const location = useLocation();
   const [token, settoken] = useState("");
   const [imgMypage, setImgMypage] = useState("");
-
   const [Cookie] = useCookies(["token"]);
   console.log(Cookie);
   const [userData, setUserData] = useState({
@@ -23,7 +21,7 @@ const Mypage = () => {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
-          null,
+          { email: location.state }, // 삭제 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -> null로 변경
           {
             headers: {
               "Content-Type": "application/json",
@@ -34,7 +32,7 @@ const Mypage = () => {
         console.log(response);
         setUserData(response.data);
       } catch (err) {
-        console.log(err);
+        console.log("오류: ", err);
         alert("오류가 발생했습니다");
       }
     }
@@ -137,7 +135,7 @@ const Mypage = () => {
         <hr />
         <button
           onClick={(e) => {
-            navigate("/Location");
+            navigate("/Location", { state: userData.email });
           }}
         >
           <img
@@ -146,14 +144,6 @@ const Mypage = () => {
             src="/images/Icon/placeIcon.png"
           />
           위치 설정 및 인증
-        </button>
-        <button
-          onClick={(e) => {
-            navigate("/auth/mypage/UserHashTag");
-          }}
-        >
-          <img alt="tag" className="MypageIMG" src="/images/Icon/tagIcon.png" />
-          해시태그 알림 설정
         </button>
         <button
           onClick={(e) => {

@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import "CSS/chatting/Chat.css";
 import HeaderV2 from "components/header/HeaderV2";
 import { useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 const Chat = () => {
   const location = useLocation();
-  //const userEmail = location.state; // "user1234@example.com"
-  const userEmail = "user1234@example.com";
+  const userEmail = location.state; // "user1234@example.com"
+  const [usserID, setUserID] = useState(0);
+  const [token, settoken] = useState("");
+  const [Cookie] = useCookies(["token"]);
+  console.log(Cookie);
   const [chattingUser, setChattingUser] = useState([
     {
       profileIMGURL: "/images/otherLogo/Naver.png",
@@ -22,11 +26,6 @@ const Chat = () => {
     },
   ]);
   const [clickChattingUser, setClickChattingUser] = useState({
-    /* chatUser: "",
-    id:0,
-    posting_id: -1,
-    host_id: 0, // 게시물 쓴 사람
-    client_id: 0, //내 아이디*/
     chatUser: "TEST",
     id: 13,
     posting_id: "string",
@@ -43,9 +42,31 @@ const Chat = () => {
     });
   };
   useEffect(() => {
+    async function getUserInfo() {
+      try {
+        const response = await axios.post(
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
+          { email: location.state }, // 삭제 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -> null로 변경
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookie.token}`,
+            },
+          }
+        );
+        console.log(response);
+        setUserID(response.data.id);
+      } catch (err) {
+        console.log("오류: ", err);
+        alert("오류가 발생했습니다");
+      }
+    }
+    getUserInfo();
+  }, [location.state]);
+  useEffect(() => {
     axios
       .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/list", {
-        id: "14",
+        id: usserID,
       })
       .then((response) => {
         console.log(response.data.chatting_list);
@@ -84,9 +105,6 @@ const Chat = () => {
             userEmail={userEmail}
           />
         )}
-        {
-          //<Chatting chatData={clickChattingUser} />
-        }
       </div>
     </div>
   );
