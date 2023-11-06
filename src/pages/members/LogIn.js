@@ -14,10 +14,13 @@ const LogIn = () => {
     event.preventDefault();
     console.log(ID, PW);
     await axios
-      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/member/login", {
-        email: ID,
-        pw: PW,
-      })
+      .post(
+        "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/login-token",
+        {
+          email: ID,
+          pw: PW,
+        }
+      )
       .then((response) => {
         if (response.data.sign_in === true) {
           console.log(response);

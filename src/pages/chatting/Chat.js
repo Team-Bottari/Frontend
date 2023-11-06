@@ -7,7 +7,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 const Chat = () => {
   const location = useLocation();
-  const userEmail = location.state; // "user1234@example.com"
+  //const userEmail = location.state; // "user1234@example.com"
+  const userEmail = "user1234@example.com";
   const [chattingUser, setChattingUser] = useState([
     {
       profileIMGURL: "/images/otherLogo/Naver.png",
@@ -27,13 +28,13 @@ const Chat = () => {
     host_id: 0, // 게시물 쓴 사람
     client_id: 0, //내 아이디*/
     chatUser: "TEST",
-    id: 14,
+    id: 13,
     posting_id: "string",
     host_id: 13,
     client_id: 14,
   });
   const chattingClick = async (index) => {
-    setClickChattingUser({
+    await setClickChattingUser({
       chatUser: chattingUser[index].chatUser,
       id: chattingUser[index].id,
       posting_id: chattingUser[index].posting_id,
@@ -78,7 +79,10 @@ const Chat = () => {
         {clickChattingUser.posting_id === -1 ? (
           <div> 채팅방을 선택해주세요 </div>
         ) : (
-          <Chatting chatData={clickChattingUser} />
+          <Chatting
+            clickChattingUser={clickChattingUser}
+            userEmail={userEmail}
+          />
         )}
         {
           //<Chatting chatData={clickChattingUser} />

@@ -1,77 +1,61 @@
 import ChattingList from "./ChattingList";
-import Chatting from "./Chatting2";
+import Chatting2 from "./Chatting2";
 import { useState, useEffect } from "react";
 import "CSS/chatting/Chat.css";
 import HeaderV2 from "components/header/HeaderV2";
-const Chat = () => {
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+const Chat2 = () => {
+  const location = useLocation();
+  //const userEmail = location.state; // "user1234@example.com"
+  const userEmail = "user11112@example.com";
   const [chattingUser, setChattingUser] = useState([
     {
-      email: "더미이메일1",
-      profileIMGURL: "/images/otherLogo/Google.png",
-      nickName: "홍길동",
-      lastChat: "ㅋㅋㅋㅋㅋㅋㅋㅋ",
-      ChatTime: "2023. 05. 01",
-      /* useEffect로 받아오기 */
-    },
-    {
-      email: "더미이메일2",
       profileIMGURL: "/images/otherLogo/Naver.png",
-      nickName: "더미2",
-      lastChat: "ㅋㅋㅋㅋㅋㅋㅋㅋ",
-      ChatTime: "2023. 05. 01",
-      /* useEffect로 받아오기 */
-    },
-    {
-      email: "더미이메일3",
-      profileIMGURL: "/images/otherLogo/Google.png",
-      nickName: "더미3",
-      lastChat: "ㅋㅋㅋㅋㅋㅋㅋㅋ",
-      ChatTime: "2023. 05. 01",
-      /* useEffect로 받아오기 */
-    },
-    {
-      email: "더미이메일4",
-      profileIMGURL: "/images/otherLogo/Google.png",
-      nickName: "더미4",
-      lastChat: "ㅋㅋㅋㅋㅋㅋㅋㅋ",
-      ChatTime: "2023. 05. 01",
-      /* useEffect로 받아오기 */
-    },
-    {
-      email: "더미이메일5",
-      profileIMGURL: "/images/otherLogo/Kakao.png",
-      nickName: "더미5",
-      lastChat: "ㅋㅋㅋㅋㅋㅋㅋㅋ",
-      ChatTime: "2023. 05. 01",
-      /* useEffect로 받아오기 */
-    },
-    {
-      email: "더미이메일6",
-      profileIMGURL: "/images/otherLogo/Google.png",
-      nickName: "더미6",
-      lastChat: "ㅋㅋㅋㅋㅋㅋㅋㅋ",
-      ChatTime: "2023. 05. 01",
-      /* useEffect로 받아오기 */
-    },
-    {
-      email: "더미이메일7",
-      profileIMGURL: "/images/otherLogo/Google.png",
-      nickName: "더미7",
-      lastChat: "ㅋㅋㅋㅋㅋㅋㅋㅋ",
-      ChatTime: "2023. 05. 01",
-      /* useEffect로 받아오기 */
+      chatUser: "",
+      text: "",
+      time: "",
+      posting_id: "string",
+      id: 0,
+      host_id: 0, // 게시물 쓴 사람
+      client_id: 0,
     },
   ]);
   const [clickChattingUser, setClickChattingUser] = useState({
-    email: "",
-    nickName: "",
+    /* chatUser: "",
+    id:0,
+    posting_id: -1,
+    host_id: 0, // 게시물 쓴 사람
+    client_id: 0, //내 아이디*/
+    chatUser: "TEST",
+    id: 14,
+    posting_id: "string",
+    host_id: 13,
+    client_id: 14,
   });
   const chattingClick = async (index) => {
     setClickChattingUser({
-      email: chattingUser[index].email,
-      nickName: chattingUser[index].nickName,
+      chatUser: chattingUser[index].chatUser,
+      id: chattingUser[index].id,
+      posting_id: chattingUser[index].posting_id,
+      host_id: chattingUser[index].host_id,
+      client_id: chattingUser[index].client_id,
     });
   };
+  useEffect(() => {
+    axios
+      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/list", {
+        id: "14",
+      })
+      .then((response) => {
+        console.log(response.data.chatting_list);
+        setChattingUser(response.data.chatting_list);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("오류가 발생했습니다.");
+      });
+  }, []);
   useEffect(() => {}, [clickChattingUser]);
   return (
     <div className="Chat">
@@ -92,9 +76,19 @@ const Chat = () => {
       </div>
       <hr />
       <div className="Chatting">
-        {clickChattingUser && <Chatting chatData={clickChattingUser} />}
+        {clickChattingUser.posting_id === -1 ? (
+          <div> 채팅방을 선택해주세요 </div>
+        ) : (
+          <Chatting2
+            clickChattingUser={clickChattingUser}
+            userEmail={userEmail}
+          />
+        )}
+        {
+          //<Chatting chatData={clickChattingUser} />
+        }
       </div>
     </div>
   );
 };
-export default Chat;
+export default Chat2;
