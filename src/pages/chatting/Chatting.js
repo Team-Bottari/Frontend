@@ -2,23 +2,55 @@ import "CSS/chatting/Chatting.css";
 import { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
 import axios from "axios";
+import ScrollToBottom from "react-scroll-to-bottom";
+
 const Chatting = (props) => {
-  const user = props.chatData;
+  //const user = props.chatData; //채팅 유저
   const scrollContainerRef = useRef(null); //스크롤 고정용
+  const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [position, setPosition] = useState(0); //스크롤 위치
+  const [isOver, setIsOver] = useState(false);
   const [pastChat, setPastChat] = useState([]);
+  /* 로그인으로부터 내 정보 가져오기!!!!!!!!*/
+  const { user, userEmail } = props;
+  const [userNum, setUserNum] = useState(13);
   var chatIndex_start = 0;
-  var chatIndex_end = 0; // useState훅으로 바꿔주기
+  var chatIndex_end = 0;
   var socket = new WebSocket(
     `ws://wisixicidi.iptime.org:3000${
       (user.host_id % 10) + (user.client_id % 10) + 1
     }/chatting-socket/${user.posting_id}/${user.host_id}/${user.client_id}`
   );
   useEffect(() => {
+    async function getUserInfo() {
+      try {
+        const response = await axios.post(
+          "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
+          {
+            //sessionID: cookies.sessionID,
+            //세션 아이디로 사용자 정보 받아오기 -> 이메일을 location으로 넘기는 방법은 컴포넌트간 결합성이 높아져서 권장 XX
+            email: userEmail,
+          }
+        );
+        console.log(response);
+        //setUserNum(response.data.userNum);
+      } catch (err) {
+        console.log(err);
+        alert("오류가 발생했습니다");
+      }
+    }
+    //getUserInfo();
+    setUserNum(13);
+  }, []);
+  useEffect(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop =
         scrollContainerRef.current.scrollHeight;
     }
+  }, []);
+  useEffect(() => {
+    // console.log(userEmail);
+
     const isTop = () => {
       if (scrollContainerRef.current.scrollTop === 0) {
         getOldChat(); // 스크롤이 최상단에 위치해 있을 때.
@@ -31,14 +63,15 @@ const Chatting = (props) => {
   }, []);
   useEffect(() => {
     socket.onmessage = function (event) {
-      //console.log("data:", event.data);
       const jsonString = event.data.replace(/'/g, '"');
-      const jsonStringModified = jsonString.replace(/True/g, "true");
-      //console.log(jsonStringModified);
+      const jsonStringModi = jsonString.replace(/True/g, "true");
+      const jsonStringModified = jsonStringModi.replace(/False/g, "false");
+
       const jsonObject = JSON.parse(jsonStringModified);
       let flag = 0;
-      if (jsonObject.host_visible === false && user.id == user.host_id) flag++;
-      else if (jsonObject.client_visible === false && user.id == user.client_id)
+      if (jsonObject.host_visible == false && user.id == user.host_id)
+        flag++; //보이지 않는 채팅의 경우, pastChat에 추가  X
+      else if (jsonObject.client_visible == false && user.id == user.client_id)
         flag++;
       else {
         setPastChat((prev) => {
@@ -60,6 +93,7 @@ const Chatting = (props) => {
     return () => {
       socket.onclose = function (event) {
         console.log("WebSocket connection closed:", event);
+        setIsOver(true);
       };
     };
   }, []);
@@ -74,29 +108,32 @@ const Chatting = (props) => {
   };
   const newChatUpdate = (event) => {
     event.preventDefault();
-    const input = document.getElementById("Chat");
-    const text = input.value;
-    const host_visible = true;
-    const client_visible = true;
-    const date = new Date();
-    let year = date.getFullYear();
-    let day = date.getDate();
-    let hours = date.getHours();
-    let month = date.getMonth() + 1;
-    let minutes = date.getMinutes().toString().padStart(2, "0");
-    const time = `${year}-${month}-${day}-${hours}-${minutes}`;
-    const message = {
-      text,
-      time,
-      chatUser: user.chatUser,
-      host_visible,
-      client_visible,
-    };
-    if (text !== "") {
-      socket.send(JSON.stringify(message));
-      //console.log(JSON.stringify(message));
+    if (isOver) {
+      alert("채팅이 끝난 방에서는 더이상 대화할 수 없습니다.");
+    } else {
+      const input = document.getElementById("Chat");
+      const text = input.value;
+      const host_visible = true;
+      const client_visible = true;
+      const date = new Date();
+      let year = date.getFullYear();
+      let day = date.getDate();
+      let hours = date.getHours();
+      let month = date.getMonth() + 1;
+      let minutes = date.getMinutes().toString().padStart(2, "0");
+      const time = `${year}-${month}-${day}-${hours}-${minutes}`;
+      const message = {
+        text,
+        time,
+        chatUser: user.chatUser,
+        host_visible,
+        client_visible,
+      };
+      if (text !== "") {
+        socket.send(JSON.stringify(message));
+      }
+      input.value = ""; // 채팅 입력란을 초기화
     }
-    input.value = ""; // 채팅 입력란을 초기화
   };
   const getOldChat = async (event) => {
     await axios
@@ -115,10 +152,26 @@ const Chatting = (props) => {
         }
       )
       .then((response) => {
-        console.log(response.data.messages); //리스폰스 pastchat에 저장하기
+        //console.log(response.data.messages); //리스폰스 pastchat에 저장하기
+        console.log(
+          response.data.messages,
+          user.host_id,
+          user.client_id,
+          userNum
+        );
         setPastChat((prev) => {
-          const newChat = [...prev, ...response.data.messages];
-          newChat.sort((a, b) => a.index - b.index);
+          const filteredChat1 = response.data.messages.filter((message) => {
+            if (message.host_visible === false && user.id === user.host_id)
+              return false;
+            else if (
+              message.client_visible === false &&
+              user.id === user.client_id
+            )
+              return false; // 조건에 맞지 않는 요소를 필터링
+            return true; // 조건에 맞는 요소를 유지
+          });
+          const newChat = [...prev, ...filteredChat1]; // 필터링된 새로운 요소를 추가
+          newChat.sort((a, b) => a.index - b.index); // 인덱스에 따라 정렬
           return newChat;
         });
         chatIndex_end = chatIndex_start - 1;
@@ -168,6 +221,7 @@ const Chatting = (props) => {
             )}
           </div>
         ))}
+        {isOver && <p>채팅이 끝났습니다.</p>}
       </div>
       <div className="chatEnter">
         <div className="chatInput">
@@ -185,7 +239,7 @@ const Chatting = (props) => {
 Chatting.defaultProps = {
   user: {
     chatUser: "string",
-    id: 14,
+    id: 13,
     posting_id: "string",
     host_id: 13,
     client_id: 14,
