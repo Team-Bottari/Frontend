@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
+
 import HeaderV2 from "components/header/HeaderV2";
 import "CSS/mypage/ModifyInfo.css";
 import { useCookies } from "react-cookie";
@@ -12,22 +13,21 @@ const ModifyInfo = () => {
   const [flag, setFlag] = useState(false);
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef(null);
-  const [cookies] = useCookies(["sessionID"]);
+  const [Cookie] = useCookies(["token"]);
+  console.log(Cookie);
   useEffect(() => {
     /*console.log(location.state.email)*/
-    if (!cookies.sessionID) {
-      alert("로그인 정보가 유효하지 않습니다!");
-      navigate("/login");
-      return;
-    }
+
     async function getUserIMG() {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
           {
             email: location.state.email,
-            //sessionID: cookies.sessionID,
-            //세션 아이디로 사용자 정보 받아오기 -> 이메일을 location으로 넘기는 방법은 컴포넌트간 결합성이 높아져서 권장 XX
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookie.token}`,
+            },
           },
           { responseType: "arraybuffer" }
         );
@@ -40,7 +40,7 @@ const ModifyInfo = () => {
       }
     }
     getUserIMG();
-  }, [location.state, cookies.sessionID]);
+  }, [location.state, Cookie.token]);
 
   const logOut = async (event) => {
     event.preventDefault();
