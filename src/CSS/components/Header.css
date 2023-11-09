@@ -1,97 +1,76 @@
-.html {
-  font-size: 62.5%;
-}
-
 .header {
-  width: 100vw;
-  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.headerlayout {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: black;
+  color: white;
+}
+.gym {
+  text-align: center;
+  font-family: "Anton", sans-serif;
+  font-weight: bolder;
+  font-size: 15px;
+}
+.bott {
+  text-align: center;
+  font-family: "Anton", sans-serif;
+  font-weight: bolder;
+  font-size: 17px;
+  width: auto;
+}
+
+.apptitle {
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  width: 10rem;
+  text-align: center;
+  font-family: "Noto Serif", serif;
+}
+.search {
+  background-color: white;
+  width: 50rem;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.searchbar {
+  margin-top: 0.5px;
+  margin-left: 1px;
+  width: 100%;
+  height: 30px;
+  border: solid 3px;
+}
+.usermenu {
+  display: flex;
+  gap: 2rem;
+  padding-left: 50rem;
   position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  position: sticky;
-  background-color: white;
-
-  z-index: 100;
+  right: 50px;
 }
-.header-align {
-  display: flex;
-  width: 70%;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  white-space: nowrap;
-}
-.headerCenter {
-  display: flex;
-  align-items: center;
+.find {
+  height: 100%;
+  cursor: pointer;
+  width: 50px;
+  border: solid 1px;
+  color: white;
   text-align: center;
+  background-color: black;
 }
-.headerLogo {
-  width: 18rem;
-
-  margin-top: 0.5rem;
-  font-size: 40px;
+.login {
+  cursor: pointer;
 }
-.br {
-  width: 40px;
-}
-.text {
-  color: black;
-}
-.headerLogo_center {
-}
-.headerLeft {
-  text-align: center;
-
-  width: auto;
-  align-items: center;
-}
-.headerRight {
-  display: flex;
-  gap: 10;
-}
-.MenuHeader {
-  width: auto;
-  height: auto;
-  border: none;
-  background: none;
-}
-.SearchLabel {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 60rem;
-  height: 4rem;
-  background-color: white;
-  padding: 0rem 1rem 0rem 1rem;
-  border-color: #3342c3;
-  border: solid 0.3rem;
-}
-
-.SearchLabel input {
-  border: none;
-  background-color: rgb(255, 255, 255, 0);
-
-  outline-style: none;
-  appearance: none;
-  width: 55rem;
-  height: 4rem;
-}
-.HeaderIcon {
-  padding: 0;
-}
-
-.MypageHeader {
-  width: 5rem;
-}
-
-.searchbtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0;
-  background: none;
+.register {
+  cursor: pointer;
 }

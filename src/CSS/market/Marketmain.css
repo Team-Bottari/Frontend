@@ -14,6 +14,7 @@
 .likebtn {
   background: none;
   width: auto;
+  border: none;
 }
 .layoutcontainer {
   margin-top: 8rem;
@@ -21,7 +22,6 @@
   justify-content: center;
 }
 .App {
-  display: flex;
   justify-content: center;
 }
 .itemlay {
@@ -55,7 +55,6 @@
   font-size: 1.5rem;
 }
 .mainlayout {
-  width: 70vw;
 }
 .iteminform {
   display: flex;
