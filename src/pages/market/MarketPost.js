@@ -109,7 +109,7 @@ const MarketPost = (propsFromM) => {
                   if (response.data.response === 200) {
                     if (imageID === MarketImgFile.length - 1) {
                       alert("작성 완료되었습니다.");
-                      navigate("/Mypage", { state: location.state }); //메인페이지로 이동
+                      navigate("/", { state: location.state }); //메인페이지로 이동
                     }
                   } else {
                     console.log(response);
@@ -358,23 +358,7 @@ const MarketPost = (propsFromM) => {
               }
             />
           </div>
-          <div className="PostDetails">
-            {/*카테고리 현재는 string값. 추후 카테고리 고정되면 select 박스 생성, 여러번 선택 가능하게 하고 선택할때마다 
-            카테고리 str 값을 추가, concat해서 합쳐서 서버로 보내기*/}
-            <label htmlFor="text">카테고리</label>
-            <input
-              className="textInput"
-              id="text"
-              name="text"
-              value={postInfo.category}
-              onChange={(event) =>
-                setPostInfo((prevPostInfo) => ({
-                  ...prevPostInfo,
-                  category: event.target.value,
-                }))
-              }
-            />
-          </div>
+          <div className="PostDetails"></div>
           <div className="PostDetailsCheckBox">
             <label htmlFor="tag">네고 가능</label>
             <input

@@ -175,9 +175,7 @@ const ModifyInfo = () => {
   };
   return (
     <div className="ModifyInfo">
-      {
-        //<HeaderV2 ID={userData.email} />
-      }
+      <HeaderV2 ID={userData.email} />
       <div className="leftDiv">
         <img className="useImg" key={imgFile} src={imgFile} alt="userIMG" />
         <form>
@@ -215,7 +213,7 @@ const ModifyInfo = () => {
           />
         </div>
         <button className="deleteIMGModify" onClick={deleteIMG}>
-          삭제
+          프로필 사진 삭제
         </button>
       </div>
       <div className="right">
@@ -229,9 +227,17 @@ const ModifyInfo = () => {
             재설정
           </button>
         </div>
+        <button
+          className="SaveInfo"
+          onClick={(e) => {
+            navigate("/Location", { state: userData.email });
+          }}
+        >
+          위치 설정
+        </button>
         <button className="Logout" onClick={logOut}>
           로그아웃
-        </button>
+        </button>{" "}
         <button className="SaveInfo" onClick={SaveInfo}>
           완료
         </button>

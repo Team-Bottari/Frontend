@@ -1,13 +1,17 @@
 html{
     font-size: 62.5%;
 }
+.body{
+    padding-top: 30rem;
+}
 .Chat{
     display: flex;
     flex-direction: row;
-    padding-top: 8rem;
+    margin-left: 0%;
+    justify-content: center;
 }
 .ListOfChatting{
-    height: 82vh;
+    height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -22,9 +26,57 @@ html{
 .ChattingListButton{
     border:1px solid rgba(0, 0, 0, 0);
     background-color: rgba(255, 255, 255, 0);
-    margin-top: -20rem;
+    margin-top: -12rem;
     margin-left: 5rem;
     width:45rem;
-    height: 15rem;
+    height: 12rem;
     overflow: auto;
+}
+.Chatting{
+    width:50rem;
+}
+.Chatting p{
+    margin-top: 20rem;
+    width:30rem;
+    margin-left:14rem;
+    text-align: center;
+    font-size: 2rem;
+    border: 1px solid black;
+    background-color: black;
+    color:white;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+@media  only screen and (min-width: 280px) and (max-width: 319px) and (orientation: portrait){/*소형 모바일(세로), 갤럭시 폴드 접은 버전(세로)*/
+    html{
+        font-size: 36.5%;
+    }
+}
+@media only screen and (min-width : 321px) and (max-width : 424px) and (orientation : portrait){/*모바일(세로)*/
+    html{
+        font-size: 50.5%;
+    }
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : landscape){/*모바일(가로)*/
+    html{
+        font-size: 30.5%;
+    }
+    button{
+        font-size: smaller;
+    }
+}
+@media only screen and (min-width : 425px) and (max-width : 1024px) and (orientation : portrait){/* 갤럭시 폴드 편 버전(가로)*/
+    html{
+        font-size: 36.5%;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait){/*태블릿(세로)*/
+    html{
+        font-size: 36.5%;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape){/*태블릿(가로)*/
+    html{
+        font-size: 35.5%;
+    }
 }

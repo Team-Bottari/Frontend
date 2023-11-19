@@ -13,7 +13,7 @@ const LogIn = () => {
 
   const LoginClick = async (event) => {
     event.preventDefault();
-    console.log(ID, PW);
+    //console.log(ID, PW);
     const config = {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -37,8 +37,8 @@ const LogIn = () => {
         setCookie("token", response.data.access_token, {
           path: "/",
         });
-        console.log(cookies);
-        navigate("/Mypage", { state: ID });
+        // console.log(cookies);
+        navigate("/", { state: ID });
       } else {
         console.log(response);
         alert("로그인에 실패했습니다!!!.");
@@ -49,30 +49,16 @@ const LogIn = () => {
     }
   };
 
-  const kakaoClick = async (event) => {
-    event.preventDefault();
-    console.log("Kakao Login");
-  };
-
-  const googleClick = (event) => {
-    event.preventDefault();
-    console.log("google Login");
-  };
-
-  const naverClick = async (event) => {
-    event.preventDefault();
-    console.log("Naver Login");
-  };
-
   return (
     <div className="LogIn">
       <div className="Logo">
-        <img alt="main Logo" className="LogoIMG" src="/images/LogoWhite.png" />
+        <p className="top">GYM</p>
+        <p>BOTTARI</p>
       </div>
       <div className="InputMaterial">
         <form>
           <div className="Input">
-            <div className="InputLabel">
+            <div className="InputLabel_Login">
               <label htmlFor="ID_input">Email</label>
             </div>
             <input
@@ -85,7 +71,7 @@ const LogIn = () => {
           </div>
           <br />
           <div className="Input">
-            <div className="InputLabel">
+            <div className="InputLabel_Login">
               <label htmlFor="PW_input">PW</label>
             </div>
             <input
@@ -97,32 +83,8 @@ const LogIn = () => {
             />
           </div>
         </form>
-        <button onClick={LoginClick}>로그인</button>
       </div>
       <div className="otherBTN">
-        <div className="otherBTN_Div1">
-          <button className="otherLogin" onClick={kakaoClick}>
-            <img
-              alt="kakao Logo"
-              className="IconLogo"
-              src="/images/otherLogo/Kakao.png"
-            />
-          </button>
-          <button className="otherLogin" onClick={googleClick}>
-            <img
-              alt="google Logo"
-              className="IconLogo"
-              src="/images/otherLogo/Google.png"
-            />
-          </button>
-          <button className="otherLogin" onClick={naverClick}>
-            <img
-              alt="naver Logo"
-              className="IconLogo"
-              src="/images/otherLogo/Naver.png"
-            />
-          </button>
-        </div>
         <div className="otherBTN_Div2">
           <button onClick={(event) => navigate("/auth/member/IDorPW")}>
             ID/PW 찾기
@@ -133,6 +95,9 @@ const LogIn = () => {
           </button>
         </div>
       </div>
+      <button className="LogInBtn" onClick={LoginClick}>
+        로그인
+      </button>
     </div>
   );
 };

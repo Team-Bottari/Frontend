@@ -42,23 +42,44 @@ const Chatting = (props) => {
     //getUserInfo();
     setUserNum(13);
   }, []);
-  useEffect(() => {
+
+  //const [prevScrollPosition, setPrevScrollPosition] = useState(10);
+  const [flag, setflag] = useState(0);
+  const [prevScrollPosition, setPrevScrollPosition] = useState(0);
+  const scrollToBottom = () => {
+    // prevScrollPosition = scrollContainerRef.current.scrollHeight;
+    //
+
+    setTimeout(() => {
+      setPrevScrollPosition(scrollContainerRef.current.scrollHeight);
+      console.log(prevScrollPosition);
+    }, 0);
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop =
         scrollContainerRef.current.scrollHeight;
     }
-  }, []);
+  };
+  if (flag === 0) {
+    setTimeout(() => {
+      scrollToBottom();
+    }, 0);
+  }
+  const handleScroll = () => {
+    // 스크롤 이벤트를 감지하여 최상단에 위치했을 때 실행할 함수
+    if (scrollContainerRef.current.scrollTop === 0) {
+      getOldChat(); // 스크롤이 최상단에 위치했을 때
+    }
+  };
   useEffect(() => {
-    // console.log(userEmail);
-
-    const isTop = () => {
-      if (scrollContainerRef.current.scrollTop === 0) {
-        getOldChat(); // 스크롤이 최상단에 위치해 있을 때.
-      }
-    };
-    scrollContainerRef.current.addEventListener("scroll", isTop); // 스크롤 이벤트 리스너
+    // 스크롤 이벤트 리스너 등록
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener("scroll", handleScroll);
+    }
     return () => {
-      scrollContainerRef.current.removeEventListener("scroll", isTop); // 언마운트될 때 리스너 제거
+      // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
   useEffect(() => {
@@ -79,7 +100,6 @@ const Chatting = (props) => {
           newChat.sort((a, b) => a.index - b.index);
           return newChat;
         });
-
         chatIndex_start = jsonObject.index - 20;
         chatIndex_end = jsonObject.index - 10;
       }
@@ -136,6 +156,7 @@ const Chatting = (props) => {
     }
   };
   const getOldChat = async (event) => {
+    setflag(1);
     await axios
       .get(
         `http://wisixicidi.iptime.org:3000${
@@ -155,6 +176,7 @@ const Chatting = (props) => {
         //console.log(response.data.messages); //리스폰스 pastchat에 저장하기
         console.log(
           response.data.messages,
+          response.data.messages.length,
           user.host_id,
           user.client_id,
           userNum
@@ -177,12 +199,28 @@ const Chatting = (props) => {
         chatIndex_end = chatIndex_start - 1;
         if (chatIndex_start >= 10) chatIndex_start -= 10;
         else chatIndex_start = 0;
+        if (chatIndex_start == 0) flag(2);
         //인덱스 다시 저장 -> 추후 불러올때 꼭 필요!
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  useEffect(() => {
+    console.log(prevScrollPosition);
+    if (scrollContainerRef.current && flag === 1) {
+      const height = scrollContainerRef.current.scrollHeight;
+      console.log("컴포넌트의 높이:", height, prevScrollPosition);
+      scrollContainerRef.current.scrollTop = height - prevScrollPosition;
+      // const newScroll = 800;
+      // scrollContainerRef.current.scrollTop = newScroll;
+      setPrevScrollPosition(height);
+    }
+    if (scrollContainerRef.current && flag == 2) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [pastChat]);
+
   const deletRoomm = async (event) => {
     await axios
       .post(
@@ -201,37 +239,67 @@ const Chatting = (props) => {
         console.error("삭제 실패:", error);
       });
   };
+
+  const formatTime = (timeString) => {
+    const [year, month, day, hours, minutes] = timeString
+      .split("-")
+      .map(Number);
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    const formattedTime = `${formattedHours} : ${formattedMinutes}`;
+
+    return formattedTime;
+  };
+  const formatTime2 = (timeString) => {
+    const [year, month, day, hours, minutes] = timeString
+      .split("-")
+      .map(Number);
+
+    return `${year}년 ${month}월 ${day}일`;
+  };
+  const renderChatMessages = pastChat.map((chat, index) => {
+    const displayDate =
+      index === 0 ||
+      formatTime2(pastChat[index].time) !==
+        formatTime2(pastChat[index - 1].time);
+    return (
+      <div key={index}>
+        {displayDate && (
+          <div className="dateSeparator">{formatTime2(chat.time)}</div>
+        )}
+        {chat.text !== "" && chat.chatUser !== user.chatUser && (
+          <div className="leftChat">
+            <div className="ChatTextL">{chat.text}</div>
+            <span className="ChatTime">{formatTime(chat.time)}</span>
+          </div>
+        )}
+
+        {chat.text !== "" && chat.chatUser === user.chatUser && (
+          <div className="rightChat">
+            <span className="ChatTime">{formatTime(chat.time)}</span>
+            <div className="ChatTextR">{chat.text}</div>
+          </div>
+        )}
+      </div>
+    );
+  });
   return (
     <div className="Chatting">
       <div className="pastChat" ref={scrollContainerRef}>
-        {pastChat.map((chat, index) => (
-          <div key={index}>
-            {chat.text !== "" && chat.chatUser !== user.chatUser && (
-              <div className="leftChat">
-                <span className="ChatUser">{chat.chatUser}</span>
-                <div className="ChatTextL">{chat.text}</div>
-                <span className="ChatTime">{chat.time}</span>
-              </div>
-            )}
-            {chat.text !== "" && chat.chatUser === user.chatUser && (
-              <div className="rightChat">
-                <span className="ChatTime">{chat.time}</span>
-                <div className="ChatTextR">{chat.text}</div>
-              </div>
-            )}
-          </div>
-        ))}
+        {renderChatMessages}
         {isOver && <p>채팅이 끝났습니다.</p>}
       </div>
       <div className="chatEnter">
         <div className="chatInput">
-          <button className="chatPlus">+</button>
           <input id="Chat" type="text" name="Chat" />
         </div>
         <button className="chatButton" onClick={newChatUpdate}>
           전송
         </button>
-        <button onClick={deletRoomm}>삭제</button>
+        <button className="deletRoomm" onClick={deletRoomm}>
+          나가기
+        </button>
       </div>
     </div>
   );

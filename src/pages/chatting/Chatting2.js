@@ -39,20 +39,34 @@ const Chatting2 = (props) => {
     //getUserInfo();
     setUserNum(14);
   }, []);
-  useEffect(() => {
-    console.log(user.id, userNum);
+  const scrollToBottom = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop =
         scrollContainerRef.current.scrollHeight;
+      console.log("스크롤 위치가 조정되었습니다.");
     }
-    const isTop = () => {
+  };
+  setTimeout(scrollToBottom, 0);
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log(
+        "스크롤 위치가 조정되었습니다.",
+        scrollContainerRef.current.scrollHeight
+      );
       if (scrollContainerRef.current.scrollTop === 0) {
-        getOldChat(); // 스크롤이 최상단에 위치해 있을 때.
+        getOldChat(); // 스크롤이 최상단에 위치했을 때
       }
     };
-    scrollContainerRef.current.addEventListener("scroll", isTop); // 스크롤 이벤트 리스너
+    // 스크롤 이벤트 리스너 등록
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener("scroll", handleScroll);
+    }
+
     return () => {
-      scrollContainerRef.current.removeEventListener("scroll", isTop); // 언마운트될 때 리스너 제거
+      // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
   useEffect(() => {

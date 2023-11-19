@@ -6,9 +6,10 @@ const IDorPW = () => {
   return (
     <div className="IDorPW">
       <div className="Logo">
-        <img alt="main Logo" className="LogoIMG" src="/images/LogoWhite.png" />
+        <p className="top">GYM</p>
+        <p>BOTTARI</p>
       </div>
-      <div className="Button">
+      <div className="IDorPWButton">
         <button
           onClick={(e) => {
             navigate("/auth/member/IDSearch");
@@ -16,6 +17,7 @@ const IDorPW = () => {
         >
           ID 찾기
         </button>
+        <div className="IDorPWVLine"></div>
         <button
           onClick={(e) => {
             navigate("/auth/member/PWReset");
