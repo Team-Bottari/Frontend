@@ -36,15 +36,11 @@ const IDSearch = () => {
   return (
     <div>
       <title>아이디찾기</title>
-
-      <div className="Inform">
-        <header className="Pagename">
-          <h2> 아이디 찾기</h2>
-        </header>
-      </div>
       <div className="IdReset">
-        <img alt="main Logo" className="LogoIMG" src="/images/purplelogo.png" />
-        <br></br>
+        <div className="Logo">
+          <p className="top">GYM</p>
+          <p>BOTTARI</p>
+        </div>
         <form>
           <div className="Id_Div">
             <label htmlFor="Name_input">이름</label>

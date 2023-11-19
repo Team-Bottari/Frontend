@@ -9,7 +9,7 @@ function MarketRouting() {
       <Route path="/Market" element={<Market />} />
       <Route path="/MarketPost" element={<MarketPost />} />
       <Route path="/MarketModify" element={<MarketModify />} />
-      <Route path="/MarketInfo" element={<MarketInfo />} />
+      <Route path="/marketinfo/:postingId" element={<MarketInfo />} />
     </Routes>
   );
 }

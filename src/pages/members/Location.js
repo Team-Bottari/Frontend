@@ -52,9 +52,9 @@ const Location = () => {
       center,
       radius: userRadius, // 단위: 미터 (원의 크기를 조절할 수 있습니다.)
       strokeWeight: 1,
-      strokeColor: "#b785d5db",
+      strokeColor: "grey",
       strokeOpacity: 0.8,
-      fillColor: "#b785d5db",
+      fillColor: "grey",
       fillOpacity: 0.3,
     });
     circle.setMap(map);
@@ -159,10 +159,10 @@ const Location = () => {
       <div className="Locatoin_Top"></div>
       <div className="Location">
         <div id="map" className="Map"></div>
-        <div>
+        <div className="loc">
           <p className="currentL">{userLocation.location}</p>
           <p className="warn">
-            주변 위치로 재설정하고 싶으시다면 목록에서 선택해주세요
+            주변 위치를 재설정하고 싶으시다면 목록에서 선택해주세요
           </p>
           <br />
           {nearLocation.map((address, index) => (

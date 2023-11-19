@@ -20,13 +20,15 @@ html{
 }
 .InputNickname{
     margin-top: 3rem;
-    border:0.1rem solid lightgray ;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
-    border-radius: 3rem;
+    border-bottom: 1px solid black;
     padding-left: 1.5rem;
-    color:#9A30AE;
+    color:black;
     font-weight: bolder;
     display: flex;
+}
+.InputLabelNickname label{
+    color: black;
+    font-size: 1.5rem;
 }
 .InputNickname input{
     margin-left: -1rem;
@@ -48,18 +50,17 @@ html{
     flex-direction: column;
 }
 .ModifyDiv{
+    font-family: 'Black Ops One', sans-serif;
     display: flex;
     flex-direction: row;
     margin-bottom: 3rem;
-    border:0.1rem solid lightgray ;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
-    border-radius: 3rem;
     padding-left: 1.5rem;
     height: 6rem;
+    border-bottom: 1px solid black;
     font-size: 2.5rem;
     line-height: 1rem;
     color:grey;
-    font-weight: bolder;
+    font-weight: medium;
 }
 .PEmail{
     text-align: center;
@@ -67,36 +68,35 @@ html{
 }
 .PLable{
     width: 3rem;
-    color: #9A30AE;
+    color: black;
 }
 .PWResetButton{
-    width: 33rem;
-    margin-left: 15rem;    
-    line-height: 4rem;
+    width: 37.5rem;
+    margin-left: 8.5rem;    
+    line-height: 2.5rem;
     color:white;
-    background-color: #9A30AE;
+    background-color: black;
+    border: 1rem solid black;
 }
 .right button{
-    border-radius: 3rem;
     font-size: 2rem;
     font-weight: bold;
     padding: 1rem 2rem 1rem 2rem;   
-    border:0.1rem solid lightgray ;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray ;
 }
 .Logout{
     margin-top: 3rem;
     width: 50rem;
     height: 6rem;
-    color: #9A30AE;
+    color: black;
     background-color:white;
+    border:1px solid black;
 }
 .SaveInfo{
     margin-top: 2rem;
     width: 50rem;
     height: 6rem;
     color:white;
-    background-color: #9A30AE;
+    background-color: black;
 }
 .withdraw{
     position: absolute; 
@@ -107,7 +107,7 @@ html{
     text-underline-position : under;
     background-color: rgba(255, 255, 255, 0);
     border:none;
-    color:#772588;
+    color:black;
     font-size: 2rem;
 }
 .ModifyInfo form{
@@ -119,7 +119,13 @@ html{
     z-index: 10;
 }
 .cameraIcon{
-    width: 6rem;
+    width: 5rem;
+    padding:1rem;
+    margin-top: -2rem;
+    margin-left: -1rem;
+    border-radius: 30%;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    background-color: rgba(236, 236, 236)
 }
 .imgInput{
     visibility: hidden;
@@ -127,4 +133,15 @@ html{
 }
 .useImg{
     position: relative;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+.deleteIMGModify{
+    background-color: black;
+    margin-top:2rem;
+    width:20rem;
+    height: 3rem;
+    border: none;
+    font-size: 1rem;
+    color:white;
+
 }

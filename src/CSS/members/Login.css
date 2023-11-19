@@ -1,24 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Righteous&family=Shrikhand&display=swap');
 html{
     font-size: 62.5%; 
+
 }
 .LogIn{
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family:'Black Ops One' ;
 }
 .Logo{
+    font-family: 'Black Ops One', sans-serif;
     margin-top: 8rem;
     padding:2rem;
-    border-radius:70%;
-    background-color: #d1bbec;
+    text-align: center;
+    border-radius:70%; 
+    background-color: black;
     width: 25rem;
     height: 25rem;
+    color:white;
+    font-size:5rem;
 } 
-.LogoIMG{
-    width: 25rem;
-    height: 25rem;
-}
+.Logo p{
+   margin-bottom: -5rem;
+} 
 .InputMaterial{
     margin-top: 3rem;
     display: flex;
@@ -26,11 +30,9 @@ html{
     flex-direction: column;
 }
 .Input{
-    border:0.1rem solid lightgray ;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem lightgray inset;
-    border-radius: 3rem;
+    border-bottom: 1px solid black;
     padding-left: 1.5rem;
-    color:#d1bbec;
+    color:black;
     font-weight: bolder;
     display: flex;
 }
@@ -41,64 +43,52 @@ html{
     appearance: none;
     width: 35rem;
     height: 4rem;
+    font-size: 1.5rem;
 }
-.InputLabel{
+.InputLabel_Login{
+    width: 6rem;
     line-height: 4rem;
     font-size: medium;
 }
-.InputMaterial button{
-    margin-top: 2rem;
-    border-radius: 3rem;
+.InputLabel_Login label{
+    color: black;
+}
+.LogInBtn{
+    margin-top: 1rem;
     border:none;
     color:white;
     font-weight: bolder;
-    font-size: larger;
-    background-color: #d1bbec;
-    width: 30rem;
-    height: 4rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    background-color: black;
+    width: 15rem;
+    height: 5rem;
 }
 .otherBTN{
     margin-top: 2rem;
-    width: 50rem;
     display: flex;
+    width: 45rem;
+    justify-content: flex-end;
 }
-.otherBTN_Div1{
-    float: left;
-    display: flex;
-    flex-direction: row;
-    width: 30rem;
-}
-.otherLogin{
-    margin-left: 0.6rem;
-    width: 4.5rem;
-    height: 4.5rem;
-    padding: 0rem;
-    background-color: white;
-    border:none;
-}
-.IconLogo{
-    width: 4.5rem;
-    height: 4.5rem;
-}
-
 .otherBTN_Div2{
-    float: right;
+    margin-top: -1rem;
     display: flex;
-    width: 20rem;
 }
 .otherBTN_Div2 button{
-    color:#d1bbec;
+    color:black;
     background-color: white;
     border:none;
-    font-weight: bold;
+    font-weight: 1.5rem;
+    font-size:small;
     height: 5rem;
     width:10rem;
 }
 
 .VLine{
-    border-left : 0.2rem solid #d1bbec;
-    margin-top:2.2rem;
-    height: 2.5rem;
+    border-left : 0.15rem solid black;
+    margin-top:1.5rem;
+    height: 2rem;
+    line-height: 0.5rem;
 }
 
 @media  only screen and (min-width: 280px) and (max-width: 319px) and (orientation: portrait){/*소형 모바일(세로), 갤럭시 폴드 접은 버전(세로)*/

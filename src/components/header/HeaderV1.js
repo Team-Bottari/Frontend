@@ -25,7 +25,7 @@ const HeaderV1 = (prop) => {
           className="login"
           onClick={(event) => {
             console.log(prop.ID);
-            navigate("/");
+            navigate("/login");
           }}
         >
           로그인

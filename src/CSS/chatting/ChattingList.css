@@ -4,30 +4,23 @@ html{
 .ChattingList{
     display: flex;
     flex-direction: column;
-    width:50rem;
+    width:45rem;
     height: 10rem;
-    padding:2rem 0rem 2rem 0rem;
+    margin-left: 3rem;
 }
 .directionRow{
     display: flex;
     flex-direction: row;
 }
-.profileIMG{
-    width:10rem;
-    height: 10rem;
-    margin: 0rem 3rem 0rem 10rem;
-}
-.profileIMGFile{
-    width:10rem;
-    height: 10rem;
-    border-radius: 100%;
-}
-.ChattingInfo{
+.ChattingInfo{ 
+    margin-left: auto;
     width:22rem;
     height: 10rem;
+    line-height: 5rem;
 }
 .ChatNick{
-    margin: 1rem 0rem 0rem 0rem;
+    padding-left: 10rem;
+    width: 50rem;
     font-size: 2.5rem;
     font-weight: bold;
 }
@@ -37,11 +30,12 @@ html{
 }
 .ChatTime{
     text-align: right;
-    font-size: 1.25rem;
+    font-size: 1rem;
+    color: rgb(165, 165, 165);
 }
 .theLine{
     width: 45rem;
-    margin:3rem 3rem 0rem 5rem;
+    margin-left: 5rem;
     height: 1rem;
     border:0.1rem solid rgba(128, 128, 128, 0.226);
 }

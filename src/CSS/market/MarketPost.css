@@ -1,6 +1,10 @@
 .html {
   font-size: 62.5%;
 }
+body{
+  padding-top: 10rem;
+  overflow: none;
+}
 .MarketPost {
   padding-top: 10rem;
   margin: 0 auto;
@@ -83,6 +87,7 @@
 }
 .PostDetails_textInput {
   display: flex;
+  height: 25rem;
   flex-direction: column;
   border-top: 0.2rem solid lightgray;
 }
@@ -101,7 +106,7 @@
   padding-left: 0rem;
 }
 .completeButton {
-  background-color: #9a30ae;
+  background-color: black;
   color: white;
   border: none;
   font-size: medium;

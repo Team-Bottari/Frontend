@@ -1,22 +1,31 @@
 import { Product } from "../../components/market/Product";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-
+import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import { PiWaveSine } from "react-icons/pi";
 import dummy from "./data.json";
 import { AiFillHeart } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import HeaderV1 from "../../components/header/HeaderV1";
+import HeaderV2 from "../../components/header/HeaderV2";
 import React from "react";
 import "CSS/market/Marketmain.css";
 
 import axios from "axios";
 export const Market = () => {
   const [products, setProducts] = useState([]);
+  const location = useLocation();
   const [itemimg, setItemimg] = useState([]);
   const [blobImg, setBlobImg] = useState([]);
   const [posting_id, setPosting_id] = useState([]);
   const [searchWord, setSeartchword] = useState("");
+  const [token, settoken] = useState("");
+  const [Cookie] = useCookies(["token"]);
+  console.log("Cookie", Cookie);
+  console.log("location", location.state);
+  console.log("location", location.state === null ? "null" : location.state);
   // setSeartchword("노트북");
   // useEffect(() => {
   //   const FetchData = async () => {
@@ -76,7 +85,11 @@ export const Market = () => {
   console.log(typeof dummy.item);
   return (
     <div className="Main">
-      <HeaderV1 />
+      {location.state === null || location.state === undefined ? (
+        <HeaderV1 />
+      ) : (
+        <HeaderV2 ID={location.state} />
+      )}
       <div className="layoutcontainer">
         {" "}
         <br />
@@ -95,7 +108,9 @@ export const Market = () => {
               //updatedArray//
               dummy.item.map((item, index) => (
                 <div className="itemlay" key={`product-${index}`}>
-                  <Product item={item} />
+                  <Link to={`/marketinfo/${item.posting_id}`}>
+                    <Product item={item} />
+                  </Link>
                 </div>
               ))
             }
