@@ -114,6 +114,7 @@ const Register = () => {
           <br />
 
           <input
+            className="registerinput"
             type="password"
             placeholder="password"
             id="password"
@@ -126,6 +127,7 @@ const Register = () => {
           <br />
 
           <input
+            className="registerinput"
             type="password"
             placeholder="password"
             id="password"
@@ -137,6 +139,7 @@ const Register = () => {
           <br />
 
           <input
+            className="registerinput"
             type="text"
             placeholder="닉네임"
             id="nickname"
@@ -149,6 +152,7 @@ const Register = () => {
           <br />
 
           <input
+            className="registerinput"
             type="text"
             placeholder="이름"
             id="name"
@@ -160,6 +164,7 @@ const Register = () => {
           <br />
 
           <input
+            className="registerinput"
             type="date"
             id="password"
             name="password"
@@ -170,6 +175,7 @@ const Register = () => {
           <br />
 
           <input
+            className="registerinput"
             type="tel"
             id="password"
             name="phonenumber"

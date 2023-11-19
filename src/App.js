@@ -9,6 +9,7 @@ import AuthRouting from "./Routes/AuthRouting";
 import Market from "./pages/market/Market";
 import Purchaselist from "./pages/members/mypage/PurchaseList";
 import Interestlist from "./pages/members/mypage/InterestList";
+import Register from "./pages/members/Register";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Purchaselist" element={<Purchaselist />} />
           <Route path="/Interestlist" element={<Interestlist />} />
           <Route path="/Market" element={<Market />} />
+          <Route path="/Register" element={<Register />} />
         </Routes>
       </div>
     </BrowserRouter>
