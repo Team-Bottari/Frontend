@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "CSS/members/Location.css";
 import HeaderV2 from "components/header/HeaderV2";
 const { kakao } = window;
 const Location = () => {
   const [map, setMap] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state; //해당 이메일로 위치 정보 업데이트
   const [locatoin, setLocation] = useState({ latitude: 0, longitude: 0 }); //위도, 경도
   const [userLocation, setUserLocation] = useState({ location: "" });
   const [nearLocation, setNearLocation] = useState([]);
@@ -146,11 +150,12 @@ const Location = () => {
   const LocationConfirm = (event) => {
     event.preventDefault();
     console.log(userLocation);
+
     //위치 업로드 함수 및 페이지 이동 함수
+    navigate("/Mypage");
   };
   return (
     <div>
-      <HeaderV2 ID={""} />
       <div className="Locatoin_Top"></div>
       <div className="Location">
         <div id="map" className="Map"></div>

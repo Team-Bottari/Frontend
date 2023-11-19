@@ -5,13 +5,6 @@ const ChattingList = (propsChatting) => {
   return (
     <div className="ChattingList">
       <div className="directionRow">
-        <div className="profileIMG">
-          <img
-            alt="Chatting Profile"
-            className="profileIMGFile"
-            src={userData.profileIMGURL}
-          />
-        </div>
         <div className="ChattingInfo">
           <p className="ChatNick">{userData.nickName}</p>
           <p className="LastChat">{userData.lastChat}</p>
