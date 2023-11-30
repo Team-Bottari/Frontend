@@ -22,14 +22,14 @@ const ModifyInfo = () => {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
+          null,
           {
-            email: location.state.email,
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${Cookie.token}`,
             },
-          },
-          { responseType: "arraybuffer" }
+            responseType: "arraybuffer",
+          }
         );
         console.log(response);
         const blob = new Blob([response.data], { type: "image/jpeg" });
@@ -128,12 +128,12 @@ const ModifyInfo = () => {
             console.log("이미지 업로드 완료");
           } else {
             console.log(response);
-            alert("오류가 발생했습니다. 다시 시도해주세요");
+            alert("이미지 오류가 발생했습니다. 다시 시도해주세요");
           }
         })
         .catch((err) => {
           console.log(err);
-          alert("전송 오류가 발생했습니다. 다시 시도해주세요");
+          alert("이미지 전송 오류가 발생했습니다. 다시 시도해주세요");
         });
     }
     await axios

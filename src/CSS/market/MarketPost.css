@@ -1,28 +1,39 @@
 .html {
   font-size: 62.5%;
 }
-body{
+/* body{
   padding-top: 10rem;
   overflow: none;
-}
+} */
 .MarketPost {
   padding-top: 10rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;    
+  margin: 0 0rem 0 0rem;
 }
 .centerDiv {
-  width: 80rem;
+  width: 50rem;
 }
 .imgUploadMarket {
   padding-top: 2rem;
   display: flex;
   flex-direction: row;
-  width: 80rem;
+  width: 60rem;
   height: 16rem;
-  overflow-x: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
   padding-bottom: 3rem;
+}
+.imgUploadMarket::-webkit-scrollbar{
+  background: white;
+  border: 0.1px solid rgba(128, 128, 128, 0.438);
+  height: 0.35rem;
+
+}
+.imgUploadMarket::-webkit-scrollbar-thumb {
+  background:black;
 }
 .imgUploadMarket form {
   width: 15rem;
@@ -62,7 +73,7 @@ body{
   margin-top: -1rem;
 }
 .PostInfo {
-  width: 80rem;
+  width: 60rem;
   height: 3rem;
   font-size: 2rem;
   font-weight: bolder;
@@ -112,6 +123,5 @@ body{
   font-size: medium;
   height: 5rem;
   width: 30rem;
-  margin-left: 25rem;
-  margin-right: 25rem;
+  margin-left: 15rem;
 }

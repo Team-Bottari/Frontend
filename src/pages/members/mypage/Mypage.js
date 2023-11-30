@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import HeaderV2 from "../../../components/header/HeaderV2";
@@ -17,12 +17,13 @@ const Mypage = () => {
     name: "홍길동",
     credit_rating: "10",
   });
+  const hasUserInfoBeenCalled = useRef(false);
   useEffect(() => {
     async function getUserInfo() {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/info",
-          { email: location.state }, // 삭제 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -> null로 변경
+          null,
           {
             headers: {
               "Content-Type": "application/json",
@@ -30,22 +31,26 @@ const Mypage = () => {
             },
           }
         );
-        console.log(response);
+        console.log("응답", response);
         setUserData(response.data);
       } catch (err) {
         console.log("오류: ", err);
         alert("오류가 발생했습니다");
       }
     }
-    getUserInfo();
+
     async function getUserIMG() {
       try {
         const response = await axios.post(
           "http://wisixicidi.iptime.org:30000/api/v1.0.0/member/profile/standard",
+          null,
           {
-            email: location.state,
-          },
-          { responseType: "arraybuffer" }
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookie.token}`,
+            },
+            responseType: "arraybuffer",
+          }
         );
         const blob = new Blob([response.data], { type: "image/jpeg" });
         setImgMypage(URL.createObjectURL(blob));
@@ -54,8 +59,14 @@ const Mypage = () => {
         alert("오류가 발생했습니다");
       }
     }
-    getUserIMG();
-  }, [location.state]);
+
+    // setTimeout 내에서 hasUserInfoBeenCalled 값을 변경하여 함수가 한 번만 호출되도록 설정합니다.
+    if (!hasUserInfoBeenCalled.current) {
+      hasUserInfoBeenCalled.current = true;
+      getUserInfo();
+      getUserIMG();
+    }
+  }, []);
   const SaleClick = (event) => {
     event.preventDefault();
     setShowStatus("SaleList");
@@ -75,6 +86,7 @@ const Mypage = () => {
         <img alt="user" className="useImg" src={imgMypage} />
         <div className="Mypage_right">
           <p className="MypageName">{userData.nick_name}</p>
+
           <div className="WeightDiv">
             <img
               alt="weight Logo"
@@ -140,7 +152,11 @@ const Mypage = () => {
             관심 목록
           </button>
         </div>
-        <div className="showDiv">{showStatus}</div>
+        <div className="showDiv">
+          {showStatus == "SaleList" && <p>판매목록</p>}
+          {showStatus == "PurchaseList" && <p>구매목록</p>}
+          {showStatus == "StarList" && <p>관심목록</p>}
+        </div>
       </div>
     </div>
   );
