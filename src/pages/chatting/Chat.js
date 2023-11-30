@@ -9,7 +9,7 @@ import axios from "axios";
 const Chat = () => {
   const location = useLocation();
   //const userEmail = location.state; // "user1234@example.com"
-  const userEmail = "user1234@example.com";
+  const userEmail = "user1234@example.com"; // 이메일 -> 번호
   //const [usserID, setUserID] = useState("user1234@example.com");
   const [token, settoken] = useState("");
   const [Cookie] = useCookies(["token"]);
@@ -77,20 +77,20 @@ const Chat = () => {
       client_id: chattingUser[index].client_id,
     });
   };
-  // useEffect(() => {
-  //   axios
-  //     .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/list", {
-  //       id: userEmail,
-  //     })
-  //     .then((response) => {
-  //       console.log(response.data.chatting_list);
-  //       setChattingUser(response.data.chatting_list);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       alert("채팅 리스트 : 오류가 발생했습니다.");
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .post("http://wisixicidi.iptime.org:30000/api/v1.0.0/chatting/list", {
+        id: "13",
+      })
+      .then((response) => {
+        console.log("sefd", response.data.chatting_list);
+        setChattingUser(response.data.chatting_list);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("채팅 리스트 : 오류가 발생했습니다.");
+      });
+  }, []);
   useEffect(() => {}, [clickChattingUser]);
   return (
     <div className="Chat">

@@ -3,6 +3,7 @@ html{
     font-size: 62.5%;
 }
 .IDorPW{
+    padding:-3rem;
     display: flex;
     flex-direction: column;
     align-items: center;

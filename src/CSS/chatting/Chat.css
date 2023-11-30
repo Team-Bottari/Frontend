@@ -1,14 +1,12 @@
 html{
     font-size: 62.5%;
 }
-.body{
-    padding-top: 30rem;
-}
 .Chat{
     display: flex;
     flex-direction: row;
     margin-left: 0%;
     justify-content: center;
+    padding-top: 10rem;
 }
 .ListOfChatting{
     height: 80vh;
